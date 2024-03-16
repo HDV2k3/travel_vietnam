@@ -1,4 +1,4 @@
-# chandoiqua
+# mobile app using flutter &firebase Vietnam travel application
 
 A new Flutter project.
 
