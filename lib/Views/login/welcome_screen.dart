@@ -1,5 +1,5 @@
-import 'package:chandoiqua/Screens/authenticate/signin_screen.dart';
-import 'package:chandoiqua/Screens/authenticate/signup_screen.dart';
+import 'package:chandoiqua/Views/login/signin_screen.dart';
+import 'package:chandoiqua/Views/login/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_scaffold.dart';

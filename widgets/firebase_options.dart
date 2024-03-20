@@ -66,7 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '561650211560',
     projectId: 'travel-729d3',
     storageBucket: 'travel-729d3.appspot.com',
-    androidClientId: '561650211560-6cd9s87q5cds2nvedvv6bbmfl6vplh4q.apps.googleusercontent.com',
+    androidClientId: '561650211560-klee4mur8dj40dklo61im5h26g0vum0u.apps.googleusercontent.com',
     iosClientId: '561650211560-hr0ld0kkhe3sv3i69rig6gvavs6elpa1.apps.googleusercontent.com',
     iosBundleId: 'com.example.chandoiqua',
   );
@@ -77,7 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '561650211560',
     projectId: 'travel-729d3',
     storageBucket: 'travel-729d3.appspot.com',
-    androidClientId: '561650211560-6cd9s87q5cds2nvedvv6bbmfl6vplh4q.apps.googleusercontent.com',
+    androidClientId: '561650211560-klee4mur8dj40dklo61im5h26g0vum0u.apps.googleusercontent.com',
     iosClientId: '561650211560-pb0l4gd1v8vgngffvdeg2l9hvc388u29.apps.googleusercontent.com',
     iosBundleId: 'com.example.chandoiqua.RunnerTests',
   );

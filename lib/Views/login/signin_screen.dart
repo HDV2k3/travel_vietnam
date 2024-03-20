@@ -1,11 +1,14 @@
-import 'package:chandoiqua/Screens/authenticate/signup_screen.dart';
+import 'package:chandoiqua/Views/login/signup_screen.dart';
+import 'package:chandoiqua/service/auth_service/auth_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_scaffold.dart';
 import '../themes/theme.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  const SignInScreen({
+    super.key,
+  });
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -14,6 +17,9 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final _formSignInKey = GlobalKey<FormState>();
   bool rememberPassword = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  AuthenticationService firestoreservice = AuthenticationService();
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -148,13 +154,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 25.0,
-                      ),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formSignInKey.currentState!.validate() &&
                                 rememberPassword) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -162,11 +165,23 @@ class _SignInScreenState extends State<SignInScreen> {
                                   content: Text('Processing Data'),
                                 ),
                               );
+                              await firestoreservice.signInUser(
+                                  emailController.text,
+                                  passwordController.text);
+                              // Đăng ký thành công, bạn có thể thực hiện các hành động khác sau khi đăng ký
                             } else if (!rememberPassword) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content: Text(
-                                        'Please agree to the processing of personal data')),
+                                  content: Text(
+                                      'Please agree to the processing of personal data'),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                      'Please fill in all required fields.'),
+                                ),
                               );
                             }
                           },
@@ -211,9 +226,20 @@ class _SignInScreenState extends State<SignInScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          // Logo(Logos.facebook_f),
-                          // Logo(Logos.google),
-                          // Logo(Logos.apple),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              firestoreservice.signInWithGoogle();
+                            },
+                            icon: Image.asset(
+                              "assets/logos/google_logo.png",
+                              width: 20,
+                            ),
+                            label: const Text(
+                              "Google",
+                              style: TextStyle(
+                                  color: Color.fromRGBO(125, 125, 125, 1)),
+                            ),
+                          )
                         ],
                       ),
                       const SizedBox(

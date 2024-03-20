@@ -1,7 +1,7 @@
-import 'package:chandoiqua/Screens/authenticate/signin_screen.dart';
+import 'package:chandoiqua/Views/login/signin_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 
+import '../../service/auth_service/auth_service.dart';
 import '../../widgets/custom_scaffold.dart';
 import '../themes/theme.dart';
 
@@ -15,6 +15,10 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formSignupKey = GlobalKey<FormState>();
   bool agreePersonalData = true;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController fullnameController = TextEditingController();
+  AuthenticationService firestoreService = AuthenticationService();
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -54,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 40.0,
+                        height: 30.0,
                       ),
                       // full name
                       TextFormField(
@@ -64,6 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }
                           return null;
                         },
+                        controller: fullnameController,
                         decoration: InputDecoration(
                           label: const Text('Full Name'),
                           hintText: 'Enter Full Name',
@@ -85,7 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 25.0,
+                        height: 20.0,
                       ),
                       // email
                       TextFormField(
@@ -95,6 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }
                           return null;
                         },
+                        controller: emailController,
                         decoration: InputDecoration(
                           label: const Text('Email'),
                           hintText: 'Enter Email',
@@ -116,7 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 25.0,
+                        height: 20.0,
                       ),
                       // password
                       TextFormField(
@@ -128,6 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }
                           return null;
                         },
+                        controller: passwordController,
                         decoration: InputDecoration(
                           label: const Text('Password'),
                           hintText: 'Enter Password',
@@ -149,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 25.0,
+                        height: 20.0,
                       ),
                       // i agree to the processing
                       Row(
@@ -179,7 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       const SizedBox(
-                        height: 25.0,
+                        height: 20.0,
                       ),
                       // signup button
                       SizedBox(
@@ -188,16 +195,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: () {
                             if (_formSignupKey.currentState!.validate() &&
                                 agreePersonalData) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Processing Data'),
-                                ),
-                              );
+                              firestoreService
+                                  .newAccount(fullnameController,
+                                      emailController, passwordController)
+                                  .then((_) async {
+                                // Kiểm tra và chuyển hướng màn hình sau khi đăng ký thành công và lưu vào Firestore
+                                if (await firestoreService
+                                    .userRegisteredSuccessfully()) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignInScreen()),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Error registering user.'),
+                                    ),
+                                  );
+                                }
+                              }).catchError((error) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text('Error registering user: $error'),
+                                  ),
+                                );
+                              });
                             } else if (!agreePersonalData) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content: Text(
-                                        'Please agree to the processing of personal data')),
+                                  content: Text(
+                                      'Please agree to the processing of personal data'),
+                                ),
                               );
                             }
                           },
@@ -205,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 30.0,
+                        height: 20.0,
                       ),
                       // sign up divider
                       Row(
@@ -238,20 +269,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       const SizedBox(
-                        height: 30.0,
+                        height: 20.0,
                       ),
                       // sign up social media logo
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Logo(Logos.facebook_f),
-                          Logo(Logos.twitter),
-                          Logo(Logos.google),
-                          Logo(Logos.apple),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              firestoreService.signInWithGoogle();
+                            },
+                            icon: Image.asset(
+                              "assets/logos/google_logo.png",
+                              width: 20,
+                            ),
+                            label: const Text(
+                              "Google",
+                              style: TextStyle(
+                                  color: Color.fromRGBO(125, 125, 125, 1)),
+                            ),
+                          )
                         ],
                       ),
                       const SizedBox(
-                        height: 25.0,
+                        height: 20.0,
                       ),
                       // already have an account
                       Row(
