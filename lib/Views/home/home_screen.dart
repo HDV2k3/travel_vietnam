@@ -1,4 +1,7 @@
+import 'package:chandoiqua/Views/home/body.dart';
 import 'package:flutter/material.dart';
+
+import 'app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,6 +13,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: const CustomAppBar(),
+      ),
+      body: const CustomBody(),
+    );
   }
 }

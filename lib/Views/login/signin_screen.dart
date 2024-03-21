@@ -1,3 +1,4 @@
+import 'package:chandoiqua/Views/home/home_screen.dart';
 import 'package:chandoiqua/Views/login/signup_screen.dart';
 import 'package:chandoiqua/service/auth_service/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -168,7 +169,13 @@ class _SignInScreenState extends State<SignInScreen> {
                               await firestoreservice.signInUser(
                                   emailController.text,
                                   passwordController.text);
-                              // Đăng ký thành công, bạn có thể thực hiện các hành động khác sau khi đăng ký
+
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()),
+                                (route) => false,
+                              );
                             } else if (!rememberPassword) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -185,7 +192,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               );
                             }
                           },
-                          child: const Text('Sign up'),
+                          child: const Text('Sign in'),
                         ),
                       ),
                       const SizedBox(

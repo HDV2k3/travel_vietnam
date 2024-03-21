@@ -8,7 +8,6 @@ class Users {
   bool gender;
   String email;
   String password;
-
   Users({
     required this.id,
     required this.name,
@@ -18,7 +17,6 @@ class Users {
     required this.email,
     required this.password,
   });
-
   Map<String, dynamic> toMap() {
     return {
       "id": id,
