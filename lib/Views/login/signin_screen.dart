@@ -1,5 +1,6 @@
 import 'package:chandoiqua/Views/home/home_screen.dart';
 import 'package:chandoiqua/Views/login/signup_screen.dart';
+import 'package:chandoiqua/Views/main/main_pages.dart';
 import 'package:chandoiqua/service/auth_service/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -236,6 +237,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           ElevatedButton.icon(
                             onPressed: () {
                               firestoreservice.signInWithGoogle();
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainPage()),
+                                (route) => false,
+                              );
                             },
                             icon: Image.asset(
                               "assets/logos/google_logo.png",

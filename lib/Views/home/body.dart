@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'list_view.dart';
+
 class CustomBody extends StatefulWidget {
   const CustomBody({super.key});
 
@@ -31,12 +33,13 @@ class _CustomBodyState extends State<CustomBody> {
               child: TextFormField(
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.location_on),
-                  hintText: '\tĐà Lạt Thành Phố Mộng Mơ',
+                  hintText: '\tThành Phố Quảng Ngãi',
                   hintStyle: TextStyle(color: Colors.grey[500]),
                   border: InputBorder.none,
                 ),
               ),
-            )
+            ),
+            const Expanded(child: HorizontalListView())
           ],
         ),
       ),

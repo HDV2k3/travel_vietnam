@@ -1,6 +1,5 @@
+import 'package:chandoiqua/Views/login/welcome_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'Views/login/welcome_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
