@@ -80,7 +80,7 @@ class HorizontalListView extends StatelessWidget {
             ),
           );
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }

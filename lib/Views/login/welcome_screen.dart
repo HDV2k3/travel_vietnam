@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/custom_scaffold.dart';
 import '../../widgets/welcome_button.dart';
+import '../themes/theme.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -43,13 +44,13 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               )),
-          const Flexible(
+          Flexible(
             flex: 1,
             child: Align(
               alignment: Alignment.bottomRight,
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: WelcomeButton(
                       buttonText: 'Sign in',
                       onTap: SignInScreen(),
@@ -60,9 +61,9 @@ class WelcomeScreen extends StatelessWidget {
                   Expanded(
                     child: WelcomeButton(
                       buttonText: 'Sign up',
-                      onTap: SignUpScreen(),
-                      color: Colors.transparent,
-                      textColor: Colors.white,
+                      onTap: const SignUpScreen(),
+                      color: Colors.white,
+                      textColor: lightColorScheme.primary,
                     ),
                   ),
                 ],
