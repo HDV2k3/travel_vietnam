@@ -1,0 +1,32 @@
+{
+  "input": "Nhập",
+  "@input": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "calendar": "Lịch",
+  "@calendar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "report": "Báo cáo",
+  "@report": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "setting": "Cài đặt",
+  "@setting": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "darkAppearance": "Chế độ tối",
+  "@darkAppearance": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "Ngôn ngữ",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

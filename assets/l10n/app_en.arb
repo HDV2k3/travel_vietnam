@@ -1,0 +1,32 @@
+{
+  "input": "Input",
+  "@input": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "calendar": "Calendar",
+  "@calendar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "report": "Report",
+  "@report": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "setting": "Setting",
+  "@setting": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "darkAppearance": "Dark Appearance",
+  "@darkAppearance": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "Language",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  }
+}
