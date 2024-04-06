@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common_widgets/base/base_screen.dart';
+import '../sign_in/sign_in_screen.dart';
+import '../sign_up/sign_up_screen.dart';
 import 'onboarding_state.dart';
 import 'onboarding_view_model.dart';
 
@@ -64,75 +66,75 @@ class _OnboardingState extends BaseScreenState<OnboardingScreen,
                   ),
                 ),
               ),
-              // Flexible(
-              //   flex: 1,
-              //   child: Align(
-              //     alignment: Alignment.bottomRight,
-              //     child: Row(
-              //       children: [
-              //         Expanded(
-              //           child: GestureDetector(
-              //             onTap: () {
-              //               Navigator.push(
-              //                 context,
-              //                 MaterialPageRoute(
-              //                   builder: (context) => SignInScreen(),
-              //                 ),
-              //               );
-              //             },
-              //             child: Container(
-              //               padding: const EdgeInsets.all(30.0),
-              //               decoration: const BoxDecoration(
-              //                 color: Colors.transparent,
-              //                 borderRadius: BorderRadius.only(
-              //                   topLeft: Radius.circular(50),
-              //                 ),
-              //               ),
-              //               child: const Text(
-              //                 'Sign in',
-              //                 textAlign: TextAlign.center,
-              //                 style: TextStyle(
-              //                   fontSize: 20.0,
-              //                   fontWeight: FontWeight.bold,
-              //                   color: Colors.white,
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //         Expanded(
-              //           child: GestureDetector(
-              //             onTap: () {
-              //               Navigator.push(
-              //                 context,
-              //                 MaterialPageRoute(
-              //                   builder: (context) => SignUpScreen(),
-              //                 ),
-              //               );
-              //             },
-              //             child: Container(
-              //               padding: const EdgeInsets.all(30.0),
-              //               decoration: const BoxDecoration(
-              //                 color: Colors.white,
-              //                 borderRadius: BorderRadius.only(
-              //                   topLeft: Radius.circular(50),
-              //                 ),
-              //               ),
-              //               child: const Text(
-              //                 'Sign up',
-              //                 textAlign: TextAlign.center,
-              //                 style: TextStyle(
-              //                     fontSize: 20.0,
-              //                     fontWeight: FontWeight.bold,
-              //                     color: Color(0xFF416FDF)),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
+              Flexible(
+                flex: 1,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignInScreen(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(30.0),
+                            decoration: const BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(50),
+                              ),
+                            ),
+                            child: const Text(
+                              'Sign in',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignUpScreen(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(30.0),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(50),
+                              ),
+                            ),
+                            child: const Text(
+                              'Sign up',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF416FDF)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

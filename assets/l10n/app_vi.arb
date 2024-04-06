@@ -1,29 +1,71 @@
 {
-  "input": "Nhập",
-  "@input": {
+  "home": "Home",
+  "@home": {
     "type": "text",
     "placeholders": {}
   },
-  "calendar": "Lịch",
-  "@calendar": {
+  "explore": "Explore",
+  "@explore": {
     "type": "text",
     "placeholders": {}
   },
-  "report": "Báo cáo",
-  "@report": {
+  "heart": "Heart",
+  "@heart": {
     "type": "text",
     "placeholders": {}
   },
-  "setting": "Cài đặt",
-  "@setting": {
+  "profile": "Profile",
+  "@profile": {
     "type": "text",
     "placeholders": {}
   },
+   "discovery": "Khám Phá",
+    "@discovery": {
+      "type": "text",
+      "placeholders": {}
+    },
+     "title_discovery": "Hôm nay chúng ta đi đâu ?",
+        "@title_discovery": {
+          "type": "text",
+          "placeholders": {}
+        },
+
+   "location_search": "Thành Phố Quảng Ngãi",
+           "@location_search": {
+             "type": "text",
+             "placeholders": {}
+           },
+     "quang_ngai": "Quảng Ngãi",
+          "@quang_ngai": {
+            "type": "text",
+            "placeholders": {}
+          },
+       "sai_gon": "Sài Gòn ",
+            "@sai_gon": {
+              "type": "text",
+              "placeholders": {}
+            },
+           "da_nang": "Đà Nẵng ",
+                "@da_nang": {
+                  "type": "text",
+                  "placeholders": {}
+                },
+
+       "ha_noi": "Hà Nội ",
+                  "@ha_noi": {
+                    "type": "text",
+                    "placeholders": {}
+                  },
   "darkAppearance": "Chế độ tối",
   "@darkAppearance": {
     "type": "text",
     "placeholders": {}
   },
+   "category": "Khách Sạn",
+    "@category": {
+      "type": "text",
+      "placeholders": {}
+    },
   "language": "Ngôn ngữ",
   "@language": {
     "type": "text",

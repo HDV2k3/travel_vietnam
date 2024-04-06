@@ -1,29 +1,76 @@
 {
-  "input": "Input",
-  "@input": {
+  "home": "Home",
+  "@home": {
     "type": "text",
     "placeholders": {}
   },
-  "calendar": "Calendar",
-  "@calendar": {
+  "explore": "Explore",
+  "@explore": {
     "type": "text",
     "placeholders": {}
   },
-  "report": "Report",
-  "@report": {
+  "heart": "Heart",
+  "@heart": {
     "type": "text",
     "placeholders": {}
   },
-  "setting": "Setting",
-  "@setting": {
+  "profile": "Profile",
+  "@profile": {
     "type": "text",
     "placeholders": {}
   },
+    "discovery": "Discovery",
+    "@discovery": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "title_discovery": "Let's explore beauty together now",
+        "@title_discovery": {
+          "type": "text",
+          "placeholders": {}
+        },
+   "location_search": "Viet Nam",
+              "@location_search": {
+                "type": "text",
+                "placeholders": {}
+              },
+
   "darkAppearance": "Dark Appearance",
   "@darkAppearance": {
     "type": "text",
     "placeholders": {}
   },
+  "all": "All",
+    "@all": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "quang_ngai": "Quảng Ngãi",
+      "@quang_ngai": {
+        "type": "text",
+        "placeholders": {}
+      },
+   "sai_gon": "Sài Gòn ",
+        "@sai_gon": {
+          "type": "text",
+          "placeholders": {}
+        },
+       "da_nang": "Đà Nẵng ",
+            "@da_nang": {
+              "type": "text",
+              "placeholders": {}
+            },
+
+   "ha_noi": "Hà Nội ",
+              "@ha_noi": {
+                "type": "text",
+                "placeholders": {}
+              },
+   "category": "Best Hotels",
+       "@category": {
+         "type": "text",
+         "placeholders": {}
+       },
   "language": "Language",
   "@language": {
     "type": "text",

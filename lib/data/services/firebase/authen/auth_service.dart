@@ -32,16 +32,11 @@ class AuthenticationService {
         email: email,
         password: password,
       );
-
-      print('Đăng nhập thành công! User ID: ${userCredential.user!.uid}');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('Không tìm thấy người dùng với email này.');
-      } else if (e.code == 'wrong-password') {
-        print('Mật khẩu không đúng.');
-      }
+      } else if (e.code == 'wrong-password') {}
     } catch (e) {
-      print(e);
+      e.toString();
     }
   }
 
@@ -77,7 +72,7 @@ class AuthenticationService {
             user.toMap(),
           );
     } catch (e) {
-      print('Error saving user to Firestore: $e');
+      e.toString();
     }
   }
 
