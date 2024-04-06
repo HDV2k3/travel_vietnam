@@ -1,20 +1,16 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-import 'package:chandoiqua/presentation/features/discovery/widgets/list_view_discovery.dart';
-import 'package:chandoiqua/utilities/extensions/string_extension.dart';
+import 'package:chandoiqua/presentation/features/discovery/widgets/list_view_hotel_all.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../data/providers/app_language_provider.dart';
+import 'list_view_discovery_all.dart';
 
 class ButtonTabbar extends ConsumerWidget {
   const ButtonTabbar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appSupportedLanguage =
-        ref.watch(appLanguageProvider).appSupportedLanguage;
-
     return DefaultTabController(
       length: 4,
       child: Column(
@@ -22,7 +18,7 @@ class ButtonTabbar extends ConsumerWidget {
           ButtonsTabBar(
             radius: 12,
             contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: Colors.transparent,
             center: false,
             decoration: const BoxDecoration(
@@ -48,8 +44,10 @@ class ButtonTabbar extends ConsumerWidget {
           Expanded(
             child: TabBarView(
               children: [
-                const HorizontalListView(),
-                Container(child: Text('Content 2')),
+                const ListViewAll(),
+                Container(
+                  child: ListViewAllHotel(),
+                ),
                 Container(child: Text('Content 3')),
                 Container(child: Text('Content 4')),
               ],

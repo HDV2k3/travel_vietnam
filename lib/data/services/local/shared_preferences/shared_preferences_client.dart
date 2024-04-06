@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,11 +6,21 @@ import '../../../../presentation/features/settings/models/app_language.dart';
 
 class SharedPreferencesClient {
   SharedPreferencesClient(this._sharedPreferences);
-
   final SharedPreferences _sharedPreferences;
-
   static const _isDarkThemeSettingKey = 'is_dark_theme_setting';
   static const _languageSettingKey = 'language_setting';
+  static const _isFavoriteKey = 'is_favorite';
+  Future<void> saveIsFavorite(bool isFavorite) async {
+    await _sharedPreferences.setBool(_isFavoriteKey, isFavorite);
+  }
+
+  IconData getIsFavorite() {
+    final isFavorite = _sharedPreferences.getBool(_isFavoriteKey);
+    if (isFavorite == null) {
+      return Icons.favorite_outline;
+    }
+    return isFavorite ? Icons.favorite : Icons.favorite_outline;
+  }
 
   Future<void> saveIsDarkTheme(bool isDarkTheme) async {
     await _sharedPreferences.setBool(_isDarkThemeSettingKey, isDarkTheme);

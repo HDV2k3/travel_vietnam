@@ -2,7 +2,6 @@ import 'package:chandoiqua/presentation/common_widgets/base/base_screen.dart';
 import 'package:chandoiqua/presentation/features/discovery/discovery_state.dart';
 import 'package:chandoiqua/presentation/features/discovery/discovery_view_model.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/buttons_tabbar.dart';
-import 'package:chandoiqua/presentation/features/discovery/widgets/text_category.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod/src/common.dart';
@@ -74,10 +73,9 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
                 ),
               ),
               const SizedBox(
-                height: 350,
+                height: double.maxFinite,
                 child: ButtonTabbar(),
               ),
-              const TextTittle(),
             ],
           ),
         ),
