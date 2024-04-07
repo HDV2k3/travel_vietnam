@@ -8,7 +8,9 @@ class Locations {
   String description;
   String location;
   String vote;
+  String nation;
   Locations({
+    required this.nation,
     required this.vote,
     required this.id,
     required this.image,
@@ -20,6 +22,7 @@ class Locations {
 
   Map<String, dynamic> toMap() {
     return {
+      "nation":nation,
       "vote":vote,
       "id": id,
       "image": image,
@@ -33,17 +36,19 @@ class Locations {
   factory Locations.fromFirebase(DocumentSnapshot snapshot) {
     var data = snapshot.data() as Map<String, dynamic>;
     return Locations(
-      vote: data["vote"],
-      id: data["id"],
-      image: data["image"],
-      title: data["title"],
-      price: data["price"],
-      description: data["description"],
-      location: data["location"]
+        nation: data["nation"],
+        vote: data["vote"],
+        id: data["id"],
+        image: data["image"],
+        title: data["title"],
+        price: data["price"],
+        description: data["description"],
+        location: data["location"]
     );
   }
 
   Locations copyWith({
+    String? nation,
     String? id,
     String? image,
     String? vote,
@@ -53,13 +58,14 @@ class Locations {
     String? location
   }) {
     return Locations(
-      vote: vote?? this.vote,
-      id: id ?? this.id,
-      image: image ?? this.image,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      price: price ?? this.price,
-      location: location?? this.location
+        nation: nation?? this.nation,
+        vote: vote?? this.vote,
+        id: id ?? this.id,
+        image: image ?? this.image,
+        title: title ?? this.title,
+        description: description ?? this.description,
+        price: price ?? this.price,
+        location: location?? this.location
     );
   }
 }

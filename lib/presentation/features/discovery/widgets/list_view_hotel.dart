@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../data/providers/app_language_provider.dart';
+import '../../detail_screen_hotel/detail_screen_hotel.dart';
 import 'button_heart.dart';
 
 class ListViewHotel extends ConsumerWidget {
@@ -36,13 +37,31 @@ class ListViewHotel extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            location.image,
-                            fit: BoxFit.cover,
-                            height: 200,
-                            width: 180,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPageHotel(
+                                  image: location.image,
+                                  title: location.title,
+                                  description: location.description,
+                                  price: location.price,
+                                  location: location.location,
+                                  vote: location.vote,
+                                  nation: location.nation,
+                                ),
+                              ),
+                            );
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              location.image,
+                              fit: BoxFit.cover,
+                              height: 200,
+                              width: 180,
+                            ),
                           ),
                         ),
                         Column(

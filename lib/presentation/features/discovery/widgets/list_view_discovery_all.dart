@@ -49,6 +49,7 @@ class ListViewAll extends ConsumerWidget {
                                   price: location.price,
                                   location: location.location,
                                   vote: location.vote,
+                                  nation: location.nation,
                                 ),
                               ),
                             );

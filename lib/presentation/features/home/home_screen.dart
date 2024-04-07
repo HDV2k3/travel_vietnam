@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../utilities/extensions/widget_ref_extension.dart';
 import '../../common_widgets/base/base_screen.dart';
 import '../discovery/discovery_screen.dart';
+import '../map/map.dart';
 import '../settings/setting_screen.dart';
 import 'home_state.dart';
 import 'home_view_model.dart';
@@ -33,7 +34,7 @@ class _HomeScreenState
     if (selectedTabIndex == HomeTab.home.index) {
       return const DiscoveryScreen();
     } else if (selectedTabIndex == HomeTab.explore.index) {
-      return const SizedBox();
+      return const GGMap();
     } else if (selectedTabIndex == HomeTab.heart.index) {
       return const SizedBox();
     } else if (selectedTabIndex == HomeTab.profile.index) {

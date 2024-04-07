@@ -26,13 +26,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/bgtour.jpeg
   AssetGenImage get bgtour => const AssetGenImage('assets/images/bgtour.jpeg');
 
+  /// File path: assets/images/booknowbutton.png
+  AssetGenImage get booknowbutton =>
+      const AssetGenImage('assets/images/booknowbutton.png');
+
   /// File path: assets/images/google_logo.png
   AssetGenImage get googleLogo =>
       const AssetGenImage('assets/images/google_logo.png');
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [img7985, backgroud, bg1, bgtour, googleLogo];
+      [img7985, backgroud, bg1, bgtour, booknowbutton, googleLogo];
 }
 
 class $AssetsLogosGen {

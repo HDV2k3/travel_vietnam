@@ -10,6 +10,7 @@ class DetailPage extends StatefulWidget {
   final String price;
   final String location;
   final String vote;
+  final String nation;
 
   const DetailPage({
     super.key,
@@ -19,6 +20,7 @@ class DetailPage extends StatefulWidget {
     required this.price,
     required this.location,
     required this.vote,
+    required this.nation,
   });
 
   @override
@@ -33,7 +35,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.nation),
       ),
       body: SizedBox(
         width: double.maxFinite,
