@@ -32,9 +32,7 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
             Icons.notifications,
             color: Colors.pink,
           ),
-          onPressed: () {
-            // Handle when the notification icon is pressed
-          },
+          onPressed: () {},
         ),
       ],
     );
@@ -56,7 +54,7 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
                     const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
-                height: 30,
+                height: 10,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -71,6 +69,9 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
                     border: InputBorder.none,
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 5,
               ),
               const SizedBox(height: 600, child: ButtonTabbar()),
             ],

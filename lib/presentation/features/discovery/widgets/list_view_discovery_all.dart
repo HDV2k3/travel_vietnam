@@ -43,11 +43,12 @@ class ListViewAll extends ConsumerWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => DetailPage(
-                                  id: location.id,
                                   image: location.image,
                                   title: location.title,
                                   description: location.description,
                                   price: location.price,
+                                  location: location.location,
+                                  vote: location.vote,
                                 ),
                               ),
                             );
@@ -96,7 +97,7 @@ class ListViewAll extends ConsumerWidget {
           );
         }
         return const CircularProgressIndicator(
-          strokeWidth: 2,
+          strokeWidth: 0.5,
         );
       },
     );

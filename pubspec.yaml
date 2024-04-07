@@ -41,7 +41,7 @@ dependencies:
   firebase_auth: ^4.17.9
   cloud_firestore: ^4.15.9
   http: ^1.2.1
-
+  slider_button: ^2.1.0
   shared_preferences: ^2.2.2
   bloc: ^8.1.3
   intl: ^0.18.1
@@ -98,8 +98,8 @@ flutter:
     - assets/images/google_logo.png
     - assets/images/bgtour.jpeg
     - assets/images/IMG_7985.png
-  
-  
+    - assets/images/booknowbutton.png
+
   
 
   

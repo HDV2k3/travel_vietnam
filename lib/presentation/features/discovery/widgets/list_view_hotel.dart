@@ -79,7 +79,7 @@ class ListViewHotel extends ConsumerWidget {
           );
         }
         return const CircularProgressIndicator(
-          strokeWidth: 2,
+          strokeWidth: 0.5,
         );
       },
     );
