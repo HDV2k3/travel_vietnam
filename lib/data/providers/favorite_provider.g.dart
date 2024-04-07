@@ -7,7 +7,7 @@ part of 'favorite_provider.dart';
 // **************************************************************************
 
 String _$favoriteButtonIconHash() =>
-    r'2ca1bcb9d9e671d141e9d70df47d007e637a5f06';
+    r'd316a28d3cb6305e48d22f8ab6307fe99bd1debb';
 
 /// See also [FavoriteButtonIcon].
 @ProviderFor(FavoriteButtonIcon)

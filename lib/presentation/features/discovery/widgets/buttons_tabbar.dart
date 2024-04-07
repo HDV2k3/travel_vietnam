@@ -1,10 +1,8 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-import 'package:chandoiqua/presentation/features/discovery/widgets/list_view_hotel_all.dart';
+import 'package:chandoiqua/presentation/features/discovery/widgets/GroupView.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'list_view_discovery_all.dart';
 
 class ButtonTabbar extends ConsumerWidget {
   const ButtonTabbar({super.key});
@@ -17,7 +15,7 @@ class ButtonTabbar extends ConsumerWidget {
         children: <Widget>[
           ButtonsTabBar(
             radius: 12,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 30),
             borderWidth: 1,
             borderColor: Colors.transparent,
             center: false,
@@ -33,7 +31,7 @@ class ButtonTabbar extends ConsumerWidget {
             unselectedLabelStyle: const TextStyle(color: Colors.black),
             labelStyle: const TextStyle(
                 color: Colors.grey, fontWeight: FontWeight.bold),
-            height: 56,
+            height: 50,
             tabs: [
               Tab(text: ref.appLocalizations.all),
               Tab(text: ref.appLocalizations.sai_gon),
@@ -41,15 +39,10 @@ class ButtonTabbar extends ConsumerWidget {
               Tab(text: ref.appLocalizations.ha_noi),
             ],
           ),
-          Expanded(
+          const Expanded(
             child: TabBarView(
               children: [
-                const ListViewAll(),
-                Container(
-                  child: ListViewAllHotel(),
-                ),
-                Container(child: Text('Content 3')),
-                Container(child: Text('Content 4')),
+                GroupViewAll(),
               ],
             ),
           ),

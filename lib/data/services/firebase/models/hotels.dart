@@ -2,20 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Hotels {
   String id;
-  String images;
-  String tittle;
+  String image;
+  String title;
 
   Hotels({
     required this.id,
-    required this.images,
-    required this.tittle,
+    required this.image,
+    required this.title,
   });
 
   Map<String, dynamic> toMap() {
     return {
       "id": id,
-      "images": images,
-      "tittle": tittle,
+      "image": image,
+      "title": title,
     };
   }
 
@@ -23,8 +23,8 @@ class Hotels {
     var data = snapshot.data() as Map<String, dynamic>;
     return Hotels(
       id: data["id"].toString(),
-      images: data["images"] ?? "", // Set a default value if the field is null
-      tittle: data["tittle"] ?? "", // Set a default value if the field is null
+      image: data["image"] ?? "", // Set a default value if the field is null
+      title: data["title"] ?? "", // Set a default value if the field is null
     );
   }
 
@@ -35,8 +35,8 @@ class Hotels {
   }) {
     return Hotels(
       id: id ?? this.id,
-      images: images ?? this.images,
-      tittle: tittle ?? this.tittle,
+      image: image ?? this.image,
+      title: title ?? this.title,
     );
   }
 }
