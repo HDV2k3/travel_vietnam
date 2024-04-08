@@ -58,19 +58,19 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
             ),
-            Positioned(
-              left: 10,
-              top: 10,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.menu),
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
+            // Positioned(
+            //   left: 10,
+            //   top: 10,
+            //   child: Row(
+            //     children: [
+            //       IconButton(
+            //         onPressed: () {},
+            //         icon: const Icon(Icons.menu),
+            //         color: Colors.white,
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Positioned(
               top: 280,
               child: Container(

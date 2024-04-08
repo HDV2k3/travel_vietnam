@@ -56,19 +56,19 @@ class _DetailPageHotelState extends State<DetailPageHotel> {
                 ),
               ),
             ),
-            Positioned(
-              left: 10,
-              top: 10,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.menu),
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
+            // Positioned(
+            //   left: 10,
+            //   top: 10,
+            //   child: Row(
+            //     children: [
+            //       IconButton(
+            //         onPressed: () {},
+            //         icon: const Icon(Icons.menu),
+            //         color: Colors.white,
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Positioned(
               top: 280,
               child: Container(

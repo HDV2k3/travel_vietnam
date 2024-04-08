@@ -1,4 +1,5 @@
 import 'package:chandoiqua/presentation/features/cart_screen/widgets/buttonDatetime.dart';
+import 'package:chandoiqua/presentation/features/cart_screen/widgets/button_confirm.dart';
 import 'package:chandoiqua/presentation/features/cart_screen/widgets/select_date_time.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class CartScreen extends ConsumerWidget {
       required this.image,
       required this.title,
       required this.price,
-      this.cart = "Giỏ Hàng",
+      this.cart = "Đặt Chuyến",
       required this.location})
       : super(key: key);
   @override
@@ -148,7 +149,7 @@ class CartScreen extends ConsumerWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: Text(
-                        'Chọn Ngày Và Giờ',
+                        'Chọn Ngày Nghĩ Dưỡng',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 25),
                       ),
@@ -162,7 +163,7 @@ class CartScreen extends ConsumerWidget {
                           child: ButtonDateTime(
                             category: 'Hôm Nay',
                             color: Colors.black,
-                            background: Colors.white,
+
                           ),
                         ),
                         SizedBox(
@@ -172,7 +173,7 @@ class CartScreen extends ConsumerWidget {
                           child: ButtonDateTime(
                             category: 'Ngày Mai',
                             color: Colors.black,
-                            background: Colors.white,
+
                           ),
                         ),
                       ],
@@ -183,7 +184,61 @@ class CartScreen extends ConsumerWidget {
                       child: SizedBox(
                         child: SelectDateTime(),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15),
+                      child: SizedBox(
+                        child: Text(
+                          'Cảm ơn quý khách đã tin tưởng và đồng hành cùng chúng tôi',
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              left: 15,
+              top: 600,
+              right: 15,
+              child: Container(
+                width: 250,
+                height: 150,
+                decoration:  BoxDecoration(
+                  color: Colors.white.withOpacity(0.5),
+                  // borderRadius: BorderRadius.only(
+                  //   bottomRight: Radius.circular(20),
+                  //   topRight: Radius.circular(20),
+                  //   bottomLeft: Radius.circular(20),
+                  //   topLeft: Radius.circular(20),
+                  // ),
+                ),
+                child: Column(
+
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50, left: 0),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Tổng Tiền:',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            price,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          const SizedBox(width: 35,),
+                          const ButtonConfirm(category:'Thanh Toán', color: Colors.white, )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

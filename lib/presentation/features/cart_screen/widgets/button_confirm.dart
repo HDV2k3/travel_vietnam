@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ButtonDateTime extends StatefulWidget {
+class ButtonConfirm extends StatefulWidget {
   final String category;
   final Color color;
 
-
-  const ButtonDateTime({
+  const ButtonConfirm({
     super.key,
     required this.category, required this.color
   });
 
   @override
-  State<ButtonDateTime> createState() => _ButtonDateTimeState();
+  State<ButtonConfirm> createState() => _ButtonConfirmState();
 }
 
-class _ButtonDateTimeState extends State<ButtonDateTime> {
+class _ButtonConfirmState extends State<ButtonConfirm> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -23,6 +22,7 @@ class _ButtonDateTimeState extends State<ButtonDateTime> {
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
