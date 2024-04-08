@@ -2,6 +2,8 @@ import 'package:chandoiqua/presentation/features/cart_screen/widgets/buttonDatet
 import 'package:chandoiqua/presentation/features/cart_screen/widgets/select_date_time.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -123,61 +125,67 @@ class CartScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            const Positioned(
-              left: 50,
-              top: 200,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Chọn Ngày Và Giờ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            Positioned(
+              left: 15,
+              top: 180,
+              right: 15,
+              child: Container(
+                width: 500,
+                height: 400,
+                decoration: const BoxDecoration(
+                  color: Colors.lightBlue,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                    topLeft: Radius.circular(20),
                   ),
-                ],
-              ),
-            ),
-            const Positioned(
-              top: 250,
-              right: 10,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-
-                      SizedBox(
-                        child: ButtonDateTime(
-                          category: 'Hôm Nay',
-                          color: Colors.black,
-                          background: Colors.white,
+                ),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text(
+                        'Chọn Ngày Và Giờ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      ),
+                    ),
+                    SizedBox(height: 50),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          child: ButtonDateTime(
+                            category: 'Hôm Nay',
+                            color: Colors.black,
+                            background: Colors.white,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      SizedBox(
-                        child: ButtonDateTime(
-                          category: 'Ngày Mai',
-                          color: Colors.black,
-                          background: Colors.white,
+                        SizedBox(
+                          width: 10,
                         ),
+                        SizedBox(
+                          child: ButtonDateTime(
+                            category: 'Ngày Mai',
+                            color: Colors.black,
+                            background: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15),
+                      child: SizedBox(
+                        child: SelectDateTime(),
                       ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            const Positioned(
-              top: 320,
-              right: 30,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                      SizedBox(
-                        child: SelectDateTime()
-                      ),
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],
