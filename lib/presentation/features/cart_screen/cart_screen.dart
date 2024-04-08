@@ -144,10 +144,11 @@ class CartScreen extends ConsumerWidget {
                 children: [
                   Row(
                     children: [
+
                       SizedBox(
                         child: ButtonDateTime(
                           category: 'Hôm Nay',
-                          color: Colors.grey,
+                          color: Colors.black,
                           background: Colors.white,
                         ),
                       ),
@@ -157,13 +158,25 @@ class CartScreen extends ConsumerWidget {
                       SizedBox(
                         child: ButtonDateTime(
                           category: 'Ngày Mai',
-                          color: Colors.grey,
+                          color: Colors.black,
                           background: Colors.white,
                         ),
                       ),
-
                     ],
                   )
+                ],
+              ),
+            ),
+            const Positioned(
+              top: 320,
+              right: 30,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                      SizedBox(
+                        child: SelectDateTime()
+                      ),
                 ],
               ),
             ),
