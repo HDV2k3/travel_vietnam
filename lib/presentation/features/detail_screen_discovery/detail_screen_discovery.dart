@@ -3,6 +3,8 @@ import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets
 import 'package:flutter/material.dart';
 import 'package:slider_button/slider_button.dart';
 
+import '../cart_screen/cart_screen.dart';
+
 class DetailPage extends StatefulWidget {
   final String image;
   final String title;
@@ -179,26 +181,41 @@ class _DetailPageState extends State<DetailPage> {
                       children: List.generate(5, (index) {
                         return InkWell(
                           onTap: () {
-                              setState(() {selectedIndex=index;});
+                            setState(() {
+                              selectedIndex = index;
+                            });
                           },
                           child: Container(
                             margin: const EdgeInsets.only(right: 10),
                             child: ButtonDetail(
                               size: 50,
-                              color: selectedIndex==index?Colors.white:Colors.black,
-                              backgroundColor:selectedIndex==index?Colors.black:
-                              Colors.deepPurple.withOpacity(0.1),
-                              borderColor:selectedIndex==index?Colors.black:
-                              Colors.deepPurple.withOpacity(0.1),
+                              color: selectedIndex == index
+                                  ? Colors.white
+                                  : Colors.black,
+                              backgroundColor: selectedIndex == index
+                                  ? Colors.black
+                                  : Colors.deepPurple.withOpacity(0.1),
+                              borderColor: selectedIndex == index
+                                  ? Colors.black
+                                  : Colors.deepPurple.withOpacity(0.1),
                               text: (index + 1).toString(),
                             ),
                           ),
                         );
                       }),
                     ),
-                    const SizedBox(height: 15,),
-                    Text('Mô tả',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8)),),
-                    const SizedBox(height: 5,),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Mô tả',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black.withOpacity(0.8)),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Text(widget.description)
                   ],
                 ),
@@ -209,21 +226,35 @@ class _DetailPageState extends State<DetailPage> {
                 left: 20,
                 right: 20,
                 child: Row(
-                children: [
-                  ButtonDetail(size: 60,
+                  children: [
+                    ButtonDetail(
+                      size: 60,
                       color: Colors.black,
                       backgroundColor: Colors.white,
                       borderColor: Colors.deepPurple,
                       isIcon: true,
-                    icon: Icons.favorite_border,
-                  ),
-                  const SizedBox(width: 20,),
-                  ResponsiveButton(
-                    isResponsive: true,
-                  )
-
-                ],
-            ))
+                      icon: Icons.favorite_border,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CartScreen(
+                                  image: widget.image,
+                                  title: widget.title,
+                                  price: widget.price, location: widget.location,)),
+                        );
+                      },
+                      child: ResponsiveButton(
+                        isResponsive: true,
+                      ),
+                    ),
+                  ],
+                ))
           ],
         ),
       ),
