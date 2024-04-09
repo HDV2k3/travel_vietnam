@@ -1,4 +1,3 @@
-import 'package:chandoiqua/presentation/features/detail_screen_discovery/detail_state.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

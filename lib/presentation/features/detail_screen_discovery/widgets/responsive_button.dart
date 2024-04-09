@@ -21,7 +21,7 @@ class ResponsiveButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment:isResponsive==true?MainAxisAlignment.spaceBetween:MainAxisAlignment.center,
           children: [
-            isResponsive==true?Container(margin: const EdgeInsets.only(left: 20),  child: Text('Đặt Ngay',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)):Container(),
+            isResponsive==true?Container(margin: const EdgeInsets.only(left: 20),  child: const Text('Đặt Ngay',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)):Container(),
 
             Image.asset('assets/images/booknowbutton.png')
           ],

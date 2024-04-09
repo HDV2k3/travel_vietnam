@@ -6,9 +6,9 @@ abstract class SharedPreferencesRepository {
   bool getIsDarkTheme();
 
   Future<void> saveIsDarkTheme(bool isDarkTheme);
-
+  Future<void> saveIsCheckBox(bool isCheckBox);
   Future<void> saveLanguageSetting(String language);
-
+  bool getIsCheckBox();
   String getLanguageSetting();
   IconData getFavorite();
   Future<void> saveFavorite(IconData isFavorite);
@@ -47,4 +47,15 @@ class SharedPreferencesRepositoryImpl implements SharedPreferencesRepository {
   IconData getFavorite() {
     return _sharedPreferencesClient.getIsFavorite();
   }
+
+  @override
+  bool getIsCheckBox() {
+    return _sharedPreferencesClient.getIsCheckBox();
+  }
+
+  @override
+  Future<void> saveIsCheckBox(bool isCheckBox) async {
+  _sharedPreferencesClient.getIsCheckBox();
+  }
+
 }

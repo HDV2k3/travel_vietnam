@@ -15,7 +15,7 @@ final favoriteButtonIconProvider =
 });
 
 class FavoriteIconButton extends ConsumerWidget {
-  FavoriteIconButton({required Key key}) : super(key: key);
+  const FavoriteIconButton({required Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

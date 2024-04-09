@@ -1,11 +1,7 @@
 import 'package:chandoiqua/presentation/features/cart_screen/widgets/buttonDatetime.dart';
-import 'package:chandoiqua/presentation/features/cart_screen/widgets/button_confirm.dart';
 import 'package:chandoiqua/presentation/features/cart_screen/widgets/select_date_time.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:chandoiqua/presentation/features/payment_screen/payment_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CartScreen extends ConsumerWidget {
@@ -15,13 +11,12 @@ class CartScreen extends ConsumerWidget {
   final String cart;
   final String location;
   const CartScreen(
-      {Key? key,
+      {super.key,
       required this.image,
       required this.title,
       required this.price,
       this.cart = "Đặt Chuyến",
-      required this.location})
-      : super(key: key);
+      required this.location});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -104,13 +99,16 @@ class CartScreen extends ConsumerWidget {
                             color: Colors.black54.withOpacity(1),
                           ),
                         ),
-                        const Text(
-                          '....................',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.7,
+                                color: Colors.grey.withOpacity(0.5),
+                              ),
+                            ),
+                          ],
                         ),
                         Text(
                           price,
@@ -151,7 +149,7 @@ class CartScreen extends ConsumerWidget {
                       child: Text(
                         'Chọn Ngày Nghĩ Dưỡng',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25),
+                            fontWeight: FontWeight.bold, fontSize: 25,color: Colors.amberAccent),
                       ),
                     ),
                     SizedBox(height: 50),
@@ -160,20 +158,18 @@ class CartScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          child: ButtonDateTime(
+                          child: ButtonDay(
                             category: 'Hôm Nay',
                             color: Colors.black,
-
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         SizedBox(
-                          child: ButtonDateTime(
+                          child: ButtonDay(
                             category: 'Ngày Mai',
                             color: Colors.black,
-
                           ),
                         ),
                       ],
@@ -192,7 +188,7 @@ class CartScreen extends ConsumerWidget {
                       padding: EdgeInsets.only(left: 15),
                       child: SizedBox(
                         child: Text(
-                          'Cảm ơn quý khách đã tin tưởng và đồng hành cùng chúng tôi',
+                          '"Khám phá những hành trình vô tận - Hòa mình cùng cuộc sống"',
                           style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                       ),
@@ -208,7 +204,7 @@ class CartScreen extends ConsumerWidget {
               child: Container(
                 width: 250,
                 height: 150,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.5),
                   // borderRadius: BorderRadius.only(
                   //   bottomRight: Radius.circular(20),
@@ -218,7 +214,6 @@ class CartScreen extends ConsumerWidget {
                   // ),
                 ),
                 child: Column(
-
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 50, left: 0),
@@ -234,8 +229,33 @@ class CartScreen extends ConsumerWidget {
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
-                          const SizedBox(width: 35,),
-                          const ButtonConfirm(category:'Thanh Toán', color: Colors.white, )
+                          const SizedBox(
+                            width: 35,
+                          ),
+                          SizedBox(
+                            width: 180,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Payment(
+                                              price: price,
+                                            )));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
+                              child: const Text(
+                                'Xác Nhận',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

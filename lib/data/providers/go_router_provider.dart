@@ -13,7 +13,7 @@ GoRouter goRouter(GoRouterRef ref) {
       GoRoute(
         path: RoutePaths.root,
         builder: (context, state) {
-          return const OnboardingScreen();
+          return const OnBoardingScreen();
         },
         routes: const [],
       ),

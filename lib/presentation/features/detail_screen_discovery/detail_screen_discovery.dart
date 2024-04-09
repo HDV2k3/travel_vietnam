@@ -1,7 +1,6 @@
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/button.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/responsive_button.dart';
 import 'package:flutter/material.dart';
-import 'package:slider_button/slider_button.dart';
 
 import '../cart_screen/cart_screen.dart';
 

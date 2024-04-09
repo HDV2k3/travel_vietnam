@@ -16,6 +16,10 @@ class $AssetsImagesGen {
   AssetGenImage get img7985 =>
       const AssetGenImage('assets/images/IMG_7985.png');
 
+  /// File path: assets/images/MoMo_Logo.png
+  AssetGenImage get moMoLogo =>
+      const AssetGenImage('assets/images/MoMo_Logo.png');
+
   /// File path: assets/images/backgroud.png
   AssetGenImage get backgroud =>
       const AssetGenImage('assets/images/backgroud.png');
@@ -34,9 +38,25 @@ class $AssetsImagesGen {
   AssetGenImage get googleLogo =>
       const AssetGenImage('assets/images/google_logo.png');
 
+  /// File path: assets/images/paypal.jpg
+  AssetGenImage get paypal => const AssetGenImage('assets/images/paypal.jpg');
+
+  /// File path: assets/images/paypalll.jpg
+  AssetGenImage get paypalll =>
+      const AssetGenImage('assets/images/paypalll.jpg');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [img7985, backgroud, bg1, bgtour, booknowbutton, googleLogo];
+  List<AssetGenImage> get values => [
+        img7985,
+        moMoLogo,
+        backgroud,
+        bg1,
+        bgtour,
+        booknowbutton,
+        googleLogo,
+        paypal,
+        paypalll
+      ];
 }
 
 class $AssetsLogosGen {

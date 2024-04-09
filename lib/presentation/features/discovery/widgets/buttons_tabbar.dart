@@ -42,7 +42,7 @@ class ButtonTabbar extends ConsumerWidget {
           const Expanded(
             child: TabBarView(
               children: [
-                GroupViewAll(),
+                Group(),
               ],
             ),
           ),

@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ButtonDateTime extends StatefulWidget {
+class ButtonDay extends StatefulWidget {
   final String category;
   final Color color;
 
-
-  const ButtonDateTime({
-    super.key,
-    required this.category, required this.color
-  });
+  const ButtonDay(
+      {super.key, required this.category, required this.color});
 
   @override
-  State<ButtonDateTime> createState() => _ButtonDateTimeState();
+  State<ButtonDay> createState() => _ButtonDayState();
 }
 
-class _ButtonDateTimeState extends State<ButtonDateTime> {
+class _ButtonDayState extends State<ButtonDay> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -27,7 +24,10 @@ class _ButtonDateTimeState extends State<ButtonDateTime> {
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-        child:  Text(widget.category,style: TextStyle(color: widget.color),),
+        child: Text(
+          widget.category,
+          style: TextStyle(color: widget.color),
+        ),
       ),
     );
   }

@@ -48,6 +48,7 @@ class _GGMapState extends State<GGMap> {
           markers: _markers.values.toSet(),
         ),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -83,7 +83,8 @@ class ListViewHotel extends ConsumerWidget {
                                 ),
                                 ProviderScope(
                                   child:
-                                      FavoriteIconButton(key: Key(location.id)),
+                                  FavoriteIconButton(key: Key(location.id)
+                                    ,)
                                 ),
                               ],
                             ),

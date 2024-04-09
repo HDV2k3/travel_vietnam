@@ -1,4 +1,3 @@
-import 'package:chandoiqua/presentation/features/discovery/discovery_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'cart_state.dart';

@@ -81,9 +81,10 @@ class ListViewAll extends ConsumerWidget {
                                 const SizedBox(
                                   width: 20,
                                 ),
+
                                 ProviderScope(
                                   child:
-                                      FavoriteIconButton(key: Key(location.id)),
+                                  FavoriteIconButton(key: Key(location.id))
                                 ),
                               ],
                             ),

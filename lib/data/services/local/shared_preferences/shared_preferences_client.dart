@@ -10,6 +10,7 @@ class SharedPreferencesClient {
   static const _isDarkThemeSettingKey = 'is_dark_theme_setting';
   static const _languageSettingKey = 'language_setting';
   static const _isFavoriteKey = 'is_favorite';
+  static const _isCheckBoxKey = 'is_checkbox';
   Future<void> saveIsFavorite(bool isFavorite) async {
     await _sharedPreferences.setBool(_isFavoriteKey, isFavorite);
   }
@@ -33,6 +34,18 @@ class SharedPreferencesClient {
           Brightness.dark;
     } else {
       return isDarkTheme;
+    }
+  }
+  Future<void> saveIsCheckBox(bool isCheckBox) async {
+    await _sharedPreferences.setBool(_isCheckBoxKey, isCheckBox);
+  }
+
+  bool getIsCheckBox() {
+    final isCheckBox = _sharedPreferences.getBool(_isCheckBoxKey);
+    if (isCheckBox == null) {
+      return false;
+    } else {
+      return isCheckBox;
     }
   }
 

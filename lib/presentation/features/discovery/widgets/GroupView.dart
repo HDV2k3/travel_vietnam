@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'list_view_hotel.dart';
 
-class GroupViewAll extends ConsumerWidget {
-  const GroupViewAll({super.key});
+class Group extends ConsumerWidget {
+  const Group({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -8,14 +8,14 @@ import '../sign_up/sign_up_screen.dart';
 import 'onboarding_state.dart';
 import 'onboarding_view_model.dart';
 
-class OnboardingScreen extends BaseScreen {
-  const OnboardingScreen({super.key});
+class OnBoardingScreen extends BaseScreen {
+  const OnBoardingScreen({super.key});
 
   @override
-  BaseScreenState createState() => _OnboardingState();
+  BaseScreenState createState() => _OnBoardingScreenState();
 }
 
-class _OnboardingState extends BaseScreenState<OnboardingScreen,
+class _OnBoardingScreenState extends BaseScreenState<OnBoardingScreen,
     OnboardingViewModel, OnboardingState> {
   @override
   Color? get backgroundColor => ref.colors.background;
@@ -78,7 +78,7 @@ class _OnboardingState extends BaseScreenState<OnboardingScreen,
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignInScreen(),
+                                builder: (context) => const SignInScreen(),
                               ),
                             );
                           },
