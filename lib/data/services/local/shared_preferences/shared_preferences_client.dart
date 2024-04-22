@@ -9,20 +9,22 @@ class SharedPreferencesClient {
   final SharedPreferences _sharedPreferences;
   static const _isDarkThemeSettingKey = 'is_dark_theme_setting';
   static const _languageSettingKey = 'language_setting';
-  static const _isFavoriteKey = 'is_favorite';
-  static const _isCheckBoxKey = 'is_checkbox';
-  Future<void> saveIsFavorite(bool isFavorite) async {
-    await _sharedPreferences.setBool(_isFavoriteKey, isFavorite);
-  }
+  static const _isFavorite = 'is_favorite';
 
-  IconData getIsFavorite() {
-    final isFavorite = _sharedPreferences.getBool(_isFavoriteKey);
+
+  bool getIsFavorite() {
+    final isFavorite = _sharedPreferences.getBool(_isFavorite);
+
     if (isFavorite == null) {
-      return Icons.favorite_outline;
+      return true; // Nếu giá trị yêu thích là null, mặc định trả về true
+    } else {
+      return isFavorite;
     }
-    return isFavorite ? Icons.favorite : Icons.favorite_outline;
   }
-
+  Future<void> saveIsFavorite(bool isFavorite) async
+  {
+    await _sharedPreferences.setBool(_isFavorite, isFavorite);
+  }
   Future<void> saveIsDarkTheme(bool isDarkTheme) async {
     await _sharedPreferences.setBool(_isDarkThemeSettingKey, isDarkTheme);
   }
@@ -35,19 +37,12 @@ class SharedPreferencesClient {
     } else {
       return isDarkTheme;
     }
-  }
-  Future<void> saveIsCheckBox(bool isCheckBox) async {
-    await _sharedPreferences.setBool(_isCheckBoxKey, isCheckBox);
+
+
   }
 
-  bool getIsCheckBox() {
-    final isCheckBox = _sharedPreferences.getBool(_isCheckBoxKey);
-    if (isCheckBox == null) {
-      return false;
-    } else {
-      return isCheckBox;
-    }
-  }
+
+
 
   Future<void> saveLanguageSetting(String language) async {
     await _sharedPreferences.setString(_languageSettingKey, language);

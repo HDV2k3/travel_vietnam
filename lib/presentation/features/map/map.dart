@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'locations.dart' as locations;
+
 class GGMap extends StatefulWidget {
   const GGMap({super.key});
 
@@ -27,6 +28,7 @@ class _GGMapState extends State<GGMap> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

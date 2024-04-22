@@ -38,7 +38,10 @@ class _PaymentPapalState extends State<PaymentPapal> {
             const SizedBox(width: 10),
             const Text(
               'Thanh Toán Qua Paypal',
-              style: TextStyle(color: Colors.black, fontSize: 16,fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 40),
             InkWell(
@@ -59,9 +62,9 @@ class _PaymentPapalState extends State<PaymentPapal> {
                 ),
                 child: isChecked
                     ? const Icon(
-                  Icons.check,
-                  color: Colors.white,
-                )
+                        Icons.check,
+                        color: Colors.white,
+                      )
                     : null,
               ),
             ),

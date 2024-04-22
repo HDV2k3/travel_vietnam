@@ -10,7 +10,6 @@ class AppTheme extends _$AppTheme {
   bool build() {
     return ref.watch(sharedPreferencesRepositoryProvider).getIsDarkTheme();
   }
-
   void onToggle() {
     final newValue = !state;
     ref.read(sharedPreferencesRepositoryProvider).saveIsDarkTheme(newValue);

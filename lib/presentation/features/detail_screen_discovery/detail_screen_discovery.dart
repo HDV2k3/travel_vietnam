@@ -1,7 +1,11 @@
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/button.dart';
+import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/button_add_to_favorite.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/responsive_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../../controllers/discovery_controller.dart';
 import '../cart_screen/cart_screen.dart';
 
 class DetailPage extends StatefulWidget {
@@ -12,7 +16,6 @@ class DetailPage extends StatefulWidget {
   final String location;
   final String vote;
   final String nation;
-
   const DetailPage({
     super.key,
     required this.image,
@@ -25,13 +28,15 @@ class DetailPage extends StatefulWidget {
   });
 
   @override
-  _DetailPageState createState() => _DetailPageState();
+  State<DetailPage> createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
   int star1 = 4;
   int selectedIndex = -1;
+  late   bool isFavorite = false;
 
+  final DiscoveryController discoveryController = Get.put(DiscoveryController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -226,13 +231,24 @@ class _DetailPageState extends State<DetailPage> {
                 right: 20,
                 child: Row(
                   children: [
-                    ButtonDetail(
+                    ButtonAddToFavorite(
                       size: 60,
-                      color: Colors.black,
+                      color: isFavorite ? Colors.red : Colors.black,
                       backgroundColor: Colors.white,
                       borderColor: Colors.deepPurple,
                       isIcon: true,
-                      icon: Icons.favorite_border,
+                      icon: isFavorite ? Icons.favorite : Icons.favorite_border,
+                      onPressed: () {
+                        discoveryController.addToFavorite(
+                          title: widget.title,
+                          image: widget.image,
+                          price: widget.price,
+                          location: widget.location,
+                        );
+                        setState(() {
+                          isFavorite = true;
+                        });
+                      },
                     ),
                     const SizedBox(
                       width: 20,
@@ -243,12 +259,14 @@ class _DetailPageState extends State<DetailPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => CartScreen(
-                                  image: widget.image,
-                                  title: widget.title,
-                                  price: widget.price, location: widget.location,)),
+                                    image: widget.image,
+                                    title: widget.title,
+                                    price: widget.price,
+                                    location: widget.location,
+                                  )),
                         );
                       },
-                      child: ResponsiveButton(
+                      child: const ResponsiveButton(
                         isResponsive: true,
                       ),
                     ),

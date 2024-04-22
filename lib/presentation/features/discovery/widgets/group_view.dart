@@ -15,14 +15,13 @@ class Group extends ConsumerWidget {
 
     return const Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: listViewDiscovery,
           ),
-          Padding(
-            padding: EdgeInsets.only(right: 270),
-            child: TextTittle(),
-          ),
+          TextTittle(),
           Expanded(
             child: listViewHotel,
           ),

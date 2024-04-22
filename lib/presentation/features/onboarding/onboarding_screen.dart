@@ -108,7 +108,7 @@ class _OnBoardingScreenState extends BaseScreenState<OnBoardingScreen,
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignUpScreen(),
+                                builder: (context) => const SignUpScreen(),
                               ),
                             );
                           },

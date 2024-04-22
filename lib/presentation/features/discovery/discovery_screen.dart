@@ -4,7 +4,7 @@ import 'package:chandoiqua/presentation/features/discovery/discovery_view_model.
 import 'package:chandoiqua/presentation/features/discovery/widgets/buttons_tabbar.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod/src/common.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DiscoveryScreen extends BaseScreen {
   const DiscoveryScreen({super.key});

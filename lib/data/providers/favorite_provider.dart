@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'shared_preferences_repository_provider.dart';
@@ -6,15 +6,16 @@ import 'shared_preferences_repository_provider.dart';
 part 'favorite_provider.g.dart';
 
 @Riverpod(keepAlive: true, dependencies: [sharedPreferencesRepository])
-class FavoriteButtonIcon extends _$FavoriteButtonIcon {
+class Favorite extends _$Favorite {
   @override
-  IconData build() {
-    return ref.watch(sharedPreferencesRepositoryProvider).getFavorite();
+  bool build() {
+    return ref.watch(sharedPreferencesRepositoryProvider).getIsFavorite();
   }
-
   void onToggle() {
-    final newValue = state;
-    ref.read(sharedPreferencesRepositoryProvider).saveFavorite(newValue);
+    final newValue = !state;
+    ref.read(sharedPreferencesRepositoryProvider).saveIsFavorite(newValue);
     state = newValue;
   }
+
+
 }

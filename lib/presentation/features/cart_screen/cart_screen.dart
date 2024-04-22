@@ -1,4 +1,4 @@
-import 'package:chandoiqua/presentation/features/cart_screen/widgets/buttonDatetime.dart';
+import 'package:chandoiqua/presentation/features/cart_screen/widgets/button_datetime.dart';
 import 'package:chandoiqua/presentation/features/cart_screen/widgets/select_date_time.dart';
 import 'package:chandoiqua/presentation/features/payment_screen/payment_screen.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +149,9 @@ class CartScreen extends ConsumerWidget {
                       child: Text(
                         'Chọn Ngày Nghĩ Dưỡng',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25,color: Colors.amberAccent),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            color: Colors.amberAccent),
                       ),
                     ),
                     SizedBox(height: 50),

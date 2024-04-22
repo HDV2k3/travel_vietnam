@@ -57,7 +57,6 @@
 import 'package:custom_date_range_picker/custom_date_range_picker.dart';
 import 'package:flutter/material.dart';
 
-
 class SelectDateTime extends StatefulWidget {
   const SelectDateTime({super.key});
 
@@ -103,7 +102,6 @@ class _SelectDateTimeState extends State<SelectDateTime> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Chọn Ngày', style: TextStyle(color: Colors.black)),
-
             SizedBox(width: 20),
             Icon(Icons.calendar_today_outlined, color: Colors.black),
           ],

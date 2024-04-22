@@ -64,18 +64,15 @@ class Office {
   final String phone;
   final String region;
 }
-
 @JsonSerializable()
 class Locations {
   Locations({
     required this.offices,
     required this.regions,
   });
-
   factory Locations.fromJson(Map<String, dynamic> json) =>
       _$LocationsFromJson(json);
   Map<String, dynamic> toJson() => _$LocationsToJson(this);
-
   final List<Office> offices;
   final List<Region> regions;
 }
@@ -95,7 +92,6 @@ Future<Locations> getGoogleOffices() async {
       print(e);
     }
   }
-
   // Fallback for when the above HTTP request fails.
   return Locations.fromJson(
     json.decode(

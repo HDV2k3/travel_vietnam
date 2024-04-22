@@ -2,7 +2,7 @@ import 'package:chandoiqua/presentation/common_widgets/base/base_screen.dart';
 import 'package:chandoiqua/presentation/features/sign_up/sign_up_state.dart';
 import 'package:chandoiqua/presentation/features/sign_up/sign_up_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod/src/common.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/services/firebase/authen/auth_service.dart';
 import '../sign_in/sign_in_screen.dart';
@@ -21,8 +21,8 @@ class _SignUpScreenState
   bool agreePersonalData = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController fullnameController = TextEditingController();
-  AuthenticationService firestoreService = AuthenticationService();
+  final TextEditingController fullNameController = TextEditingController();
+  AuthenticationService fireStoreService = AuthenticationService();
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
@@ -78,7 +78,7 @@ class _SignUpScreenState
                           }
                           return null;
                         },
-                        controller: fullnameController,
+                        controller: fullNameController,
                         decoration: InputDecoration(
                           label: const Text('Full Name'),
                           hintText: 'Enter Full Name',
@@ -205,25 +205,30 @@ class _SignUpScreenState
                           onPressed: () {
                             if (_formSignupKey.currentState!.validate() &&
                                 agreePersonalData) {
-                              firestoreService
-                                  .newAccount(fullnameController,
+                              fireStoreService
+                                  .newAccount(fullNameController,
                                       emailController, passwordController)
                                   .then((_) async {
                                 // Kiểm tra và chuyển hướng màn hình sau khi đăng ký thành công và lưu vào Firestore
-                                if (await firestoreService
+                                if (await fireStoreService
                                     .userRegisteredSuccessfully()) {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SignInScreen()),
-                                  );
+                                  if (context.mounted) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignInScreen()),
+                                    );
+                                  }
                                 } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Error registering user.'),
-                                    ),
-                                  );
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content:
+                                            Text('Error registering user.'),
+                                      ),
+                                    );
+                                  }
                                 }
                               }).catchError((error) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -287,7 +292,7 @@ class _SignUpScreenState
                         children: [
                           ElevatedButton.icon(
                             onPressed: () {
-                              firestoreService.signInWithGoogle();
+                              fireStoreService.signInWithGoogle();
                             },
                             icon: Image.asset(
                               "assets/logos/google_logo.png",

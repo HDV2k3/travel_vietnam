@@ -1,4 +1,4 @@
-import 'package:chandoiqua/presentation/features/onboarding/OnboardingScreen.dart';
+import 'package:chandoiqua/presentation/features/onboarding/onboarding_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

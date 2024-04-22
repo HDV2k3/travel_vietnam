@@ -4,7 +4,7 @@ import 'package:chandoiqua/presentation/features/sign_in/sign_in_view_model.dart
 import 'package:chandoiqua/presentation/features/sign_in/widgets/custom_scaffold.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod/src/common.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/services/firebase/authen/auth_service.dart';
 import '../home/home_screen.dart';
@@ -27,7 +27,7 @@ class _SignInScreenState
   bool rememberPassword = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  AuthenticationService firestoreservice = AuthenticationService();
+  AuthenticationService fireStoreService = AuthenticationService();
   _SignInScreenState() {
     emailController.text = ""; // Gán giá trị ban đầu
     passwordController.text = ""; // Gán giá trị ban đầu
@@ -179,33 +179,55 @@ class _SignInScreenState
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () async {
+
                             if (_formSignInKey.currentState!.validate() &&
                                 rememberPassword) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Đăng Nhập Thành Công'),
-                                ),
+                              // Xác thực đăng nhập
+                              final result = await fireStoreService.signInUser(
+                                emailController.text,
+                                passwordController.text,
                               );
-                              await firestoreservice.signInUser(
-                                  emailController.text,
-                                  passwordController.text);
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()),
-                              );
+
+                              if (result == true) {
+                                // Đăng nhập thành công, chuyển trang
+                                if (context.mounted) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const HomeScreen()),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Đăng Nhập Thành Công'),
+                                    ),
+                                  );
+                                }
+                              } else {
+                                // Đăng nhập không thành công, hiển thị thông báo lỗi
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Đăng nhập không thành công. Vui lòng kiểm tra thông tin đăng nhập.'),
+                                  ),
+                                );
+                                }
+                              }
                             } else if (!rememberPassword) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text(
-                                      'Vui lòng đồng ý với việc xử lý dữ liệu cá nhân'),
+                                    'Vui lòng đồng ý với việc xử lý dữ liệu cá nhân',
+                                  ),
                                 ),
                               );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text(
-                                      'Xin vui lòng điền đầy đủ thông tin vào các ô bắt buộc!'),
+                                    'Xin vui lòng điền đầy đủ thông tin vào các ô bắt buộc!',
+                                  ),
                                 ),
                               );
                             }
@@ -253,12 +275,31 @@ class _SignInScreenState
                         children: [
                           ElevatedButton.icon(
                             onPressed: () async {
-                              firestoreservice.signInWithGoogle();
-                              Navigator.pushReplacement(
+                              // Gọi signInWithGoogle để thực hiện quá trình đăng nhập bằng Google
+
+                              await fireStoreService.signInWithGoogle();
+                              // Kiểm tra kết quả đăng nhập
+
+                              // Nếu đăng nhập thành công, thực hiện chuyển hướng đến trang HomeScreen
+                              if (context.mounted) {
+                                Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const HomeScreen()),
                               );
+                              }
+                              else
+                              {
+                                // Nếu đăng nhập không thành công, hiển thị thông báo hoặc xử lý theo ý bạn
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Đăng nhập thất bại. Vui lòng thử lại.'),
+                                  ),
+                                );
+                                }
+                              }
                             },
                             icon: Image.asset(
                               "assets/logos/google_logo.png",
@@ -336,5 +377,5 @@ class _SignInScreenState
 
   @override
   // TODO: implement viewModel
-  SignInViewModel get viewModel => ref.read(signInViewModelProvider.notifier);
+  SignInViewModel get viewModel =>ref.read(signInViewModelProvider.notifier);
 }

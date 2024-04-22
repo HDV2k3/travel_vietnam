@@ -1,3 +1,4 @@
+import 'package:chandoiqua/presentation/features/favorite_screen/favorite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,7 +37,7 @@ class _HomeScreenState
     } else if (selectedTabIndex == HomeTab.explore.index) {
       return const GGMap();
     } else if (selectedTabIndex == HomeTab.heart.index) {
-      return const SizedBox();
+      return const FavoriteScreen();
     } else if (selectedTabIndex == HomeTab.profile.index) {
       return const SettingScreen();
     } else {

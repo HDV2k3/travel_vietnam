@@ -1,5 +1,5 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-import 'package:chandoiqua/presentation/features/discovery/widgets/GroupView.dart';
+import 'package:chandoiqua/presentation/features/discovery/widgets/group_view.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

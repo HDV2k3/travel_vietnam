@@ -13,3 +13,4 @@ SharedPreferencesRepository sharedPreferencesRepository(
     ref.watch(sharedPreferencesClientProvider),
   );
 }
+

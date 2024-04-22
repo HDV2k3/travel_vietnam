@@ -23,7 +23,7 @@ class DetailPageHotel extends StatefulWidget {
   });
 
   @override
-  _DetailPageHotelState createState() => _DetailPageHotelState();
+  State createState() => _DetailPageHotelState();
 }
 
 class _DetailPageHotelState extends State<DetailPageHotel> {
@@ -178,51 +178,68 @@ class _DetailPageHotelState extends State<DetailPageHotel> {
                       children: List.generate(5, (index) {
                         return InkWell(
                           onTap: () {
-                              setState(() {selectedIndex=index;});
+                            setState(() {
+                              selectedIndex = index;
+                            });
                           },
                           child: Container(
                             margin: const EdgeInsets.only(right: 10),
                             child: ButtonDetail(
                               size: 50,
-                              color: selectedIndex==index?Colors.white:Colors.black,
-                              backgroundColor:selectedIndex==index?Colors.black:
-                              Colors.deepPurple.withOpacity(0.1),
-                              borderColor:selectedIndex==index?Colors.black:
-                              Colors.deepPurple.withOpacity(0.1),
+                              color: selectedIndex == index
+                                  ? Colors.white
+                                  : Colors.black,
+                              backgroundColor: selectedIndex == index
+                                  ? Colors.black
+                                  : Colors.deepPurple.withOpacity(0.1),
+                              borderColor: selectedIndex == index
+                                  ? Colors.black
+                                  : Colors.deepPurple.withOpacity(0.1),
                               text: (index + 1).toString(),
                             ),
                           ),
                         );
                       }),
                     ),
-                    const SizedBox(height: 15,),
-                    Text('Tiện ích',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8)),),
-                    const SizedBox(height: 5,),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Tiện ích',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black.withOpacity(0.8)),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Text(widget.description)
                   ],
                 ),
               ),
             ),
-            Positioned(
+            const Positioned(
                 bottom: 20,
                 left: 20,
                 right: 20,
                 child: Row(
-                children: [
-                  ButtonDetail(size: 60,
+                  children: [
+                    ButtonDetail(
+                      size: 60,
                       color: Colors.black,
                       backgroundColor: Colors.white,
                       borderColor: Colors.deepPurple,
                       isIcon: true,
-                    icon: Icons.favorite_border,
-                  ),
-                  const SizedBox(width: 20,),
-                  ResponsiveButton(
-                    isResponsive: true,
-                  )
-
-                ],
-            ))
+                      icon: Icons.favorite_border,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    ResponsiveButton(
+                      isResponsive: true,
+                    )
+                  ],
+                ))
           ],
         ),
       ),

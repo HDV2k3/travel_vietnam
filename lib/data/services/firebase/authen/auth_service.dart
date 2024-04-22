@@ -24,20 +24,47 @@ class AuthenticationService {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-// sign in with email and password
-  Future<void> signInUser(String email, String password) async {
+// // sign in with email and password
+//   Future<String?> signInUser(String email, String password) async {
+//     try {
+//       // UserCredential userCredential =
+//       //     await FirebaseAuth.instance.signInWithEmailAndPassword(
+//       //   email: email,
+//       //   password: password,
+//       // );
+//     } on FirebaseAuthException catch (e) {
+//       if (e.code == 'user-not-found') {
+//       } else if (e.code == 'wrong-password') {}
+//     } catch (e) {
+//       e.toString();
+//     }
+//     return null;
+//   }
+// anonymous
+  Future<bool> signInUser(String email, String password) async {
     try {
-      // UserCredential userCredential =
-      //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-      //   email: email,
-      //   password: password,
-      // );
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      // If the login is successful, return true
+      return true;
     } on FirebaseAuthException catch (e) {
+      // Handle login errors
       if (e.code == 'user-not-found') {
-      } else if (e.code == 'wrong-password') {}
+        // Return user not found error
+        return false;
+      } else if (e.code == 'wrong-password') {
+        // Return wrong password error
+        return false;
+      }
     } catch (e) {
-      e.toString();
+      // Handle other errors
+      return false;
     }
+
+    // If no errors occurred, return false
+    return false;
   }
 
   // get collection of users

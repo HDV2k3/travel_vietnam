@@ -4,8 +4,7 @@ class ButtonDay extends StatefulWidget {
   final String category;
   final Color color;
 
-  const ButtonDay(
-      {super.key, required this.category, required this.color});
+  const ButtonDay({super.key, required this.category, required this.color});
 
   @override
   State<ButtonDay> createState() => _ButtonDayState();

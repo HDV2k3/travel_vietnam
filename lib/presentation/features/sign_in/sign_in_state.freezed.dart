@@ -36,25 +36,25 @@ class _$SignInStateCopyWithImpl<$Res, $Val extends SignInState>
 }
 
 /// @nodoc
-abstract class _$$SignInStateImplCopyWith<$Res> {
-  factory _$$SignInStateImplCopyWith(
-          _$SignInStateImpl value, $Res Function(_$SignInStateImpl) then) =
-      __$$SignInStateImplCopyWithImpl<$Res>;
+abstract class _$$SignInSateImplCopyWith<$Res> {
+  factory _$$SignInSateImplCopyWith(
+          _$SignInSateImpl value, $Res Function(_$SignInSateImpl) then) =
+      __$$SignInSateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SignInStateImplCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$SignInStateImpl>
-    implements _$$SignInStateImplCopyWith<$Res> {
-  __$$SignInStateImplCopyWithImpl(
-      _$SignInStateImpl _value, $Res Function(_$SignInStateImpl) _then)
+class __$$SignInSateImplCopyWithImpl<$Res>
+    extends _$SignInStateCopyWithImpl<$Res, _$SignInSateImpl>
+    implements _$$SignInSateImplCopyWith<$Res> {
+  __$$SignInSateImplCopyWithImpl(
+      _$SignInSateImpl _value, $Res Function(_$SignInSateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SignInStateImpl implements _SignInState {
-  _$SignInStateImpl();
+class _$SignInSateImpl implements _SignInSate {
+  _$SignInSateImpl();
 
   @override
   String toString() {
@@ -64,13 +64,13 @@ class _$SignInStateImpl implements _SignInState {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SignInStateImpl);
+        (other.runtimeType == runtimeType && other is _$SignInSateImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class _SignInState implements SignInState {
-  factory _SignInState() = _$SignInStateImpl;
+abstract class _SignInSate implements SignInState {
+  factory _SignInSate() = _$SignInSateImpl;
 }
