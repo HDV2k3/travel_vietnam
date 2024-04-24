@@ -6,7 +6,6 @@ import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/services/firebase/authen/auth_service.dart';
 import '../home/home_screen.dart';
 import '../sign_up/sign_up_screen.dart';
 
@@ -27,10 +26,16 @@ class _SignInScreenState
   bool rememberPassword = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  AuthenticationService fireStoreService = AuthenticationService();
   _SignInScreenState() {
     emailController.text = ""; // Gán giá trị ban đầu
     passwordController.text = ""; // Gán giá trị ban đầu
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.clear();
+    passwordController.clear();
   }
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
@@ -182,11 +187,7 @@ class _SignInScreenState
 
                             if (_formSignInKey.currentState!.validate() &&
                                 rememberPassword) {
-                              // Xác thực đăng nhập
-                              final result = await fireStoreService.signInUser(
-                                emailController.text,
-                                passwordController.text,
-                              );
+                              final result = await viewModel.signInUser(emailController.text,  passwordController.text,);
 
                               if (result == true) {
                                 // Đăng nhập thành công, chuyển trang
@@ -277,7 +278,7 @@ class _SignInScreenState
                             onPressed: () async {
                               // Gọi signInWithGoogle để thực hiện quá trình đăng nhập bằng Google
 
-                              await fireStoreService.signInWithGoogle();
+                              await viewModel.signInWithGoogle();
                               // Kiểm tra kết quả đăng nhập
 
                               // Nếu đăng nhập thành công, thực hiện chuyển hướng đến trang HomeScreen

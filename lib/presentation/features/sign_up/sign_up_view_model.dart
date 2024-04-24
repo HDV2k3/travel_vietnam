@@ -1,5 +1,10 @@
 import 'package:chandoiqua/presentation/features/sign_up/sign_up_state.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../../data/models/user.dart';
 
 part 'sign_up_view_model.g.dart';
 
@@ -7,6 +12,82 @@ part 'sign_up_view_model.g.dart';
 class SignUpViewModel extends _$SignUpViewModel {
   @override
   FutureOr<SignUpState> build() {
-    return SignUpState();
+    return SignUpState(
+        fullNameController: TextEditingController(),
+        emailController: TextEditingController(),
+        passwordController: TextEditingController(),
+        agree: ValueNotifier<bool>(false)
+    );
+  }
+
+
+  //Create add new account
+  Future<void> newAccount(
+    TextEditingController fullNameController,
+    TextEditingController emailController,
+    TextEditingController passwordController,
+  ) async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      Users user = Users(
+        id: '',
+        avatar: '',
+        birthday: '',
+        email: emailController.text,
+        name: fullNameController.text,
+        password: passwordController.text,
+      );
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set(
+            user.toMap(),
+          );
+    } catch (e) {
+      e.toString();
+    }
+  }
+
+// check users
+  Future<bool> userRegisteredSuccessfully() async {
+    try {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
+
+      if (documentSnapshot.exists) {
+        // Người dùng đã được lưu vào Firestore
+        return true;
+      } else {
+        // Người dùng không được lưu vào Firestore
+        return false;
+      }
+    } catch (error) {
+      // Xử lý lỗi nếu có
+      return false;
+    }
+  }
+  // sign in with google
+  Future<UserCredential> signInWithGoogle( ) async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+    await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

@@ -19,7 +19,7 @@ class _AppState extends ConsumerState<App> {
     final isDarkTheme = ref.watch(appThemeProvider);
 
     return MaterialApp.router(
-      title: 'Money Management',
+      title: 'Travel VietNam',
       debugShowCheckedModeBanner: false,
       theme: AppThemes.appTheme(isDarkTheme),
       darkTheme: AppThemes.appTheme(isDarkTheme),

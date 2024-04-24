@@ -10,4 +10,12 @@ class OnboardingViewModel extends _$OnboardingViewModel {
   FutureOr<OnboardingState> build() {
     return OnboardingState();
   }
+  void selectSignIn() {
+    update((state) => state.copyWith(isSignInSelected:true,isSignUpSelected:false));
+
+  }
+
+  void selectSignUp() {
+    update((state) => state.copyWith(isSignInSelected:false,isSignUpSelected:true));
+  }
 }

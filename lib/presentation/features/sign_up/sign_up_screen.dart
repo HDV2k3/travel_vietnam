@@ -3,8 +3,6 @@ import 'package:chandoiqua/presentation/features/sign_up/sign_up_state.dart';
 import 'package:chandoiqua/presentation/features/sign_up/sign_up_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../data/services/firebase/authen/auth_service.dart';
 import '../sign_in/sign_in_screen.dart';
 import '../sign_in/widgets/custom_scaffold.dart';
 
@@ -16,14 +14,17 @@ class SignUpScreen extends BaseScreen {
 }
 
 class _SignUpScreenState
-    extends BaseScreenState<SignUpScreen, SignUpState, SignUpViewModel> {
+    extends BaseScreenState<SignUpScreen, SignUpViewModel, SignUpState> {
   final _formSignupKey = GlobalKey<FormState>();
   bool agreePersonalData = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
-  AuthenticationService fireStoreService = AuthenticationService();
-
+  _SignUpScreenState() {
+    fullNameController.text = ""; // Gán giá trị ban đầu
+    emailController.text = ""; // Gán giá trị ban đầu
+    passwordController.text = ""; // Gán giá trị ban đầu
+  }
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return null;
@@ -205,12 +206,12 @@ class _SignUpScreenState
                           onPressed: () {
                             if (_formSignupKey.currentState!.validate() &&
                                 agreePersonalData) {
-                              fireStoreService
+                              viewModel
                                   .newAccount(fullNameController,
                                       emailController, passwordController)
                                   .then((_) async {
                                 // Kiểm tra và chuyển hướng màn hình sau khi đăng ký thành công và lưu vào Firestore
-                                if (await fireStoreService
+                                if (await viewModel
                                     .userRegisteredSuccessfully()) {
                                   if (context.mounted) {
                                     Navigator.pushReplacement(
@@ -292,7 +293,7 @@ class _SignUpScreenState
                         children: [
                           ElevatedButton.icon(
                             onPressed: () {
-                              fireStoreService.signInWithGoogle();
+                              viewModel.signInWithGoogle();
                             },
                             icon: Image.asset(
                               "assets/logos/google_logo.png",
@@ -354,9 +355,9 @@ class _SignUpScreenState
 
   @override
   // TODO: implement state
-  AsyncValue<SignUpViewModel> get state => throw UnimplementedError();
+  AsyncValue<SignUpState> get state => ref.watch(signUpViewModelProvider);
 
   @override
   // TODO: implement viewModel
-  SignUpState get viewModel => throw UnimplementedError();
+  SignUpViewModel get viewModel => ref.read(signUpViewModelProvider.notifier);
 }
