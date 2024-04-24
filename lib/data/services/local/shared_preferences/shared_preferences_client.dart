@@ -15,10 +15,10 @@ class SharedPreferencesClient {
   bool getIsFavorite() {
     final isFavorite = _sharedPreferences.getBool(_isFavorite);
 
-    if (isFavorite == null) {
-      return true; // Nếu giá trị yêu thích là null, mặc định trả về true
+    if (isFavorite != null) {
+      return isFavorite; // Nếu giá trị yêu thích là null, mặc định trả về true
     } else {
-      return isFavorite;
+      return  false;
     }
   }
   Future<void> saveIsFavorite(bool isFavorite) async

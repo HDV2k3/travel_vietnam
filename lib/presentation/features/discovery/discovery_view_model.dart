@@ -5,8 +5,7 @@ part 'discovery_view_model.g.dart';
 
 @riverpod
 class DiscoveryViewModel extends _$DiscoveryViewModel {
-  @override
-  FutureOr<DiscoverryState> build() {
-    return DiscoverryState();
+  FutureOr<DiscoveryState> build() {
+    return DiscoveryState();
   }
 }

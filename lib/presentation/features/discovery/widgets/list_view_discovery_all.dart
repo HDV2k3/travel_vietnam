@@ -9,13 +9,14 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../../data/services/firebase/models/locations.dart';
 import '../../../controllers/discovery_controller.dart';
 import 'favorite_icon.dart';
+
 class ListViewAll extends ConsumerWidget {
   const ListViewAll({super.key});
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isFavorite = ref.watch(favoriteProvider);
     final DiscoveryController discoveryController =
-    Get.put(DiscoveryController());
+        Get.put(DiscoveryController());
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('locations').snapshots(),
       builder: (context, snapshot) {
@@ -70,7 +71,8 @@ class ListViewAll extends ConsumerWidget {
                                     ),
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Row(
@@ -86,16 +88,17 @@ class ListViewAll extends ConsumerWidget {
                                           const SizedBox(
                                             width: 50,
                                           ),
-                                          FavoriteIcon(isFavorite: isFavorite,
-                                            onPressed: () {
-                                              discoveryController.addToFavorite(
-                                                title: location.title,
-                                                image: location.image,
-                                                price: location.price,
-                                                location: location.location,
-                                              );
-                                            },
-                                          ),
+                                          FavoriteIcon(
+                                              isFavorite: isFavorite,
+                                              onPressed: () {
+                                                discoveryController
+                                                    .addToFavorite(
+                                                        title: location.title,
+                                                        image: location.image,
+                                                        price: location.price,
+                                                        location:
+                                                            location.location);
+                                              })
                                         ],
                                       ),
                                     ],
@@ -103,7 +106,6 @@ class ListViewAll extends ConsumerWidget {
                                 ],
                               ),
                             ),
-
                           ],
                         ),
                       );
@@ -120,6 +122,4 @@ class ListViewAll extends ConsumerWidget {
       },
     );
   }
-
-
 }

@@ -15,19 +15,19 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$DiscoverryState {}
+mixin _$DiscoveryState {}
 
 /// @nodoc
-abstract class $DiscoverryStateCopyWith<$Res> {
-  factory $DiscoverryStateCopyWith(
-          DiscoverryState value, $Res Function(DiscoverryState) then) =
-      _$DiscoverryStateCopyWithImpl<$Res, DiscoverryState>;
+abstract class $DiscoveryStateCopyWith<$Res> {
+  factory $DiscoveryStateCopyWith(
+          DiscoveryState value, $Res Function(DiscoveryState) then) =
+      _$DiscoveryStateCopyWithImpl<$Res, DiscoveryState>;
 }
 
 /// @nodoc
-class _$DiscoverryStateCopyWithImpl<$Res, $Val extends DiscoverryState>
-    implements $DiscoverryStateCopyWith<$Res> {
-  _$DiscoverryStateCopyWithImpl(this._value, this._then);
+class _$DiscoveryStateCopyWithImpl<$Res, $Val extends DiscoveryState>
+    implements $DiscoveryStateCopyWith<$Res> {
+  _$DiscoveryStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -36,41 +36,41 @@ class _$DiscoverryStateCopyWithImpl<$Res, $Val extends DiscoverryState>
 }
 
 /// @nodoc
-abstract class _$$DiscoverryStateImplCopyWith<$Res> {
-  factory _$$DiscoverryStateImplCopyWith(_$DiscoverryStateImpl value,
-          $Res Function(_$DiscoverryStateImpl) then) =
-      __$$DiscoverryStateImplCopyWithImpl<$Res>;
+abstract class _$$DiscoveryStateImplCopyWith<$Res> {
+  factory _$$DiscoveryStateImplCopyWith(_$DiscoveryStateImpl value,
+          $Res Function(_$DiscoveryStateImpl) then) =
+      __$$DiscoveryStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DiscoverryStateImplCopyWithImpl<$Res>
-    extends _$DiscoverryStateCopyWithImpl<$Res, _$DiscoverryStateImpl>
-    implements _$$DiscoverryStateImplCopyWith<$Res> {
-  __$$DiscoverryStateImplCopyWithImpl(
-      _$DiscoverryStateImpl _value, $Res Function(_$DiscoverryStateImpl) _then)
+class __$$DiscoveryStateImplCopyWithImpl<$Res>
+    extends _$DiscoveryStateCopyWithImpl<$Res, _$DiscoveryStateImpl>
+    implements _$$DiscoveryStateImplCopyWith<$Res> {
+  __$$DiscoveryStateImplCopyWithImpl(
+      _$DiscoveryStateImpl _value, $Res Function(_$DiscoveryStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$DiscoverryStateImpl implements _DiscoverryState {
-  _$DiscoverryStateImpl();
+class _$DiscoveryStateImpl implements _DiscoveryState {
+  _$DiscoveryStateImpl();
 
   @override
   String toString() {
-    return 'DiscoverryState()';
+    return 'DiscoveryState()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DiscoverryStateImpl);
+        (other.runtimeType == runtimeType && other is _$DiscoveryStateImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class _DiscoverryState implements DiscoverryState {
-  factory _DiscoverryState() = _$DiscoverryStateImpl;
+abstract class _DiscoveryState implements DiscoveryState {
+  factory _DiscoveryState() = _$DiscoveryStateImpl;
 }

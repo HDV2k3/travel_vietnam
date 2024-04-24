@@ -14,7 +14,7 @@ class DiscoveryScreen extends BaseScreen {
 }
 
 class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
-    DiscoveryViewModel, DiscoverryState> {
+    DiscoveryViewModel, DiscoveryState> {
   @override
   Color? get backgroundColor => ref.colors.background;
 
@@ -80,10 +80,9 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
       ),
     );
   }
-
   @override
   // TODO: implement state
-  AsyncValue<DiscoverryState> get state =>
+  AsyncValue<DiscoveryState> get state =>
       ref.watch(discoveryViewModelProvider);
 
   @override

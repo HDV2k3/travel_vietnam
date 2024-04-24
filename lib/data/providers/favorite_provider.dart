@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'shared_preferences_repository_provider.dart';
@@ -16,6 +15,5 @@ class Favorite extends _$Favorite {
     ref.read(sharedPreferencesRepositoryProvider).saveIsFavorite(newValue);
     state = newValue;
   }
-
 
 }

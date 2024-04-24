@@ -24,7 +24,7 @@ class ListViewHotel extends ConsumerWidget {
            Column(
              children: [
                Expanded(child:
-               Container(
+               SizedBox(
                  height: double.maxFinite,
                  child: ListView.builder(
                    scrollDirection: Axis.horizontal,

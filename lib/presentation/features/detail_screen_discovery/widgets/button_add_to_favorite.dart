@@ -1,3 +1,5 @@
+import 'package:chandoiqua/data/providers/favorite_provider.dart';
+import 'package:chandoiqua/presentation/features/discovery/widgets/favorite_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,10 +13,10 @@ class ButtonAddToFavorite extends ConsumerWidget {
   final IconData? icon;
   final bool? isIcon;
   final Color borderColor;
-  final VoidCallback onPressed; // Thêm vào đây
-
+  final VoidCallback onPressed;
   const ButtonAddToFavorite( {
     super.key,
+
     this.isIcon = false,
     this.text,
     this.icon,
@@ -25,10 +27,15 @@ class ButtonAddToFavorite extends ConsumerWidget {
     required this.borderColor,
   });
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorite = ref.watch(favoriteProvider);
     return GestureDetector(
-      onTap: onPressed,
+      onTap:(){
+        onPressed();
+        // ref.read(favoriteProvider.notifier).onToggle();
+      } ,
       child: Container(
         width: size,
         height: size,
@@ -40,20 +47,12 @@ class ButtonAddToFavorite extends ConsumerWidget {
           borderRadius: BorderRadius.circular(15),
           color: backgroundColor,
         ),
-        child: isIcon == false
-            ? Center(
-          child: Text(
-            text!,
-            style: TextStyle(color: color),
-          ),
-        )
-            : Center(
-          child: Icon(
-            icon,
-            color: color,
-          ),
-        ),
+        // child: FavoriteIcon(isFavorite: isFavorite, onPressed: onPressed),
+        child: FavoriteIcon( onPressed: onPressed, isFavorite: isFavorite,),
+
       ),
+
     );
+
   }
 }
