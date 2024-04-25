@@ -11,7 +11,7 @@ class DiscoveryViewModel extends _$DiscoveryViewModel {
     return DiscoveryState();
   }
 
-  Future<List<DocumentSnapshot>> searchFavorites(String query) async {
+  Future<List<DocumentSnapshot>> searchLocations(String query) async {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {

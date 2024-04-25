@@ -3,6 +3,7 @@ import 'package:chandoiqua/presentation/features/discovery/discovery_state.dart'
 import 'package:chandoiqua/presentation/features/discovery/discovery_view_model.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/buttons_tabbar.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -62,6 +63,17 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: TextFormField(
+                  onChanged: (value) {
+                    viewModel.searchLocations(value).then((searchResults) {
+                      // Xử lý danh sách kết quả tìm kiếm ở đây
+                      // Ví dụ: In danh sách kết quả tìm kiếm ra console
+                      for (var result in searchResults) {
+                        if (kDebugMode) {
+                          print(result);
+                        }
+                      }
+                    });
+                  },
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.location_on),
                     hintText: ref.appLocalizations.location_search,
