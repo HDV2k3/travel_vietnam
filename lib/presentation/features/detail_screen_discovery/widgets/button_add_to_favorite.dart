@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ButtonAddToFavorite extends ConsumerWidget {
-
   final Color color;
   final Color backgroundColor;
   final double size;
@@ -14,9 +13,8 @@ class ButtonAddToFavorite extends ConsumerWidget {
   final bool? isIcon;
   final Color borderColor;
   final VoidCallback onPressed;
-  const ButtonAddToFavorite( {
+  const ButtonAddToFavorite({
     super.key,
-
     this.isIcon = false,
     this.text,
     this.icon,
@@ -27,15 +25,14 @@ class ButtonAddToFavorite extends ConsumerWidget {
     required this.borderColor,
   });
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isFavorite = ref.watch(favoriteProvider);
     return GestureDetector(
-      onTap:(){
+      onTap: () {
         onPressed();
-        // ref.read(favoriteProvider.notifier).onToggle();
-      } ,
+        ref.read(favoriteProvider.notifier).onToggle();
+      },
       child: Container(
         width: size,
         height: size,
@@ -47,12 +44,11 @@ class ButtonAddToFavorite extends ConsumerWidget {
           borderRadius: BorderRadius.circular(15),
           color: backgroundColor,
         ),
-        // child: FavoriteIcon(isFavorite: isFavorite, onPressed: onPressed),
-        child: FavoriteIcon( onPressed: onPressed, isFavorite: isFavorite,),
-
+        child: FavoriteIcon(
+          onPressed: onPressed,
+          isFavorite: isFavorite,
+        ),
       ),
-
     );
-
   }
 }

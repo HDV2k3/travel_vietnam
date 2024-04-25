@@ -82,9 +82,9 @@ class ListViewHotel extends ConsumerWidget {
                                      const SizedBox(
                                        width: 50,
                                      ),
-                                     FavoriteIcon(isFavorite: isFavorite, onPressed: () {  },
-
-                                     ),
+                                     // FavoriteIcon(isFavorite: isFavorite, onPressed: () {  },
+                                     //
+                                     // ),
                                    ],
                                  ),
                                ],

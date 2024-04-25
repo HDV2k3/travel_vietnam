@@ -89,16 +89,16 @@ class ListViewAll extends ConsumerWidget {
                                             width: 50,
                                           ),
                                           FavoriteIcon(
-                                              isFavorite: isFavorite,
-                                              onPressed: () {
-                                                discoveryController
-                                                    .addToFavorite(
-                                                        title: location.title,
-                                                        image: location.image,
-                                                        price: location.price,
-                                                        location:
-                                                            location.location);
-                                              })
+                                            isFavorite: isFavorite,
+                                            onPressed: () {
+                                              discoveryController.addToFavorite(
+                                                title: location.title,
+                                                image: location.image,
+                                                price: location.price,
+                                                location: location.location,
+                                              );
+                                            },
+                                          ),
                                         ],
                                       ),
                                     ],

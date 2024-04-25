@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class DiscoveryController extends GetxController {
 
@@ -12,6 +11,7 @@ class DiscoveryController extends GetxController {
     required String image,
     required String price,
     required String location,
+
   }) async {
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -50,7 +50,33 @@ class DiscoveryController extends GetxController {
   }
 
 
+  Future<void> removeFromFavorite(String title) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final querySnapshot = await FirebaseFirestore.instance
+            .collection('favorite')
+            .where('title', isEqualTo: title)
+            .get();
 
+        if (querySnapshot.docs.isNotEmpty) {
+          final docId = querySnapshot.docs.first.id;
+          await FirebaseFirestore.instance
+              .collection('favorite')
+              .doc(docId)
+              .delete();
+          // Xoá đối tượng yêu thích thành công
+        } else {
+          // Không tìm thấy đối tượng yêu thích
+        }
+      } else {
+        // Người dùng chưa đăng nhập
+      }
+    } catch (e) {
+      // Xử lý lỗi
+      print('Error removing from favorite: $e');
+    }
+  }
 
   Future<List<QueryDocumentSnapshot>> fetchFavoriteItems(String uid) async {
     try {

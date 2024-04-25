@@ -57,6 +57,7 @@ class _DiscoveryState
 
   @override
   Widget buildBody(BuildContext context) {
+
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       loadFavoriteItems(); // Gọi hàm loadFavoriteItems để tải danh sách yêu thích
@@ -176,18 +177,13 @@ class _DiscoveryState
                                           color: Colors.blue,
                                         ),
                                       ),
-                                      ElevatedButton(
+                                      IconButton(
                                         onPressed: () {
-                                          // Thực hiện các xử lý khi nút Delete được nhấn
+                                          discoveryController.removeFromFavorite(favorite.title);
                                         },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.red, // Màu nền của nút Delete
-                                        ),
-                                        child: const Text(
-                                          'Delete',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
                                         ),
                                       ),
                                     ],
