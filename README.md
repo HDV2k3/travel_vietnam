@@ -1,5 +1,5 @@
 # Vietnam travel application using flutter & firebase 
-Đồ Án Cơ Sở Trường Công Nghệ TP.HCM <br>
+Đồ Án Cơ Sở Trường Đại Học Công Nghệ TP.HCM(Hutech) <br>
 Author : <a href="https://www.facebook.com/huynh.viet.7771">Huỳnh Đắc Việt</a>
 
 ## Getting Started
