@@ -1,13 +1,10 @@
-import 'dart:ffi';
 
-import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/button.dart';
+import 'package:chandoiqua/data/models/location.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/button_add_to_favorite.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/responsive_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../common_widgets/base/base_screen.dart';
 import '../../controllers/discovery_controller.dart';
 import '../cart_screen/cart_screen.dart';
@@ -15,39 +12,25 @@ import 'detail_state.dart';
 import 'detail_view_model.dart';
 
 class DetailPage extends BaseScreen {
-  final String image;
-  final String title;
-  final String description;
-  final String price;
-  final String location;
-  final String vote;
-  final String nation;
   int numPeople;
    DetailPage( {
     super.key,
     this.numPeople =1,
-    required this.image,
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.location,
-    required this.vote,
-    required this.nation,
   });
-
   @override
   BaseScreenState createState() => _DetailState();
 }
 
 class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
     DetailDiscoveryState> {
-  int star = 4;
   int selectedIndex = -1;
   late bool isFavorite = false;
+  Location? location;
   final DiscoveryController discoveryController =
       Get.put(DiscoveryController());
   @override
   Widget buildBody(BuildContext context) {
+    final location = ModalRoute.of(context)!.settings.arguments as Location;
     return Scaffold(
       body: SizedBox(
         width: double.maxFinite,
@@ -63,7 +46,7 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                 height: 350,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: Image.network(widget.image).image,
+                    image: Image.network(location.image??'').image,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -90,7 +73,7 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.title,
+                          location.name?? '',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -98,7 +81,7 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                           ),
                         ),
                         Text(
-                          '${((widget.numPeople - 1) * 300 + double.parse(widget.price) ).toStringAsFixed(0)} \$'  ,
+                          '${((widget.numPeople - 1) * 300 + location.price! ).toStringAsFixed(0)} \$'  ,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -120,7 +103,7 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                           height: 5,
                         ),
                         Text(
-                          widget.location,
+                          location.provinceName?? '',
                           style: const TextStyle(
                             color: Colors.deepPurple,
                           ),
@@ -136,7 +119,7 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                           children: List.generate(5, (index) {
                             return Icon(
                               Icons.star,
-                              color: index < star
+                              color: index < location.vote!
                                   ? Colors.yellowAccent
                                   : Colors.blueGrey,
                             );
@@ -146,7 +129,7 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                           width: 10,
                         ),
                         Text(
-                          widget.vote,
+                          (location.vote ?? 0).toString(),
                           style: const TextStyle(
                             color: Colors.blueGrey,
                           ),
@@ -167,46 +150,9 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                     const SizedBox(
                       height: 5,
                     ),
-                    // const Text(
-                    //   'Số người trong nhóm của bạn',
-                    //   style: TextStyle(
-                    //     color: Colors.black54,
-                    //   ),
-                    // ),
                     const SizedBox(
                       height: 10,
                     ),
-                    // Wrap(
-                    //   children: List.generate(
-                    //     5,
-                    //     (index) {
-                    //       return InkWell(
-                    //         onTap: () {
-                    //           setState(() {
-                    //             selectedIndex = index;
-                    //           });
-                    //         },
-                    //         child: Container(
-                    //           margin: const EdgeInsets.only(right: 10),
-                    //           child: ButtonDetail(
-                    //             size: 50,
-                    //             color: selectedIndex == index
-                    //                 ? Colors.white
-                    //                 : Colors.black,
-                    //             backgroundColor: selectedIndex == index
-                    //                 ? Colors.black
-                    //                 : Colors.deepPurple.withOpacity(0.1),
-                    //             borderColor: selectedIndex == index
-                    //                 ? Colors.black
-                    //                 : Colors.deepPurple.withOpacity(0.1),
-                    //             text: (index + 1).toString(),
-                    //           ),
-                    //         ),
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
-
                     Row(
                       children: [
                         IconButton(
@@ -244,7 +190,7 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(widget.description)
+                    Text(location.description??''),
                   ],
                 ),
               ),
@@ -265,10 +211,10 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                     icon: isFavorite ? Icons.favorite : Icons.favorite_border,
                     onPressed: () {
                       discoveryController.addToFavorite(
-                        title: widget.title,
-                        image: widget.image,
-                        price: widget.price.toString(),
-                        location: widget.location,
+                        title: location.name??'',
+                        image: location.image?? '',
+                        price: location.price!.toString(),
+                        location: location.provinceName?? '',
                       );
                       setState(() {
                         isFavorite = true;
@@ -284,13 +230,16 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CartScreen(
-                                  image: widget.image,
-                                  title: widget.title,
-                                  price: ((widget.numPeople - 1) * 300 + double.parse(widget.price)  ).toStringAsFixed(0),
-                                  location: widget.location,
-                                  numPeople:widget.numPeople,
-                                ),
+                          builder: (context) => CartScreen(
+                            image: location.image ?? "",
+                            title: location.name ?? "",
+                            price:
+                            (((widget.numPeople - 1) * 300) +
+                                (location.price ?? 0))
+                                .toStringAsFixed(0),
+                            location: location.provinceName ?? "",
+                            numPeople: widget.numPeople,
+                          ),
                         ),
                       );
                     },
@@ -310,7 +259,7 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
-      title: Text(widget.nation),
+      title: Text(location?.provinceName??''),
     );
   }
 

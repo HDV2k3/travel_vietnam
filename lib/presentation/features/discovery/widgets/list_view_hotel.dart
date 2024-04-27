@@ -3,16 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../data/providers/favorite_provider.dart';
+// import '../../../../data/providers/favorite_provider.dart';
 import '../../detail_screen_hotel/detail_screen_hotel.dart';
-import 'favorite_icon.dart';
 
 class ListViewHotel extends ConsumerWidget {
   const ListViewHotel({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isFavorite = ref.watch(favoriteProvider);
+    // final isFavorite = ref.watch(favoriteProvider);
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('hotels').snapshots(),
       builder: (context, snapshot) {

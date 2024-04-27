@@ -1,16 +1,17 @@
 import 'package:chandoiqua/presentation/features/discovery/discovery_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'discovery_view_model.g.dart';
 
 @riverpod
 class DiscoveryViewModel extends _$DiscoveryViewModel {
+  @override
   FutureOr<DiscoveryState> build() {
     return DiscoveryState();
   }
-
   Future<List<DocumentSnapshot>> searchLocations(String query) async {
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -18,7 +19,7 @@ class DiscoveryViewModel extends _$DiscoveryViewModel {
         final querySnapshot = await FirebaseFirestore.instance
             .collection('locations')
             .where('location', isGreaterThanOrEqualTo: query)
-            .where('location', isLessThan: query + 'z')
+            .where('location', isLessThan: '${query}z')
             .get();
 
         return querySnapshot.docs;
@@ -28,8 +29,11 @@ class DiscoveryViewModel extends _$DiscoveryViewModel {
       }
     } catch (e) {
       // Xử lý lỗi
-      print('Error searching favorites: $e');
+      if (kDebugMode) {
+        print('Error searching favorites: $e');
+      }
       return [];
     }
   }
+
 }

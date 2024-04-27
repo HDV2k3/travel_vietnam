@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:chandoiqua/data/services/firebase/func/fire_store_service.dart';
 import 'package:chandoiqua/data/services/firebase/models/favorite.dart';
 import 'package:chandoiqua/presentation/common_widgets/base/base_screen.dart';
@@ -15,9 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../../data/providers/favorite_provider.dart';
 import '../../controllers/discovery_controller.dart';
-import '../detail_screen_discovery/detail_screen_discovery.dart';
 
 class FavoriteScreen extends BaseScreen {
   const FavoriteScreen({super.key});
@@ -214,7 +211,7 @@ class _DiscoveryState
   void loadFavoriteItems() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      final favoriteItems =
+
           await discoveryController.fetchFavoriteItems(user.uid);
       // Xử lý danh sách yêu thích đã tải
       // ...

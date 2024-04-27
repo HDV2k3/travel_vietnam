@@ -37,8 +37,8 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                 isSelected = !isSelected;
                 endDate = end;
                 startDate = start;
-                selectedStartDateText = DateFormat('dd/MM/yyyy').format(start!);
-                selectedEndDateText = DateFormat('dd/MM/yyyy').format(end!);
+                selectedStartDateText = DateFormat('dd/MM/yyyy').format(start);
+                selectedEndDateText = DateFormat('dd/MM/yyyy').format(end);
               });
             },
             onCancelClick: () {
@@ -48,7 +48,6 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                 startDate = null;
                 selectedStartDateText = 'Chọn Ngày Bắt Đầu';
                 selectedEndDateText = 'Chọn Ngày Kết Thúc';
-                ///gitworkflow
               });
             },
           );

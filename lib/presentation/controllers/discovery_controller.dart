@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -45,7 +46,9 @@ class DiscoveryController extends GetxController {
       }
     } catch (e) {
       // Xử lý lỗi
-      print('Error adding to favorite: $e');
+      if (kDebugMode) {
+        print('Error adding to favorite: $e');
+      }
     }
   }
 
@@ -74,7 +77,9 @@ class DiscoveryController extends GetxController {
       }
     } catch (e) {
       // Xử lý lỗi
-      print('Error removing from favorite: $e');
+      if (kDebugMode) {
+        print('Error removing from favorite: $e');
+      }
     }
   }
 
@@ -87,9 +92,12 @@ class DiscoveryController extends GetxController {
       return snapshot.docs;
     } catch (e) {
       // Xử lý lỗi
-      print('Error fetching favorite items: $e');
+      if (kDebugMode) {
+        print('Error fetching favorite items: $e');
+      }
       return [];
     }
   }
+
 
 }
