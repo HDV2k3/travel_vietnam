@@ -1,26 +1,48 @@
+import 'package:chandoiqua/presentation/common_widgets/base/base_screen.dart';
+import 'package:chandoiqua/presentation/features/cart_screen/cart_state.dart';
+import 'package:chandoiqua/presentation/features/cart_screen/cart_view_model.dart';
 import 'package:chandoiqua/presentation/features/cart_screen/widgets/button_datetime.dart';
 import 'package:chandoiqua/presentation/features/cart_screen/widgets/select_date_time.dart';
 import 'package:chandoiqua/presentation/features/payment_screen/payment_screen.dart';
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CartScreen extends ConsumerWidget {
+class CartScreen extends BaseScreen {
   final String image;
   final String title;
   final String price;
   final String cart;
   final String location;
+  final int numPeople;
   const CartScreen(
       {super.key,
+      required this.numPeople,
       required this.image,
       required this.title,
       required this.price,
       this.cart = "Đặt Chuyến",
       required this.location});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _CartScreenSate();
+}
+
+class _CartScreenSate
+    extends BaseScreenState<CartScreen, CartViewModel, CartState> {
+  @override
+  Color? get backgroundColor => ref.colors.background;
+
+  @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text(widget.cart),
+    );
+  }
+
+  @override
+  Widget buildBody(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(cart)),
       body: SizedBox(
         height: double.infinity,
         width: double.infinity,
@@ -31,7 +53,7 @@ class CartScreen extends ConsumerWidget {
               top: 20,
               child: Container(
                 width: 150,
-                height: 150,
+                height: 200,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(
@@ -40,7 +62,7 @@ class CartScreen extends ConsumerWidget {
                     topLeft: Radius.circular(20),
                   ),
                   image: DecorationImage(
-                    image: NetworkImage(image),
+                    image: NetworkImage(widget.image),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -52,7 +74,7 @@ class CartScreen extends ConsumerWidget {
               child: Container(
                 padding: const EdgeInsets.only(left: 20, right: 100, top: 30),
                 width: 250,
-                height: 150,
+                height: 200,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -81,7 +103,7 @@ class CartScreen extends ConsumerWidget {
                               height: 5,
                             ),
                             Text(
-                              location,
+                              widget.location,
                               style: TextStyle(
                                   color: Colors.black54.withOpacity(0.8),
                                   fontSize: 15),
@@ -92,7 +114,7 @@ class CartScreen extends ConsumerWidget {
                           height: 5,
                         ),
                         Text(
-                          title,
+                          widget.title,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -111,13 +133,14 @@ class CartScreen extends ConsumerWidget {
                           ],
                         ),
                         Text(
-                          price,
+                          '${widget.price} \$',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             color: Colors.blue,
                           ),
                         ),
+                        Text('${widget.numPeople} Người'),
                       ],
                     ),
                   ],
@@ -126,11 +149,11 @@ class CartScreen extends ConsumerWidget {
             ),
             Positioned(
               left: 15,
-              top: 180,
+              top: 230,
               right: 15,
               child: Container(
                 width: 500,
-                height: 400,
+                height: 300,
                 decoration: const BoxDecoration(
                   color: Colors.lightBlue,
                   borderRadius: BorderRadius.only(
@@ -183,18 +206,6 @@ class CartScreen extends ConsumerWidget {
                         child: SelectDateTime(),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 15),
-                      child: SizedBox(
-                        child: Text(
-                          '"Khám phá những hành trình vô tận - Hòa mình cùng cuộc sống"',
-                          style: TextStyle(fontSize: 25, color: Colors.white),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -208,12 +219,6 @@ class CartScreen extends ConsumerWidget {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.5),
-                  // borderRadius: BorderRadius.only(
-                  //   bottomRight: Radius.circular(20),
-                  //   topRight: Radius.circular(20),
-                  //   bottomLeft: Radius.circular(20),
-                  //   topLeft: Radius.circular(20),
-                  // ),
                 ),
                 child: Column(
                   children: [
@@ -227,7 +232,7 @@ class CartScreen extends ConsumerWidget {
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            price,
+                            '${widget.price} \$',
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
@@ -240,11 +245,13 @@ class CartScreen extends ConsumerWidget {
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Payment(
-                                              price: price,
-                                            )));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Payment(
+                                      price: widget.price,
+                                    ),
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blue,
@@ -270,4 +277,12 @@ class CartScreen extends ConsumerWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement state
+  AsyncValue<CartState> get state => ref.watch(cartViewModelProvider);
+
+  @override
+  // TODO: implement viewModel
+  CartViewModel get viewModel => ref.read(cartViewModelProvider.notifier);
 }

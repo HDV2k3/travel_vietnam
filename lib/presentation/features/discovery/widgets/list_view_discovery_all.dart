@@ -94,7 +94,7 @@ class ListViewAll extends ConsumerWidget {
                                               discoveryController.addToFavorite(
                                                 title: location.title,
                                                 image: location.image,
-                                                price: location.price,
+                                                price: location.price.toString(),
                                                 location: location.location,
                                               );
                                             },

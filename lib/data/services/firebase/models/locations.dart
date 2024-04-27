@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Locations {
@@ -52,7 +54,7 @@ class Locations {
       String? vote,
       String? title,
       String? description,
-      String? price,
+        String? price,
       String? location}) {
     return Locations(
         nation: nation ?? this.nation,

@@ -23,26 +23,28 @@ class ButtonDetail extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: borderColor,
-              width: 1.0,
-            ),
-            borderRadius: BorderRadius.circular(15),
-            color: backgroundColor),
-        child: isIcon == false
-            ? Center(
-                child: Text(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: borderColor,
+            width: 1.0,
+          ),
+          borderRadius: BorderRadius.circular(15),
+          color: backgroundColor),
+      child: isIcon == false
+          ? Center(
+              child: Text(
                 text!,
                 style: TextStyle(color: color),
-              ))
-            : Center(
-                child: Icon(
-                  icon,
-                  color: color,
-                ),
-              ));
+              ),
+            )
+          : Center(
+              child: Icon(
+                icon,
+                color: color,
+              ),
+            ),
+    );
   }
 }

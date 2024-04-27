@@ -8,6 +8,7 @@ import '../payment_process_screen/payment_process_screen.dart';
 class Payment extends ConsumerWidget {
   final String payment;
   final String price;
+
   const Payment({
     super.key,
     required this.price,
