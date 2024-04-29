@@ -44,7 +44,8 @@ class FavoriteIcon extends ConsumerWidget {
   final bool isFavorite;
   final VoidCallback onPressed;
 
-  const FavoriteIcon(  {required this.isFavorite, super.key, required this.onPressed });
+  const FavoriteIcon(
+      {required this.isFavorite, super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,7 +57,7 @@ class FavoriteIcon extends ConsumerWidget {
       },
       child: Icon(
         favorite ? Icons.favorite_outline_outlined : Icons.favorite,
-        color: favorite ? Colors.blueGrey : Colors.red,
+        color: favorite ? Colors.yellowAccent : Colors.red,
         size: 24.0,
       ),
     );

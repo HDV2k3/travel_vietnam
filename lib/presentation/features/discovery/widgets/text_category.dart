@@ -7,9 +7,12 @@ class TextTittle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Text(
-      ref.appLocalizations.category,
-      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return Container(
+      color: Colors.white,
+      child: Text(
+        ref.appLocalizations.category,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

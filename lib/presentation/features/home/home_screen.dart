@@ -1,4 +1,5 @@
 import 'package:chandoiqua/presentation/features/favorite_screen/favorite_screen.dart';
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -50,57 +51,50 @@ class _HomeScreenState
     final selectedTabIndex =
         state.value?.selectedTabIndex ?? HomeTab.home.index;
 
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: selectedTabIndex,
-      onTap: viewModel.onTabChanged,
+    return CustomNavigationBar(
+      strokeColor: Colors.transparent,
+      scaleFactor: 0.5,
       elevation: 0,
+      backgroundColor: Colors.white,
+      iconSize: 24.0,
+      selectedColor: Colors.blue,
+      unSelectedColor: Colors.grey,
       items: [
-        BottomNavigationBarItem(
-          label: ref.appLocalizations.home,
-          icon: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 4),
-            child: Icon(
-              selectedTabIndex == HomeTab.home.index
-                  ? Icons.home
-                  : Icons.home_outlined,
-            ),
+        CustomNavigationBarItem(
+          icon: Icon(
+            selectedTabIndex == HomeTab.home.index
+                ? Icons.home
+                : Icons.home_outlined,
           ),
+          title: Text(ref.appLocalizations.home),
         ),
-        BottomNavigationBarItem(
-          label: ref.appLocalizations.explore,
-          icon: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 4),
-            child: Icon(
-              selectedTabIndex == HomeTab.explore.index
-                  ? Icons.explore
-                  : Icons.explore_outlined,
-            ),
+        CustomNavigationBarItem(
+          icon: Icon(
+            selectedTabIndex == HomeTab.explore.index
+                ? Icons.explore
+                : Icons.explore_outlined,
           ),
+          title: Text(ref.appLocalizations.explore),
         ),
-        BottomNavigationBarItem(
-          label: ref.appLocalizations.heart,
-          icon: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 4),
-            child: Icon(
-              selectedTabIndex == HomeTab.heart.index
-                  ? Icons.favorite
-                  : Icons.favorite_outline,
-            ),
+        CustomNavigationBarItem(
+          icon: Icon(
+            selectedTabIndex == HomeTab.heart.index
+                ? Icons.favorite
+                : Icons.favorite_outline,
           ),
+          title: Text(ref.appLocalizations.heart),
         ),
-        BottomNavigationBarItem(
-          label: ref.appLocalizations.profile,
-          icon: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 4),
-            child: Icon(
-              selectedTabIndex == HomeTab.profile.index
-                  ? Icons.person
-                  : Icons.person_outline,
-            ),
+        CustomNavigationBarItem(
+          icon: Icon(
+            selectedTabIndex == HomeTab.profile.index
+                ? Icons.person
+                : Icons.person_outline,
           ),
+          title: Text(ref.appLocalizations.profile),
         ),
       ],
+      currentIndex: selectedTabIndex,
+      onTap: viewModel.onTabChanged,
     );
   }
 

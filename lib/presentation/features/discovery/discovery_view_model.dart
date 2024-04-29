@@ -12,12 +12,13 @@ class DiscoveryViewModel extends _$DiscoveryViewModel {
   FutureOr<DiscoveryState> build() {
     return DiscoveryState();
   }
+
   Future<List<DocumentSnapshot>> searchLocations(String query) async {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         final querySnapshot = await FirebaseFirestore.instance
-            .collection('locations')
+            .collection('location')
             .where('location', isGreaterThanOrEqualTo: query)
             .where('location', isLessThan: '${query}z')
             .get();
@@ -35,5 +36,4 @@ class DiscoveryViewModel extends _$DiscoveryViewModel {
       return [];
     }
   }
-
 }
