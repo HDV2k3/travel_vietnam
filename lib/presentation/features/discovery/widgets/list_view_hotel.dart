@@ -60,12 +60,12 @@ class ListViewHotel extends ConsumerWidget {
                                                   data[index].image![0],
                                                   fit: BoxFit.cover,
                                                   height: 230,
-                                                  width: 180,
+                                                  width: 210,
                                                 ),
                                               ),
                                             ),
                                             Positioned(
-                                              left: 150,
+                                              left: 170,
                                               top: 10,
                                               child: FavoriteIcon(
                                                 isFavorite: isFavorite,
