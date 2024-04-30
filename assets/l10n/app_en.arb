@@ -29,7 +29,7 @@
           "type": "text",
           "placeholders": {}
         },
-   "location_search": "Viet Nam",
+  "location_search": "Viet Nam",
               "@location_search": {
                 "type": "text",
                 "placeholders": {}

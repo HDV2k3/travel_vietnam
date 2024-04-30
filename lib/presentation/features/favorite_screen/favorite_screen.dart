@@ -8,11 +8,8 @@ import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/preferred_size.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../controllers/discovery_controller.dart';
 
@@ -54,7 +51,6 @@ class _DiscoveryState
 
   @override
   Widget buildBody(BuildContext context) {
-
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       loadFavoriteItems(); // Gọi hàm loadFavoriteItems để tải danh sách yêu thích
@@ -176,7 +172,9 @@ class _DiscoveryState
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          discoveryController.removeFromFavorite(favorite.title);
+                                          discoveryController
+                                              .removeFromFavorite(
+                                                  favorite.title);
                                         },
                                         icon: const Icon(
                                           Icons.delete,
@@ -211,8 +209,7 @@ class _DiscoveryState
   void loadFavoriteItems() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-
-          await discoveryController.fetchFavoriteItems(user.uid);
+      await discoveryController.fetchFavoriteItems(user.uid);
       // Xử lý danh sách yêu thích đã tải
       // ...
     } else {

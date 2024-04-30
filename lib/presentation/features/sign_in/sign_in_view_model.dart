@@ -11,6 +11,8 @@ part 'sign_in_view_model.g.dart';
 
 @riverpod
 class SignInViewModel extends _$SignInViewModel {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   FutureOr<SignInState> build() {
     return SignInState(
@@ -19,22 +21,37 @@ class SignInViewModel extends _$SignInViewModel {
       rememberMe: ValueNotifier<bool>(false),
     );
   }
+
   // sign in with google
-  Future<UserCredential> signInWithGoogle( ) async {
+  Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
-    await googleUser?.authentication;
-
+        await googleUser?.authentication;
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    UserCredential userCredential =
+        await _auth.signInWithCredential(credential);
+    User? user = userCredential.user;
+    if (user != null) {
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        await _firestore.collection('users').doc(user.uid).set({
+          'name': user.displayName,
+          'uid': user.uid,
+          'avatar': user.photoURL,
+          'password': user.uid,
+        });
+      }
+    }
+
+    return userCredential; // Trả về giá trị UserCredential
   }
+
   // anonymous
   Future<bool> signInUser(String email, String password) async {
     try {
@@ -61,19 +78,20 @@ class SignInViewModel extends _$SignInViewModel {
     // If no errors occurred, return false
     return false;
   }
+
   // get collection of users
   final CollectionReference account =
-  FirebaseFirestore.instance.collection('users');
+      FirebaseFirestore.instance.collection('users');
 
   //Create add new account
   Future<void> newAccount(
-      TextEditingController fullnameController,
-      TextEditingController emailController,
-      TextEditingController passwordController,
-      ) async {
+    TextEditingController fullnameController,
+    TextEditingController emailController,
+    TextEditingController passwordController,
+  ) async {
     try {
       UserCredential userCredential =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -91,8 +109,8 @@ class SignInViewModel extends _$SignInViewModel {
           .collection('users')
           .doc(userCredential.user!.uid)
           .set(
-        user.toMap(),
-      );
+            user.toMap(),
+          );
     } catch (e) {
       e.toString();
     }

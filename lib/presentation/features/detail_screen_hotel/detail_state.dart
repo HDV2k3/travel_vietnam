@@ -4,5 +4,7 @@ part 'detail_state.freezed.dart';
 
 @freezed
 class DetailHotelState with _$DetailHotelState {
-  factory DetailHotelState() = _DetailHotelState;
+  factory DetailHotelState({
+    @Default([]) List<String> utilities,
+  }) = _DetailHotelState;
 }

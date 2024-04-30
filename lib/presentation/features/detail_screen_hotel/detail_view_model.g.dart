@@ -7,7 +7,7 @@ part of 'detail_view_model.dart';
 // **************************************************************************
 
 String _$detailHotelViewModelHash() =>
-    r'6362a10f9891cb206098e65dcb6738fb23eaa866';
+    r'c26ec066bd14a25e5fcce8de769df36e7e0bd5f8';
 
 /// See also [DetailHotelViewModel].
 @ProviderFor(DetailHotelViewModel)

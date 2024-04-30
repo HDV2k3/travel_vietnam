@@ -1,26 +1,23 @@
-import 'package:chandoiqua/data/services/firebase/models/hotels.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chandoiqua/presentation/controllers/hotel_controller.dart';
+import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_screen_hotel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// import '../../../../data/providers/favorite_provider.dart';
-import '../../detail_screen_hotel/detail_screen_hotel.dart';
+import '../../../../data/providers/favorite_provider.dart';
+import 'error_text.dart';
+import 'favorite_icon.dart';
+import 'loader.dart';
 
 class ListViewHotel extends ConsumerWidget {
-  const ListViewHotel({Key? key});
-
+  const ListViewHotel({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final isFavorite = ref.watch(favoriteProvider);
+    final isFavorite = ref.watch(favoriteProvider);
+    final hotels = ref.watch(getHotelsProvider);
     return Container(
       color: Colors.white, // Đặt màu nền cho ListView
-      child: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('hotels').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final hotels = snapshot.data!.docs
-                .map((doc) => Hotels.fromFirebase(doc))
-                .toList();
+      child: hotels.when(
+          data: (data) {
             return Column(
               children: [
                 Expanded(
@@ -28,68 +25,111 @@ class ListViewHotel extends ConsumerWidget {
                     height: double.maxFinite,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: hotels.length,
+                      itemCount: data.length,
                       itemBuilder: (context, index) {
-                        final location = hotels[index];
+                        data[index];
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => DetailPageHotel(
-                                          image: location.image,
-                                          title: location.title,
-                                          description: location.description,
-                                          price: location.price,
-                                          location: location.location,
-                                          vote: location.vote,
-                                          nation: location.nation,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      location.image,
-                                      fit: BoxFit.cover,
-                                      height: 260,
-                                      width: 200,
-                                    ),
-                                  ),
-                                ),
-                                Column(
+                          child: Stack(
+                            children: [
+                              SingleChildScrollView(
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          location.title,
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.0,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const DetailScreenHotel(),
+                                            settings: RouteSettings(
+                                                arguments: data[index]),
                                           ),
+                                        );
+                                      },
+                                      child: SizedBox(
+                                        child: Stack(
+                                          children: [
+                                            Positioned(
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image.network(
+                                                  data[index].image![0],
+                                                  fit: BoxFit.cover,
+                                                  height: 230,
+                                                  width: 180,
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              left: 150,
+                                              top: 10,
+                                              child: FavoriteIcon(
+                                                isFavorite: isFavorite,
+                                                onPressed: () {},
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        const SizedBox(
-                                          width: 50,
+                                      ),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  data[index].name!,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16.0,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      '${data[index].vote}/5',
+                                                    ),
+                                                    const Icon(
+                                                      Icons.star,
+                                                      color: Colors.yellow,
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              'Từ ${data[index].price!.toStringAsFixed(0)}\$',
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        // FavoriteIcon(isFavorite: isFavorite, onPressed: () {  },
-                                        // ),
                                       ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         );
                       },
@@ -98,12 +138,9 @@ class ListViewHotel extends ConsumerWidget {
                 ),
               ],
             );
-          }
-          return const CircularProgressIndicator(
-            strokeWidth: 0.5,
-          );
-        },
-      ),
+          },
+          error: (error, stackTrace) => ErrorText(error: error.toString()),
+          loading: () => const Loader()),
     );
   }
 }

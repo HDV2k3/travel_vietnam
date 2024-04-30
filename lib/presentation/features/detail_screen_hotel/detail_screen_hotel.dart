@@ -1,46 +1,37 @@
-import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/button.dart';
-import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/responsive_button.dart';
+import 'package:chandoiqua/data/models/hotel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DetailPageHotel extends StatefulWidget {
-  final String image;
-  final String title;
-  final String description;
-  final String price;
-  final String location;
-  final String vote;
-  final String nation;
+import '../../../utilities/widget/icon_button.dart';
+import '../../common_widgets/base/base_screen.dart';
+import 'detail_state.dart';
+import 'detail_view_model.dart';
 
-  const DetailPageHotel({
+class DetailScreenHotel extends BaseScreen {
+  const DetailScreenHotel({
     super.key,
-    required this.image,
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.location,
-    required this.vote,
-    required this.nation,
   });
-
   @override
-  State createState() => _DetailPageHotelState();
+  BaseScreenState createState() => _DetailHotelState();
 }
 
-class _DetailPageHotelState extends State<DetailPageHotel> {
-  int star1 = 5;
+class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
+    DetailHotelViewModel, DetailHotelState> {
   int selectedIndex = -1;
-
+  late bool isFavorite = false;
+  Hotel? hotel;
+  // final DiscoveryController discoveryController =
+  //     Get.put(DiscoveryController());
   @override
-  Widget build(BuildContext context) {
+  Widget buildBody(BuildContext context) {
+    final hotel = ModalRoute.of(context)!.settings.arguments as Hotel;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.nation),
-      ),
       body: SizedBox(
         width: double.maxFinite,
         height: double.maxFinite,
         child: Stack(
           children: [
+            // ảnh
             Positioned(
               left: 0,
               right: 0,
@@ -49,25 +40,27 @@ class _DetailPageHotelState extends State<DetailPageHotel> {
                 height: 350,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: Image.network(widget.image).image,
+                    image: Image.network(hotel.image![0]).image,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
             ),
-            // Positioned(
-            //   left: 10,
-            //   top: 10,
-            //   child: Row(
-            //     children: [
-            //       IconButton(
-            //         onPressed: () {},
-            //         icon: const Icon(Icons.menu),
-            //         color: Colors.white,
-            //       ),
-            //     ],
-            //   ),
-            // ),
+            Positioned(
+              top: 40,
+              child: IconButtonBar(
+                onBackPressed: () {
+                  Navigator.pop(context);
+                  // Quay lại trang trước đó
+                },
+                onFavoritePressed: () {
+                  // Xử lý sự kiện khi nút favorite được nhấn
+                },
+                onSharePressed: () {
+                  // Xử lý sự kiện khi nút share được nhấn
+                },
+              ),
+            ),
             Positioned(
               top: 280,
               child: Container(
@@ -88,20 +81,22 @@ class _DetailPageHotelState extends State<DetailPageHotel> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.title,
+                          hotel.name!,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                             color: Colors.black54.withOpacity(0.8),
                           ),
                         ),
-                        Text(
-                          widget.price,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.blueGrey,
-                          ),
+                        Wrap(
+                          children: List.generate(5, (index) {
+                            return Icon(
+                              Icons.star,
+                              color: index < hotel.vote!
+                                  ? Colors.yellowAccent
+                                  : Colors.blueGrey,
+                            );
+                          }),
                         ),
                       ],
                     ),
@@ -118,7 +113,7 @@ class _DetailPageHotelState extends State<DetailPageHotel> {
                           height: 5,
                         ),
                         Text(
-                          widget.location,
+                          hotel.provinceName!,
                           style: const TextStyle(
                             color: Colors.deepPurple,
                           ),
@@ -126,123 +121,65 @@ class _DetailPageHotelState extends State<DetailPageHotel> {
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(5, (index) {
-                            return Icon(
-                              Icons.star,
-                              color: index < star1
-                                  ? Colors.yellowAccent
-                                  : Colors.blueGrey,
-                            );
-                          }),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          widget.vote,
-                          style: const TextStyle(
-                            color: Colors.blueGrey,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
+                      height: 5,
                     ),
                     Text(
-                      'Số Người Đi',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: Colors.black.withOpacity(0.8),
-                      ),
+                      hotel.description!,
+                      style: const TextStyle(color: Colors.lightBlue),
                     ),
                     const SizedBox(
                       height: 5,
+                    ),
+                    Divider(
+                      height: 1,
+                      color: Colors.grey.withOpacity(0.5),
                     ),
                     const Text(
-                      'Số người trong nhóm của bạn',
-                      style: TextStyle(
-                        color: Colors.black54,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
+                      'Tiện Ích',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Wrap(
-                      children: List.generate(5, (index) {
-                        return InkWell(
-                          onTap: () {
-                            setState(() {
-                              selectedIndex = index;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            child: ButtonDetail(
-                              size: 50,
-                              color: selectedIndex == index
-                                  ? Colors.white
-                                  : Colors.black,
-                              backgroundColor: selectedIndex == index
-                                  ? Colors.black
-                                  : Colors.deepPurple.withOpacity(0.1),
-                              borderColor: selectedIndex == index
-                                  ? Colors.black
-                                  : Colors.deepPurple.withOpacity(0.1),
-                              text: (index + 1).toString(),
-                            ),
+                      children: hotel.utilities!.map((utility) {
+                        return Container(
+                          margin: const EdgeInsets.only(right: 40),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            utility,
+                            style: TextStyle(
+                                color: Colors.grey.shade600,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold),
                           ),
                         );
-                      }),
+                      }).toList(),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      'Tiện ích',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black.withOpacity(0.8)),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(widget.description)
                   ],
                 ),
               ),
             ),
-            const Positioned(
-                bottom: 20,
-                left: 20,
-                right: 20,
-                child: Row(
-                  children: [
-                    ButtonDetail(
-                      size: 60,
-                      color: Colors.black,
-                      backgroundColor: Colors.white,
-                      borderColor: Colors.deepPurple,
-                      isIcon: true,
-                      icon: Icons.favorite_border,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    ResponsiveButton(
-                      isResponsive: true,
-                    )
-                  ],
-                ))
           ],
         ),
       ),
     );
   }
+
+  @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return null;
+  }
+
+  @override
+  // TODO: implement state
+  AsyncValue<DetailHotelState> get state =>
+      ref.watch(detailHotelViewModelProvider);
+
+  @override
+  // TODO: implement viewModel
+  DetailHotelViewModel get viewModel =>
+      ref.read(detailHotelViewModelProvider.notifier);
 }

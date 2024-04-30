@@ -4,26 +4,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SliderImage extends ConsumerWidget {
   const SliderImage({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> imageUrls = [
       'assets/images/bg1.png',
-      'assets/images/bg1.png',
-      'assets/images/bg1.png',
-      'assets/images/bg1.png',
+      'assets/images/dn1.jpeg',
+      'assets/images/dn2.jpg',
+      'assets/images/dn3.jpg',
     ];
-
     return CarouselSlider(
       options: CarouselOptions(
         height: 200, // Set the height of the slider
         enableInfiniteScroll: true, // Enable infinite scrolling
         autoPlay: true, // Enable auto play
         autoPlayInterval:
-            const Duration(seconds: 5), // Set the auto play interval
+            const Duration(seconds: 3), // Set the auto play interval
         enlargeCenterPage: true, // Enlarge the center page
         viewportFraction:
-            1.1, // Set the visible portion of each item on the screen
+            1, // Set the visible portion of each item on the screen
         onPageChanged: (index, reason) {
           // Callback function for when the page changes
         },
