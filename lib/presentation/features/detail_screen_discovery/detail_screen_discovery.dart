@@ -1,4 +1,6 @@
 import 'package:chandoiqua/data/models/location.dart';
+import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/list_view_hotel_near.dart';
+import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/slider_activi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,190 +10,247 @@ import 'detail_state.dart';
 import 'detail_view_model.dart';
 
 class DetailPage extends BaseScreen {
-  int numPeople;
-  DetailPage({
+  const DetailPage({
     super.key,
-    this.numPeople = 1,
   });
   @override
-  BaseScreenState createState() => _DetailState();
+  BaseScreenState createState() => _DetailPageState();
 }
 
-class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
-    DetailDiscoveryState> {
-  int selectedIndex = -1;
-  late bool isFavorite = false;
+class _DetailPageState extends BaseScreenState<DetailPage,
+    DetailDiscoveryViewModel, DetailDiscoveryState> {
   Location? location;
+  // Activity? activities;
+  // List<DocumentSnapshot>?
+  //     activityDocuments;
+
   // final DiscoveryController discoveryController =
   //     Get.put(DiscoveryController());
   @override
   Widget buildBody(BuildContext context) {
     final location = ModalRoute.of(context)!.settings.arguments as Location;
     return Scaffold(
-      body: SizedBox(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        child: Stack(
-          children: [
-            // ảnh
-            Positioned(
-              left: 0,
-              right: 0,
-              child: Container(
-                width: double.maxFinite,
-                height: 400,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: Image.network(location.image ?? '').image,
-                    fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: double.maxFinite,
+          height: 1050,
+          child: Stack(
+            children: [
+              // ảnh
+              Positioned(
+                left: 0,
+                right: 0,
+                child: Container(
+                  width: double.maxFinite,
+                  height: 400,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: Image.network(location.image ?? '').image,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              top: 40,
-              child: IconButtonBar(
-                onBackPressed: () {
-                  Navigator.pop(context); // Quay lại trang trước đó
-                },
-                onFavoritePressed: () {
-                  // Xử lý sự kiện khi nút favorite được nhấn
-                },
-                onSharePressed: () {
-                  // Xử lý sự kiện khi nút share được nhấn
-                },
-              ),
-            ),
-            // info
-            Positioned(
-              top: 260,
-              child: Container(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                width: MediaQuery.of(context).size.width,
-                height: 180,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
+              Positioned(
+                top: 40,
+                child: IconButtonBar(
+                  onBackPressed: () {
+                    Navigator.pop(context); // Quay lại trang trước đó
+                  },
+                  onFavoritePressed: () {
+                    // Xử lý sự kiện khi nút favorite được nhấn
+                  },
+                  onSharePressed: () {
+                    // Xử lý sự kiện khi nút share được nhấn
+                  },
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          location.name ?? '',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.black54.withOpacity(0.8),
+              ),
+              Positioned(
+                top: 260,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  width: MediaQuery.of(context).size.width,
+                  height: 180,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            location.name ?? '',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              color: Colors.black54.withOpacity(0.8),
+                            ),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Wrap(
-                              children: List.generate(5, (index) {
-                                return Icon(
-                                  Icons.star,
-                                  color: index < location.vote!
-                                      ? Colors.yellowAccent
-                                      : Colors.blueGrey,
-                                );
-                              }),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              (location.vote ?? 0).toString(),
-                              style: const TextStyle(
-                                color: Colors.blueGrey,
+                          Row(
+                            children: [
+                              Wrap(
+                                children: List.generate(5, (index) {
+                                  return Icon(
+                                    Icons.star,
+                                    color: index < location.vote!
+                                        ? Colors.yellowAccent
+                                        : Colors.blueGrey,
+                                  );
+                                }),
                               ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                (location.vote ?? 0).toString(),
+                                style: const TextStyle(
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.5),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on,
+                            color: Colors.deepPurple,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            location.provinceName ?? '',
+                            style: const TextStyle(
+                              color: Colors.deepPurple,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Divider(
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.5),
+                      ),
+                      Text(
+                        'Mở Cửa Hàng Ngày',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black.withOpacity(0.8)),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(location.description ?? ''),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 430,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  width: MediaQuery.of(context).size.width,
+                  height: 80,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hoạt Động',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            SizedBox(
+                              height: 10,
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                    Divider(
-                      height: 1,
-                      color: Colors.grey.withOpacity(0.5),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_on,
-                          color: Colors.deepPurple,
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          location.provinceName ?? '',
-                          style: const TextStyle(
-                            color: Colors.deepPurple,
+                        Container(
+                          constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width),
+                          child: Wrap(
+                            children: location.activity!.map((activity) {
+                              return Container(
+                                margin: const EdgeInsets.only(right: 5),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 6),
+                                child: Text(
+                                  activity,
+                                  style: const TextStyle(
+                                      color: Colors.lightBlue,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Divider(
-                      height: 1,
-                      color: Colors.grey.withOpacity(0.5),
-                    ),
-                    Text(
-                      'Mở Cửa Hàng Ngày',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black.withOpacity(0.8)),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(location.description ?? ''),
-                  ],
+                  ),
                 ),
               ),
-            ),
-            // Positioned(
-            //   top: 600,
-            //   child: Container(
-            //     padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            //     width: MediaQuery.of(context).size.width,
-            //     height: 180,
-            //     decoration: const BoxDecoration(
-            //       color: Colors.white,
-            //       borderRadius: BorderRadius.all(Radius.circular(10)),
-            //     ),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         Row(
-            //           children: [
-            //             SizedBox(
-            //               child: Text(
-            //                 'Chi Tiết',
-            //                 style: TextStyle(
-            //                   fontWeight: FontWeight.bold,
-            //                   fontSize: 25,
-            //                   color: Colors.black54.withOpacity(0.8),
-            //                 ),
-            //               ),
-            //             )
-            //           ],
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-          ],
+              Positioned(
+                top: 500,
+                child: Container(
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 5),
+                  width: MediaQuery.of(context).size.width,
+                  height: 220,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: const SliderImageActivity(),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 720, left: 20),
+                child: Text(
+                  'Khách Sạn Gần Đó',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
+              Positioned(
+                top: 750,
+                child: Container(
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 5),
+                  width: MediaQuery.of(context).size.width,
+                  height: 270,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: ListViewHotelNear(location.provinceName!),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -212,57 +271,3 @@ class _DetailState extends BaseScreenState<DetailPage, DetailDiscoveryViewModel,
   DetailDiscoveryViewModel get viewModel =>
       ref.read(detailDiscoveryViewModelProvider.notifier);
 }
-// Positioned(
-// bottom: 20,
-// left: 20,
-// right: 20,
-// child: Row(
-// children: [
-// // add favorite
-// ButtonAddToFavorite(
-// size: 60,
-// color: isFavorite ? Colors.red : Colors.black,
-// backgroundColor: Colors.white,
-// borderColor: Colors.deepPurple,
-// isIcon: true,
-// icon: isFavorite ? Icons.favorite : Icons.favorite_border,
-// onPressed: () {
-// discoveryController.addToFavorite(
-// title: location.name ?? '',
-// image: location.image ?? '',
-// price: location.price!.toString(),
-// location: location.provinceName ?? '',
-// );
-// setState(() {
-// isFavorite = true;
-// });
-// },
-// ),
-// const SizedBox(
-// width: 20,
-// ),
-// // book tour
-// GestureDetector(
-// onTap: () {
-// Navigator.push(
-// context,
-// MaterialPageRoute(
-// builder: (context) => CartScreen(
-// image: location.image ?? "",
-// title: location.name ?? "",
-// price: (((widget.numPeople - 1) * 300) +
-// (location.price ?? 0))
-//     .toStringAsFixed(0),
-// location: location.provinceName ?? "",
-// numPeople: widget.numPeople,
-// ),
-// ),
-// );
-// },
-// child: const ResponsiveButton(
-// isResponsive: true,
-// ),
-// ),
-// ],
-// ),
-// ),

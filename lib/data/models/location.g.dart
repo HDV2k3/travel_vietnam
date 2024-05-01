@@ -17,6 +17,12 @@ _$LocationImpl _$$LocationImplFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
       provinceName: json['provinceName'] as String?,
       vote: json['vote'] as int?,
+      activity: (json['activity'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      imageActivity: (json['imageActivity'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$LocationImplToJson(_$LocationImpl instance) =>
@@ -30,4 +36,6 @@ Map<String, dynamic> _$$LocationImplToJson(_$LocationImpl instance) =>
       'description': instance.description,
       'provinceName': instance.provinceName,
       'vote': instance.vote,
+      'activity': instance.activity,
+      'imageActivity': instance.imageActivity,
     };

@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 part 'hotel.freezed.dart';
 part 'hotel.g.dart';
 
-List<Hotel> locationFromJson(dynamic str) =>
+List<Hotel> hotelFromJson(dynamic str) =>
     List<Hotel>.from((str).map((e) => Hotel.fromJson(e)));
 
 @freezed

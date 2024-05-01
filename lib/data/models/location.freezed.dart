@@ -38,6 +38,10 @@ mixin _$Location {
   String? get provinceName => throw _privateConstructorUsedError;
   @HiveField(8)
   int? get vote => throw _privateConstructorUsedError;
+  @HiveField(9)
+  List<String>? get activity => throw _privateConstructorUsedError;
+  @HiveField(10)
+  List<String>? get imageActivity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,7 +63,9 @@ abstract class $LocationCopyWith<$Res> {
       @HiveField(5) bool? isAvailable,
       @HiveField(6) String? description,
       @HiveField(7) String? provinceName,
-      @HiveField(8) int? vote});
+      @HiveField(8) int? vote,
+      @HiveField(9) List<String>? activity,
+      @HiveField(10) List<String>? imageActivity});
 }
 
 /// @nodoc
@@ -84,6 +90,8 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
     Object? description = freezed,
     Object? provinceName = freezed,
     Object? vote = freezed,
+    Object? activity = freezed,
+    Object? imageActivity = freezed,
   }) {
     return _then(_value.copyWith(
       locationId: freezed == locationId
@@ -122,6 +130,14 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
           ? _value.vote
           : vote // ignore: cast_nullable_to_non_nullable
               as int?,
+      activity: freezed == activity
+          ? _value.activity
+          : activity // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      imageActivity: freezed == imageActivity
+          ? _value.imageActivity
+          : imageActivity // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -143,7 +159,9 @@ abstract class _$$LocationImplCopyWith<$Res>
       @HiveField(5) bool? isAvailable,
       @HiveField(6) String? description,
       @HiveField(7) String? provinceName,
-      @HiveField(8) int? vote});
+      @HiveField(8) int? vote,
+      @HiveField(9) List<String>? activity,
+      @HiveField(10) List<String>? imageActivity});
 }
 
 /// @nodoc
@@ -166,6 +184,8 @@ class __$$LocationImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? provinceName = freezed,
     Object? vote = freezed,
+    Object? activity = freezed,
+    Object? imageActivity = freezed,
   }) {
     return _then(_$LocationImpl(
       locationId: freezed == locationId
@@ -204,6 +224,14 @@ class __$$LocationImplCopyWithImpl<$Res>
           ? _value.vote
           : vote // ignore: cast_nullable_to_non_nullable
               as int?,
+      activity: freezed == activity
+          ? _value._activity
+          : activity // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      imageActivity: freezed == imageActivity
+          ? _value._imageActivity
+          : imageActivity // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -220,7 +248,11 @@ class _$LocationImpl implements _Location {
       @HiveField(5) this.isAvailable,
       @HiveField(6) this.description,
       @HiveField(7) this.provinceName,
-      @HiveField(8) this.vote});
+      @HiveField(8) this.vote,
+      @HiveField(9) final List<String>? activity,
+      @HiveField(10) final List<String>? imageActivity})
+      : _activity = activity,
+        _imageActivity = imageActivity;
 
   factory _$LocationImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocationImplFromJson(json);
@@ -252,10 +284,31 @@ class _$LocationImpl implements _Location {
   @override
   @HiveField(8)
   final int? vote;
+  final List<String>? _activity;
+  @override
+  @HiveField(9)
+  List<String>? get activity {
+    final value = _activity;
+    if (value == null) return null;
+    if (_activity is EqualUnmodifiableListView) return _activity;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<String>? _imageActivity;
+  @override
+  @HiveField(10)
+  List<String>? get imageActivity {
+    final value = _imageActivity;
+    if (value == null) return null;
+    if (_imageActivity is EqualUnmodifiableListView) return _imageActivity;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'Location(locationId: $locationId, image: $image, name: $name, price: $price, oldPrice: $oldPrice, isAvailable: $isAvailable, description: $description, provinceName: $provinceName, vote: $vote)';
+    return 'Location(locationId: $locationId, image: $image, name: $name, price: $price, oldPrice: $oldPrice, isAvailable: $isAvailable, description: $description, provinceName: $provinceName, vote: $vote, activity: $activity, imageActivity: $imageActivity)';
   }
 
   @override
@@ -276,13 +329,27 @@ class _$LocationImpl implements _Location {
                 other.description == description) &&
             (identical(other.provinceName, provinceName) ||
                 other.provinceName == provinceName) &&
-            (identical(other.vote, vote) || other.vote == vote));
+            (identical(other.vote, vote) || other.vote == vote) &&
+            const DeepCollectionEquality().equals(other._activity, _activity) &&
+            const DeepCollectionEquality()
+                .equals(other._imageActivity, _imageActivity));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, locationId, image, name, price,
-      oldPrice, isAvailable, description, provinceName, vote);
+  int get hashCode => Object.hash(
+      runtimeType,
+      locationId,
+      image,
+      name,
+      price,
+      oldPrice,
+      isAvailable,
+      description,
+      provinceName,
+      vote,
+      const DeepCollectionEquality().hash(_activity),
+      const DeepCollectionEquality().hash(_imageActivity));
 
   @JsonKey(ignore: true)
   @override
@@ -308,7 +375,9 @@ abstract class _Location implements Location {
       @HiveField(5) final bool? isAvailable,
       @HiveField(6) final String? description,
       @HiveField(7) final String? provinceName,
-      @HiveField(8) final int? vote}) = _$LocationImpl;
+      @HiveField(8) final int? vote,
+      @HiveField(9) final List<String>? activity,
+      @HiveField(10) final List<String>? imageActivity}) = _$LocationImpl;
 
   factory _Location.fromJson(Map<String, dynamic> json) =
       _$LocationImpl.fromJson;
@@ -340,6 +409,12 @@ abstract class _Location implements Location {
   @override
   @HiveField(8)
   int? get vote;
+  @override
+  @HiveField(9)
+  List<String>? get activity;
+  @override
+  @HiveField(10)
+  List<String>? get imageActivity;
   @override
   @JsonKey(ignore: true)
   _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>

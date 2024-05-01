@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:chandoiqua/data/models/location.dart';
 
+import 'package:chandoiqua/data/models/location.dart';
 import 'package:chandoiqua/data/services/firebase/location_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,6 +34,7 @@ final relatedLocationsProvider =
       .watch(locationsControllerProvider.notifier)
       .getRelatedLocations(provinceName);
 });
+
 final searchLocations = StreamProvider.family((ref, String search) {
   return ref
       .watch(locationsControllerProvider.notifier)

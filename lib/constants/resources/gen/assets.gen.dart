@@ -34,6 +34,15 @@ class $AssetsImagesGen {
   AssetGenImage get booknowbutton =>
       const AssetGenImage('assets/images/booknowbutton.png');
 
+  /// File path: assets/images/dn1.jpeg
+  AssetGenImage get dn1 => const AssetGenImage('assets/images/dn1.jpeg');
+
+  /// File path: assets/images/dn2.jpg
+  AssetGenImage get dn2 => const AssetGenImage('assets/images/dn2.jpg');
+
+  /// File path: assets/images/dn3.jpg
+  AssetGenImage get dn3 => const AssetGenImage('assets/images/dn3.jpg');
+
   /// File path: assets/images/google_logo.png
   AssetGenImage get googleLogo =>
       const AssetGenImage('assets/images/google_logo.png');
@@ -53,6 +62,9 @@ class $AssetsImagesGen {
         bg1,
         bgtour,
         booknowbutton,
+        dn1,
+        dn2,
+        dn3,
         googleLogo,
         paypal,
         paypalll

@@ -7,7 +7,7 @@ class SliderImage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> imageUrls = [
-      'assets/images/bg1.png',
+      'assets/images/dn2.png',
       'assets/images/dn1.jpeg',
       'assets/images/dn2.jpg',
       'assets/images/dn3.jpg',

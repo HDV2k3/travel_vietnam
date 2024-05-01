@@ -7,6 +7,7 @@ import 'package:chandoiqua/presentation/features/discovery/widgets/list_view_hot
 import 'package:chandoiqua/presentation/features/discovery/widgets/search.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/slider.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/text_category.dart';
+import 'package:chandoiqua/presentation/features/discovery/widgets/text_location.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -70,6 +71,13 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
             const SizedBox(
               child: SliderImage(),
             ),
+            Container(
+              color: Colors.white,
+              child: const SizedBox(
+                width: double.maxFinite,
+                child: TextLocation(),
+              ),
+            ),
             const SizedBox(
               width: double.maxFinite,
               height: 300, // Set a fixed height for the SliderImage widget
@@ -79,7 +87,7 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
               color: Colors.white,
               child: const SizedBox(
                 width: double.maxFinite,
-                child: TextTittle(),
+                child: TextHotel(),
               ),
             ),
             const SizedBox(

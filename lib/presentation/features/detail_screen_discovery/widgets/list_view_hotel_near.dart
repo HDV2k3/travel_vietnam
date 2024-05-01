@@ -1,26 +1,25 @@
-import 'package:chandoiqua/data/providers/favorite_provider.dart';
-import 'package:chandoiqua/presentation/controllers/location_controller.dart';
-import 'package:chandoiqua/presentation/features/detail_screen_discovery/detail_screen_discovery.dart';
+import 'package:chandoiqua/presentation/controllers/hotel_controller.dart';
+import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_screen_hotel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 
-import '../../../controllers/discovery_controller.dart';
-import 'error_text.dart';
-import 'favorite_icon.dart';
-import 'loader.dart';
+import '../../../../data/models/hotel.dart';
+import '../../../../data/providers/favorite_provider.dart';
+import '../../discovery/widgets/error_text.dart';
+import '../../discovery/widgets/favorite_icon.dart';
+import '../../discovery/widgets/loader.dart';
 
-class ListViewLocation extends ConsumerWidget {
-  const ListViewLocation({super.key});
+class ListViewHotelNear extends ConsumerWidget {
+  final String provinceName;
+  const ListViewHotelNear(this.provinceName, {super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isFavorite = ref.watch(favoriteProvider);
-    final locations = ref.watch(getLocationsProvider);
-    final DiscoveryController discoveryController =
-        Get.put(DiscoveryController());
+    final AsyncValue<List<Hotel>> hotels =
+        ref.watch(relatedHotelsProvider(provinceName));
     return Container(
-      color: Colors.white,
-      child: locations.when(
+      color: Colors.white, // Đặt màu nền cho ListView
+      child: hotels.when(
           data: (data) {
             return Column(
               children: [
@@ -47,7 +46,7 @@ class ListViewLocation extends ConsumerWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const DetailPage(),
+                                                const DetailScreenHotel(),
                                             settings: RouteSettings(
                                                 arguments: data[index]),
                                           ),
@@ -61,33 +60,19 @@ class ListViewLocation extends ConsumerWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(10),
                                                 child: Image.network(
-                                                  data[index].image!,
+                                                  data[index].image![0],
                                                   fit: BoxFit.cover,
-                                                  height: 230,
-                                                  width: 210,
+                                                  height: 200,
+                                                  width: 360,
                                                 ),
                                               ),
                                             ),
                                             Positioned(
-                                              left: 170,
+                                              left: 300,
                                               top: 10,
                                               child: FavoriteIcon(
                                                 isFavorite: isFavorite,
-                                                onPressed: () {
-                                                  discoveryController
-                                                      .addToFavorite(
-                                                    title:
-                                                        data[index].name ?? '',
-                                                    image:
-                                                        data[index].image ?? '',
-                                                    price: data[index]
-                                                        .price
-                                                        .toString(),
-                                                    location: data[index]
-                                                            .provinceName ??
-                                                        '',
-                                                  );
-                                                },
+                                                onPressed: () {},
                                               ),
                                             ),
                                           ],
@@ -130,14 +115,18 @@ class ListViewLocation extends ConsumerWidget {
                                               ],
                                             ),
                                             const SizedBox(
-                                              width: 35,
+                                              width: 20,
                                             ),
-                                            Text(
-                                              'Từ ${data[index].price!.toStringAsFixed(0)}\$',
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16.0,
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 150),
+                                              child: Text(
+                                                'Từ ${data[index].price!.toStringAsFixed(0)}\$',
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16.0,
+                                                ),
                                               ),
                                             ),
                                           ],
