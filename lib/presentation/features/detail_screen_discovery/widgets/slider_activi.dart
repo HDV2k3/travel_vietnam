@@ -4,11 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final currentIndexProvider = Provider<int>((ref) => 0);
+
 class SliderImageActivity extends ConsumerWidget {
   const SliderImageActivity({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    int _currentIndex = 0;
     return FutureBuilder<List<String>>(
       future:
           getImageUrlsFromFirebase(), // Call the function to get the image URLs from Firebase
@@ -37,9 +40,7 @@ class SliderImageActivity extends ConsumerWidget {
               enlargeCenterPage: true, // Enlarge the center page
               viewportFraction:
                   1, // Set the visible portion of each item on the screen
-              onPageChanged: (index, reason) {
-                // Callback function for when the page changes
-              },
+              onPageChanged: (index, reason) {},
             ),
             items: imageUrls.map((imageUrl) {
               return Builder(

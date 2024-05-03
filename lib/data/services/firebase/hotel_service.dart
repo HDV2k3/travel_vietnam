@@ -6,6 +6,7 @@ import 'package:fpdart/fpdart.dart';
 
 import '../../../constants/firebase_constants.dart';
 import '../../../core/failure.dart';
+import '../../models/room_in_hotel.dart';
 
 final hotelsServiceProvider = Provider((ref) {
   return HotelService(fireStore: ref.watch(firebaseFirestoreProvider));
@@ -62,6 +63,20 @@ class HotelService {
           }
           return hotels;
         });
+  }
+
+  Stream<List<Room>> getDataRoomInHotels(String hotelId) {
+    return FirebaseFirestore.instance
+        .collection('hotels')
+        .doc(hotelId)
+        .collection('room')
+        .snapshots()
+        .map((querySnapshot) {
+      return querySnapshot.docs.map((doc) {
+        // Create a Room object from the document data
+        return Room.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
+    });
   }
 
   Either<dynamic, Future<void>> updateLocation(Hotel hotel) {

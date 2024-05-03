@@ -2,17 +2,17 @@ import 'package:custom_date_range_picker/custom_date_range_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class SelectDateTime extends StatefulWidget {
-  const SelectDateTime({super.key});
+class SelectDateTimeHotel extends StatefulWidget {
+  const SelectDateTimeHotel({super.key});
 
   @override
-  State<SelectDateTime> createState() => _SelectDateTimeState();
+  State<SelectDateTimeHotel> createState() => _SelectDateTimeState();
 }
 
-class _SelectDateTimeState extends State<SelectDateTime> {
+class _SelectDateTimeState extends State<SelectDateTimeHotel> {
   DateTime? startDate;
   DateTime? endDate;
-  late String applyClickText;
+  String applyClickText = '1 Đêm';
   String selectedStartDateText = DateFormat('dd/MM').format(DateTime.now());
   String selectedEndDateText =
       DateFormat('dd/MM').format(DateTime.now().add(const Duration(days: 1)));

@@ -63,7 +63,7 @@ class ListViewHotelNear extends ConsumerWidget {
                                                   data[index].image![0],
                                                   fit: BoxFit.cover,
                                                   height: 200,
-                                                  width: 360,
+                                                  width: 340,
                                                 ),
                                               ),
                                             ),

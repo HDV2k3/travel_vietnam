@@ -73,6 +73,7 @@ dependencies:
   flutter_sequence_animation: ^4.0.0
   convex_bottom_bar: ^3.2.0
   custom_navigation_bar: ^0.8.2
+  dots_indicator: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

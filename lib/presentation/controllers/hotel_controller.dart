@@ -102,6 +102,7 @@ import 'package:chandoiqua/data/models/hotel.dart';
 import 'package:chandoiqua/data/services/firebase/hotel_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/models/room_in_hotel.dart';
 import '../../data/services/firebase/storage_service.dart';
 
 final hotelsControllerProvider =
@@ -128,7 +129,13 @@ final relatedHotelsProvider =
       .watch(hotelsControllerProvider.notifier)
       .getRelatedHotels(provinceName);
 });
-
+//
+final roomsByHotelProvider =
+    StreamProvider.family<List<Room>, String>((ref, String hotelId) {
+  return ref
+      .watch(hotelsControllerProvider.notifier)
+      .getDataRoomInHotels(hotelId);
+});
 final searchLocations = StreamProvider.family((ref, String search) {
   return ref.watch(hotelsControllerProvider.notifier).searchHotels(search);
 });
@@ -154,6 +161,10 @@ class HotelController extends StateNotifier<bool> {
 
   Stream<List<Hotel>> searchHotels(String search) {
     return _hotelService.searchHotels(search);
+  }
+
+  Stream<List<Room>> getDataRoomInHotels(String hotelId) {
+    return _hotelService.getDataRoomInHotels(hotelId);
   }
 
   Stream<List<Hotel>> getRelatedHotels(String provinceName) {
