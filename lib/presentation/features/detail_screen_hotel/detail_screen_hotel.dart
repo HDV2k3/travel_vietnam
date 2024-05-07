@@ -1,6 +1,7 @@
 import 'package:chandoiqua/data/models/hotel.dart';
 import 'package:chandoiqua/data/models/room_in_hotel.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/model/room_person_child.dart';
+import 'package:chandoiqua/presentation/features/detail_screen_hotel/provider/days_provider.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/widget/room_person_conut_screen.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/widget/selected_date_time.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../utilities/widget/icon_button.dart';
 import '../../common_widgets/base/base_screen.dart';
+import '../cart_screen/cart_screen.dart';
 import 'detail_state.dart';
 import 'detail_view_model.dart';
 
@@ -30,7 +32,9 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
   int countRoom = 1;
   int countPerson = 2;
   int countChild = 0;
+
   Room? room;
+
   @override
   Widget buildBody(BuildContext context) {
     final hotel = ModalRoute.of(context)!.settings.arguments as Hotel;
@@ -60,7 +64,6 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
               child: IconButtonBar(
                 onBackPressed: () {
                   Navigator.pop(context);
-                  // Quay lại trang trước đó
                 },
                 onFavoritePressed: () {
                   // Xử lý sự kiện khi nút favorite được nhấn
@@ -301,7 +304,7 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
             final DocumentSnapshot<Map<String, dynamic>> document =
                 querySnapshot.docs.first;
             final String hotelId = document.id;
-            return getRoomDataWidget(context, hotelId);
+            return getRoomDataWidget1(context, hotelId);
           } else {
             return const Text('No hotel found with the given name.');
           }
@@ -314,134 +317,278 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
     );
   }
 
-  Widget getRoomDataWidget(BuildContext context, String hotelId) {
-    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: FirebaseFirestore.instance
-          .collection('hotels')
-          .doc(hotelId)
-          .collection('room')
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
-              snapshot.data!.docs;
-          return ListView.builder(
-            itemCount: documents.length,
-            itemBuilder: (context, index) {
-              final QueryDocumentSnapshot<Map<String, dynamic>> document =
-                  documents[index];
-              final Room room = Room.fromJson(document.data());
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          room.image![0],
-                          fit: BoxFit.cover,
-                          height: 180,
-                          width: 150,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 0, bottom: 0, left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              room.name!,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('Chi tiết')),
-                            // const SizedBox(
-                            //   height: 20,
-                            // ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.bedroom_parent_outlined,
-                                  size: 20,
-                                ),
-                                Text('${room.numberOfBeds!} giường king')
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.area_chart_outlined,
-                                  size: 20,
-                                ),
-                                Text('${room.area!}m²'),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                const Icon(
-                                  Icons.living_outlined,
-                                  size: 20,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(room.view!),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Icon(Icons.smoke_free_outlined),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(room.regulations!),
-                              ],
-                            ),
+  // Widget getRoomDataWidget(BuildContext context, String hotelId) {
+  //   final numberOfDays = DataCountDay.numberOfDays;
+  //   return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+  //     stream: FirebaseFirestore.instance
+  //         .collection('hotels')
+  //         .doc(hotelId)
+  //         .collection('room')
+  //         .snapshots(),
+  //     builder: (context, snapshot) {
+  //       if (snapshot.hasData) {
+  //         final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
+  //             snapshot.data!.docs;
+  //         return ListView.builder(
+  //           itemCount: documents.length,
+  //           itemBuilder: (context, index) {
+  //             final QueryDocumentSnapshot<Map<String, dynamic>> document =
+  //                 documents[index];
+  //             final Room room = Room.fromJson(document.data());
+  //             return Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 Row(
+  //                   children: [
+  //                     ClipRRect(
+  //                       borderRadius: BorderRadius.circular(10),
+  //                       child: Image.network(
+  //                         room.image![0],
+  //                         fit: BoxFit.cover,
+  //                         height: 180,
+  //                         width: 150,
+  //                       ),
+  //                     ),
+  //                     Padding(
+  //                       padding:
+  //                           const EdgeInsets.only(top: 0, bottom: 0, left: 20),
+  //                       child: Column(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //                           Text(
+  //                             room.name!,
+  //                             style:
+  //                                 const TextStyle(fontWeight: FontWeight.bold),
+  //                           ),
+  //                           TextButton(
+  //                               onPressed: () {},
+  //                               child: const Text('Chi tiết')),
+  //                           // const SizedBox(
+  //                           //   height: 20,
+  //                           // ),
+  //                           Row(
+  //                             children: [
+  //                               const Icon(
+  //                                 Icons.bedroom_parent_outlined,
+  //                                 size: 20,
+  //                               ),
+  //                               Text('${room.numberOfBeds!} giường king')
+  //                             ],
+  //                           ),
+  //                           Row(
+  //                             children: [
+  //                               const Icon(
+  //                                 Icons.area_chart_outlined,
+  //                                 size: 20,
+  //                               ),
+  //                               Text('${room.area!}m²'),
+  //                               const SizedBox(
+  //                                 width: 20,
+  //                               ),
+  //                               const Icon(
+  //                                 Icons.living_outlined,
+  //                                 size: 20,
+  //                               ),
+  //                               const SizedBox(
+  //                                 width: 5,
+  //                               ),
+  //                               Text(room.view!),
+  //                             ],
+  //                           ),
+  //                           Row(
+  //                             children: [
+  //                               const Icon(Icons.smoke_free_outlined),
+  //                               const SizedBox(
+  //                                 width: 10,
+  //                               ),
+  //                               Text(room.regulations!),
+  //                             ],
+  //                           ),
+  //
+  //                           Row(
+  //                             children: [
+  //                               Text('${room.oldPrice! * numberOfDays}\$'),
+  //                               const SizedBox(
+  //                                 width: 20,
+  //                               ),
+  //                               ElevatedButton(
+  //                                 onPressed: () {},
+  //                                 style: ElevatedButton.styleFrom(
+  //                                   foregroundColor: Colors.white,
+  //                                   backgroundColor:
+  //                                       Colors.blue, // Màu nền của nút
+  //                                   shape: RoundedRectangleBorder(
+  //                                     borderRadius: BorderRadius.circular(
+  //                                         0), // Bo góc, bạn có thể đặt giá trị bất kỳ, 0 để không bo góc
+  //                                   ),
+  //                                 ),
+  //                                 child: const SizedBox(
+  //                                   width: 80,
+  //                                   child: Align(
+  //                                     alignment: Alignment.center,
+  //                                     child: Text('Đặt'),
+  //                                   ),
+  //                                 ),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ],
+  //             );
+  //           },
+  //         );
+  //       } else if (snapshot.hasError) {
+  //         return Text('Error: ${snapshot.error}');
+  //       } else {
+  //         return const CircularProgressIndicator();
+  //       }
+  //     },
+  //   );
+  // }
 
-                            Row(
+  Widget getRoomDataWidget1(BuildContext context, String hotelId) {
+    return Consumer(
+      builder: (context, ref, child) {
+        final numberOfDays = ref.watch(daysProvider);
+        return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: FirebaseFirestore.instance
+              .collection('hotels')
+              .doc(hotelId)
+              .collection('room')
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                  documents = snapshot.data!.docs;
+              return ListView.builder(
+                itemCount: documents.length,
+                itemBuilder: (context, index) {
+                  final QueryDocumentSnapshot<Map<String, dynamic>> document =
+                      documents[index];
+                  final Room room = Room.fromJson(document.data());
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              room.image![0],
+                              fit: BoxFit.cover,
+                              height: 180,
+                              width: 150,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 0, bottom: 0, left: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('${room.oldPrice!}\$'),
-                                const SizedBox(
-                                  width: 20,
+                                Text(
+                                  room.name!,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    foregroundColor: Colors.white,
-                                    backgroundColor:
-                                        Colors.blue, // Màu nền của nút
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          0), // Bo góc, bạn có thể đặt giá trị bất kỳ, 0 để không bo góc
+                                TextButton(
+                                    onPressed: () {},
+                                    child: const Text('Chi tiết')),
+                                // const SizedBox(
+                                //   height: 20,
+                                // ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.bedroom_parent_outlined,
+                                      size: 20,
                                     ),
-                                  ),
-                                  child: const SizedBox(
-                                    width: 80,
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text('Đặt'),
+                                    Text('${room.numberOfBeds!} giường king')
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.area_chart_outlined,
+                                      size: 20,
                                     ),
-                                  ),
+                                    Text('${room.area!}m²'),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    const Icon(
+                                      Icons.living_outlined,
+                                      size: 20,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(room.view!),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.smoke_free_outlined),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(room.regulations!),
+                                  ],
+                                ),
+
+                                Row(
+                                  children: [
+                                    Text('${room.oldPrice! * numberOfDays}\$'),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const CartScreen()));
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        foregroundColor: Colors.white,
+                                        backgroundColor:
+                                            Colors.blue, // Màu nền của nút
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              0), // Bo góc, bạn có thể đặt giá trị bất kỳ, 0 để không bo góc
+                                        ),
+                                      ),
+                                      child: const SizedBox(
+                                        width: 80,
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text('Đặt'),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
-                  ),
-                ],
+                  );
+                },
               );
-            },
-          );
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
-          return const CircularProgressIndicator();
-        }
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
+        );
       },
     );
   }
