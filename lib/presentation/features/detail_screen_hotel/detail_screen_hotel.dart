@@ -8,8 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/utils.dart';
 import '../../../utilities/widget/icon_button.dart';
 import '../../common_widgets/base/base_screen.dart';
+import '../../controllers/cart_controller.dart';
 import '../cart_screen/cart_screen.dart';
 import 'detail_state.dart';
 import 'detail_view_model.dart';
@@ -26,7 +28,6 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
     DetailHotelViewModel, DetailHotelState> {
   int selectedIndex = -1;
   late bool isFavorite = false;
-  Hotel? hotel;
   // final DiscoveryController discoveryController =
   //     Get.put(DiscoveryController());
   int countRoom = 1;
@@ -38,6 +39,8 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
   @override
   Widget buildBody(BuildContext context) {
     final hotel = ModalRoute.of(context)!.settings.arguments as Hotel;
+    final cart = ref.watch(cartControllerProvider.notifier);
+
     return Scaffold(
       body: SizedBox(
         width: double.maxFinite,
@@ -67,6 +70,10 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                 },
                 onFavoritePressed: () {
                   // Xử lý sự kiện khi nút favorite được nhấn
+                  ref
+                      .watch(cartControllerProvider.notifier)
+                      .addProductToCart(room!, context);
+                  showSnackBar(context, "Added to Cart");
                 },
                 onSharePressed: () {
                   // Xử lý sự kiện khi nút share được nhấn
@@ -317,140 +324,9 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
     );
   }
 
-  // Widget getRoomDataWidget(BuildContext context, String hotelId) {
-  //   final numberOfDays = DataCountDay.numberOfDays;
-  //   return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-  //     stream: FirebaseFirestore.instance
-  //         .collection('hotels')
-  //         .doc(hotelId)
-  //         .collection('room')
-  //         .snapshots(),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.hasData) {
-  //         final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
-  //             snapshot.data!.docs;
-  //         return ListView.builder(
-  //           itemCount: documents.length,
-  //           itemBuilder: (context, index) {
-  //             final QueryDocumentSnapshot<Map<String, dynamic>> document =
-  //                 documents[index];
-  //             final Room room = Room.fromJson(document.data());
-  //             return Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: [
-  //                 Row(
-  //                   children: [
-  //                     ClipRRect(
-  //                       borderRadius: BorderRadius.circular(10),
-  //                       child: Image.network(
-  //                         room.image![0],
-  //                         fit: BoxFit.cover,
-  //                         height: 180,
-  //                         width: 150,
-  //                       ),
-  //                     ),
-  //                     Padding(
-  //                       padding:
-  //                           const EdgeInsets.only(top: 0, bottom: 0, left: 20),
-  //                       child: Column(
-  //                         crossAxisAlignment: CrossAxisAlignment.start,
-  //                         children: [
-  //                           Text(
-  //                             room.name!,
-  //                             style:
-  //                                 const TextStyle(fontWeight: FontWeight.bold),
-  //                           ),
-  //                           TextButton(
-  //                               onPressed: () {},
-  //                               child: const Text('Chi tiết')),
-  //                           // const SizedBox(
-  //                           //   height: 20,
-  //                           // ),
-  //                           Row(
-  //                             children: [
-  //                               const Icon(
-  //                                 Icons.bedroom_parent_outlined,
-  //                                 size: 20,
-  //                               ),
-  //                               Text('${room.numberOfBeds!} giường king')
-  //                             ],
-  //                           ),
-  //                           Row(
-  //                             children: [
-  //                               const Icon(
-  //                                 Icons.area_chart_outlined,
-  //                                 size: 20,
-  //                               ),
-  //                               Text('${room.area!}m²'),
-  //                               const SizedBox(
-  //                                 width: 20,
-  //                               ),
-  //                               const Icon(
-  //                                 Icons.living_outlined,
-  //                                 size: 20,
-  //                               ),
-  //                               const SizedBox(
-  //                                 width: 5,
-  //                               ),
-  //                               Text(room.view!),
-  //                             ],
-  //                           ),
-  //                           Row(
-  //                             children: [
-  //                               const Icon(Icons.smoke_free_outlined),
-  //                               const SizedBox(
-  //                                 width: 10,
-  //                               ),
-  //                               Text(room.regulations!),
-  //                             ],
-  //                           ),
-  //
-  //                           Row(
-  //                             children: [
-  //                               Text('${room.oldPrice! * numberOfDays}\$'),
-  //                               const SizedBox(
-  //                                 width: 20,
-  //                               ),
-  //                               ElevatedButton(
-  //                                 onPressed: () {},
-  //                                 style: ElevatedButton.styleFrom(
-  //                                   foregroundColor: Colors.white,
-  //                                   backgroundColor:
-  //                                       Colors.blue, // Màu nền của nút
-  //                                   shape: RoundedRectangleBorder(
-  //                                     borderRadius: BorderRadius.circular(
-  //                                         0), // Bo góc, bạn có thể đặt giá trị bất kỳ, 0 để không bo góc
-  //                                   ),
-  //                                 ),
-  //                                 child: const SizedBox(
-  //                                   width: 80,
-  //                                   child: Align(
-  //                                     alignment: Alignment.center,
-  //                                     child: Text('Đặt'),
-  //                                   ),
-  //                                 ),
-  //                               ),
-  //                             ],
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ],
-  //             );
-  //           },
-  //         );
-  //       } else if (snapshot.hasError) {
-  //         return Text('Error: ${snapshot.error}');
-  //       } else {
-  //         return const CircularProgressIndicator();
-  //       }
-  //     },
-  //   );
-  // }
-
   Widget getRoomDataWidget1(BuildContext context, String hotelId) {
+    final hotel = ModalRoute.of(context)!.settings.arguments as Hotel;
+    final cart = ref.watch(cartControllerProvider.notifier);
     return Consumer(
       builder: (context, ref, child) {
         final numberOfDays = ref.watch(daysProvider);
@@ -470,6 +346,7 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                   final QueryDocumentSnapshot<Map<String, dynamic>> document =
                       documents[index];
                   final Room room = Room.fromJson(document.data());
+
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -548,6 +425,24 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
+                                        double totalPrice =
+                                            room.oldPrice! * numberOfDays;
+                                        // Tạo một đối tượng mới với giá trị mới cho trường oldPrice
+                                        Room updatedRoom = room.copyWith(
+                                            image: room.image,
+                                            area: room.area,
+                                            name: room.name,
+                                            numberOfBeds: room.numberOfBeds,
+                                            regulations: room.regulations,
+                                            view: room.view,
+                                            oldPrice: totalPrice);
+                                        ref
+                                            .watch(
+                                                cartControllerProvider.notifier)
+                                            .addProductToCart(
+                                                updatedRoom, context);
+                                        showSnackBar(context, "Added to Cart");
+
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -591,6 +486,32 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
         );
       },
     );
+  }
+
+// Hàm cập nhật trường giá trị của tài liệu con trong tài liệu cha
+  Future<void> updateChildDocumentValue(
+      String parentCollection,
+      String parentDocId,
+      String childCollection,
+      String childDocId,
+      String field,
+      dynamic value) async {
+    try {
+      // Lấy tham chiếu tới tài liệu cha
+      DocumentReference parentRef = FirebaseFirestore.instance
+          .collection(parentCollection)
+          .doc(parentDocId);
+
+      // Lấy tham chiếu tới tài liệu con trong tài liệu cha
+      DocumentReference childRef =
+          parentRef.collection(childCollection).doc(childDocId);
+
+      // Cập nhật trường giá trị của tài liệu con
+      await childRef.update({field: value});
+      print('Cập nhật thành công');
+    } catch (e) {
+      print('Lỗi khi cập nhật: $e');
+    }
   }
 
   @override

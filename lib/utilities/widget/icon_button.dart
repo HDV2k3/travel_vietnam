@@ -35,7 +35,7 @@ class IconButtonBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: onFavoritePressed,
-            icon: const Icon(Icons.favorite_outline_outlined),
+            icon: const Icon(Icons.shopping_cart),
             color: Colors.white,
           ),
           IconButton(

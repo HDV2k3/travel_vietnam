@@ -1,11 +1,10 @@
+import 'package:chandoiqua/data/models/usser.dart';
 import 'package:chandoiqua/presentation/features/sign_in/sign_in_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../../data/models/user.dart';
 
 part 'sign_in_view_model.g.dart';
 
@@ -96,12 +95,12 @@ class SignInViewModel extends _$SignInViewModel {
         password: passwordController.text,
       );
 
-      Users user = Users(
-        id: '',
+      UserModel user = UserModel(
+        uid: '',
         avatar: '',
         birthday: '',
         email: emailController.text,
-        name: fullnameController.text,
+        fullName: fullnameController.text,
         password: passwordController.text,
       );
 
@@ -109,7 +108,7 @@ class SignInViewModel extends _$SignInViewModel {
           .collection('users')
           .doc(userCredential.user!.uid)
           .set(
-            user.toMap(),
+            user.toJson(),
           );
     } catch (e) {
       e.toString();
