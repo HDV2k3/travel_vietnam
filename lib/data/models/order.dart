@@ -1,5 +1,3 @@
-import 'package:chandoiqua/data/models/room_in_hotel.dart';
-import 'package:chandoiqua/data/models/usser.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'cart_item.dart';
@@ -15,10 +13,6 @@ abstract class Orders with _$Orders {
       required List<CartItem> products,
       required double total,
       required String orderId,
-      required UserModel fullName,
-      required Room nameRoomInOrder,
-      required UserModel emailUser,
-      required UserModel phoneUser,
       bool? isAccepted,
       bool? isCancelled,
       required DateTime date}) = _Orders;

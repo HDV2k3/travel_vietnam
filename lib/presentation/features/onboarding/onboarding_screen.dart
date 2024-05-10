@@ -54,7 +54,7 @@ class _OnBoardingScreenState extends BaseScreenState<OnBoardingScreen,
                           ),
                           TextSpan(
                             text:
-                            '\nThe application provides tourist destinations in Vietnam',
+                                '\nThe application provides tourist destinations in Vietnam',
                             style: TextStyle(
                               fontSize: 20,
                               // height: 0,
@@ -78,7 +78,7 @@ class _OnBoardingScreenState extends BaseScreenState<OnBoardingScreen,
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const SignInScreen(),
+                                builder: (context) => const LogIn(),
                               ),
                             );
                           },

@@ -5,9 +5,6 @@ class FirebaseConstants {
   static const usersCollection = "users";
   static final user = FirebaseAuth.instance.currentUser!;
   static final currentUser = FirebaseAuth.instance.currentUser;
-  static final addressRef =
-      FirebaseFirestore.instance.collection("Adresses").doc(user.uid);
-
   static const locationsCollection = "location";
 
   static const hotelsCollection = "hotels";

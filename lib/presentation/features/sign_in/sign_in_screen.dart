@@ -9,8 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../home/home_screen.dart';
 import '../sign_up/sign_up_screen.dart';
 
-class SignInScreen extends BaseScreen {
-  const SignInScreen({
+class LogIn extends BaseScreen {
+  const LogIn({
     super.key,
   });
 
@@ -19,7 +19,7 @@ class SignInScreen extends BaseScreen {
 }
 
 class _SignInScreenState
-    extends BaseScreenState<SignInScreen, SignInViewModel, SignInState> {
+    extends BaseScreenState<LogIn, SignInViewModel, SignInState> {
   @override
   Color? get backgroundColor => ref.colors.background;
   final _formSignInKey = GlobalKey<FormState>();
@@ -37,6 +37,7 @@ class _SignInScreenState
     emailController.clear();
     passwordController.clear();
   }
+
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return null;
@@ -184,10 +185,12 @@ class _SignInScreenState
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () async {
-
                             if (_formSignInKey.currentState!.validate() &&
                                 rememberPassword) {
-                              final result = await viewModel.signInUser(emailController.text,  passwordController.text,);
+                              final result = await viewModel.signInUser(
+                                emailController.text,
+                                passwordController.text,
+                              );
 
                               if (result == true) {
                                 // Đăng nhập thành công, chuyển trang
@@ -208,11 +211,11 @@ class _SignInScreenState
                                 // Đăng nhập không thành công, hiển thị thông báo lỗi
                                 if (context.mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                        'Đăng nhập không thành công. Vui lòng kiểm tra thông tin đăng nhập.'),
-                                  ),
-                                );
+                                    const SnackBar(
+                                      content: Text(
+                                          'Đăng nhập không thành công. Vui lòng kiểm tra thông tin đăng nhập.'),
+                                    ),
+                                  );
                                 }
                               }
                             } else if (!rememberPassword) {
@@ -284,21 +287,19 @@ class _SignInScreenState
                               // Nếu đăng nhập thành công, thực hiện chuyển hướng đến trang HomeScreen
                               if (context.mounted) {
                                 Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()),
-                              );
-                              }
-                              else
-                              {
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomeScreen()),
+                                );
+                              } else {
                                 // Nếu đăng nhập không thành công, hiển thị thông báo hoặc xử lý theo ý bạn
                                 if (context.mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                        'Đăng nhập thất bại. Vui lòng thử lại.'),
-                                  ),
-                                );
+                                    const SnackBar(
+                                      content: Text(
+                                          'Đăng nhập thất bại. Vui lòng thử lại.'),
+                                    ),
+                                  );
                                 }
                               }
                             },
@@ -378,5 +379,5 @@ class _SignInScreenState
 
   @override
   // TODO: implement viewModel
-  SignInViewModel get viewModel =>ref.read(signInViewModelProvider.notifier);
+  SignInViewModel get viewModel => ref.read(signInViewModelProvider.notifier);
 }

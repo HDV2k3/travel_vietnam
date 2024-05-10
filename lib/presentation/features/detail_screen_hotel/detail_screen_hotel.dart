@@ -4,7 +4,9 @@ import 'package:chandoiqua/presentation/features/detail_screen_hotel/model/room_
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/provider/days_provider.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/widget/room_person_conut_screen.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/widget/selected_date_time.dart';
+import 'package:chandoiqua/presentation/features/payment_screen/payment_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,7 +14,7 @@ import '../../../core/utils.dart';
 import '../../../utilities/widget/icon_button.dart';
 import '../../common_widgets/base/base_screen.dart';
 import '../../controllers/cart_controller.dart';
-import '../cart_screen/cart_screen.dart';
+import '../sign_in/sign_in_screen.dart';
 import 'detail_state.dart';
 import 'detail_view_model.dart';
 
@@ -39,7 +41,6 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
   @override
   Widget buildBody(BuildContext context) {
     final hotel = ModalRoute.of(context)!.settings.arguments as Hotel;
-    final cart = ref.watch(cartControllerProvider.notifier);
 
     return Scaffold(
       body: SizedBox(
@@ -425,29 +426,42 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        double totalPrice =
-                                            room.oldPrice! * numberOfDays;
-                                        // Tạo một đối tượng mới với giá trị mới cho trường oldPrice
-                                        Room updatedRoom = room.copyWith(
-                                            image: room.image,
-                                            area: room.area,
-                                            name: room.name,
-                                            numberOfBeds: room.numberOfBeds,
-                                            regulations: room.regulations,
-                                            view: room.view,
-                                            oldPrice: totalPrice);
-                                        ref
-                                            .watch(
-                                                cartControllerProvider.notifier)
-                                            .addProductToCart(
-                                                updatedRoom, context);
-                                        showSnackBar(context, "Added to Cart");
-
-                                        Navigator.push(
+                                        User? user =
+                                            FirebaseAuth.instance.currentUser;
+                                        if (user == null) {
+                                          // Người dùng chưa đăng nhập, chuyển hướng đến màn hình đăng nhập
+                                          Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const CartScreen()));
+                                                    const LogIn()),
+                                          );
+                                        } else {
+                                          double totalPrice =
+                                              room.oldPrice! * numberOfDays;
+                                          // Tạo một đối tượng mới với giá trị mới cho trường oldPrice
+                                          Room updatedRoom = room.copyWith(
+                                              image: room.image,
+                                              area: room.area,
+                                              name: room.name,
+                                              numberOfBeds: room.numberOfBeds,
+                                              regulations: room.regulations,
+                                              view: room.view,
+                                              oldPrice: totalPrice);
+                                          ref
+                                              .watch(cartControllerProvider
+                                                  .notifier)
+                                              .addProductToCart(
+                                                  updatedRoom, context);
+                                          showSnackBar(
+                                              context, "Added to Cart");
+
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PaymentVip()));
+                                        }
                                       },
                                       style: ElevatedButton.styleFrom(
                                         foregroundColor: Colors.white,

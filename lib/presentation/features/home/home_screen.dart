@@ -1,4 +1,3 @@
-import 'package:chandoiqua/presentation/features/cart_screen/cart_screen.dart';
 import 'package:chandoiqua/presentation/features/favorite_screen/favorite_screen.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +39,6 @@ class _HomeScreenState
       return const GGMap();
     } else if (selectedTabIndex == HomeTab.heart.index) {
       return const FavoriteScreen();
-    } else if (selectedTabIndex == HomeTab.cart.index) {
-      return const CartScreen();
     } else if (selectedTabIndex == HomeTab.profile.index) {
       return const SettingScreen();
     } else {
@@ -86,14 +83,6 @@ class _HomeScreenState
                 : Icons.favorite_outline,
           ),
           title: Text(ref.appLocalizations.heart),
-        ),
-        CustomNavigationBarItem(
-          icon: Icon(
-            selectedTabIndex == HomeTab.cart.index
-                ? Icons.shopping_cart
-                : Icons.shopping_cart_outlined,
-          ),
-          title: Text(ref.appLocalizations.cart),
         ),
         CustomNavigationBarItem(
           icon: Icon(

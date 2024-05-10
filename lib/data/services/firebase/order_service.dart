@@ -1,3 +1,4 @@
+import 'package:chandoiqua/data/models/order.dart';
 import 'package:chandoiqua/data/services/firebase/provider/firebase_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../../constants/firebase_constants.dart';
-import '../../models/order.dart';
 
 final ordersServiceProvider = Provider((ref) => OrderService(
     firestore: ref.watch(firebaseFirestoreProvider),
@@ -30,15 +30,5 @@ class OrderService {
     return right(
       _orders.doc(order.orderId).set(order.toJson()),
     );
-  }
-
-  Stream<List<Orders>> getUserOrders(String userId) {
-    return _orders.where('uid', isEqualTo: userId).snapshots().map((event) {
-      List<Orders> orders = [];
-      for (var doc in event.docs) {
-        orders.add(Orders.fromJson(doc.data() as Map<String, dynamic>));
-      }
-      return orders;
-    });
   }
 }

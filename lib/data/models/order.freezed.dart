@@ -24,10 +24,6 @@ mixin _$Orders {
   List<CartItem> get products => throw _privateConstructorUsedError;
   double get total => throw _privateConstructorUsedError;
   String get orderId => throw _privateConstructorUsedError;
-  UserModel get fullName => throw _privateConstructorUsedError;
-  Room get nameRoomInOrder => throw _privateConstructorUsedError;
-  UserModel get emailUser => throw _privateConstructorUsedError;
-  UserModel get phoneUser => throw _privateConstructorUsedError;
   bool? get isAccepted => throw _privateConstructorUsedError;
   bool? get isCancelled => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
@@ -47,18 +43,9 @@ abstract class $OrdersCopyWith<$Res> {
       List<CartItem> products,
       double total,
       String orderId,
-      UserModel fullName,
-      Room nameRoomInOrder,
-      UserModel emailUser,
-      UserModel phoneUser,
       bool? isAccepted,
       bool? isCancelled,
       DateTime date});
-
-  $UserModelCopyWith<$Res> get fullName;
-  $RoomCopyWith<$Res> get nameRoomInOrder;
-  $UserModelCopyWith<$Res> get emailUser;
-  $UserModelCopyWith<$Res> get phoneUser;
 }
 
 /// @nodoc
@@ -78,10 +65,6 @@ class _$OrdersCopyWithImpl<$Res, $Val extends Orders>
     Object? products = null,
     Object? total = null,
     Object? orderId = null,
-    Object? fullName = null,
-    Object? nameRoomInOrder = null,
-    Object? emailUser = null,
-    Object? phoneUser = null,
     Object? isAccepted = freezed,
     Object? isCancelled = freezed,
     Object? date = null,
@@ -103,22 +86,6 @@ class _$OrdersCopyWithImpl<$Res, $Val extends Orders>
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as String,
-      fullName: null == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      nameRoomInOrder: null == nameRoomInOrder
-          ? _value.nameRoomInOrder
-          : nameRoomInOrder // ignore: cast_nullable_to_non_nullable
-              as Room,
-      emailUser: null == emailUser
-          ? _value.emailUser
-          : emailUser // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      phoneUser: null == phoneUser
-          ? _value.phoneUser
-          : phoneUser // ignore: cast_nullable_to_non_nullable
-              as UserModel,
       isAccepted: freezed == isAccepted
           ? _value.isAccepted
           : isAccepted // ignore: cast_nullable_to_non_nullable
@@ -132,38 +99,6 @@ class _$OrdersCopyWithImpl<$Res, $Val extends Orders>
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get fullName {
-    return $UserModelCopyWith<$Res>(_value.fullName, (value) {
-      return _then(_value.copyWith(fullName: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $RoomCopyWith<$Res> get nameRoomInOrder {
-    return $RoomCopyWith<$Res>(_value.nameRoomInOrder, (value) {
-      return _then(_value.copyWith(nameRoomInOrder: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get emailUser {
-    return $UserModelCopyWith<$Res>(_value.emailUser, (value) {
-      return _then(_value.copyWith(emailUser: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get phoneUser {
-    return $UserModelCopyWith<$Res>(_value.phoneUser, (value) {
-      return _then(_value.copyWith(phoneUser: value) as $Val);
-    });
   }
 }
 
@@ -179,22 +114,9 @@ abstract class _$$OrdersImplCopyWith<$Res> implements $OrdersCopyWith<$Res> {
       List<CartItem> products,
       double total,
       String orderId,
-      UserModel fullName,
-      Room nameRoomInOrder,
-      UserModel emailUser,
-      UserModel phoneUser,
       bool? isAccepted,
       bool? isCancelled,
       DateTime date});
-
-  @override
-  $UserModelCopyWith<$Res> get fullName;
-  @override
-  $RoomCopyWith<$Res> get nameRoomInOrder;
-  @override
-  $UserModelCopyWith<$Res> get emailUser;
-  @override
-  $UserModelCopyWith<$Res> get phoneUser;
 }
 
 /// @nodoc
@@ -212,10 +134,6 @@ class __$$OrdersImplCopyWithImpl<$Res>
     Object? products = null,
     Object? total = null,
     Object? orderId = null,
-    Object? fullName = null,
-    Object? nameRoomInOrder = null,
-    Object? emailUser = null,
-    Object? phoneUser = null,
     Object? isAccepted = freezed,
     Object? isCancelled = freezed,
     Object? date = null,
@@ -237,22 +155,6 @@ class __$$OrdersImplCopyWithImpl<$Res>
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
               as String,
-      fullName: null == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      nameRoomInOrder: null == nameRoomInOrder
-          ? _value.nameRoomInOrder
-          : nameRoomInOrder // ignore: cast_nullable_to_non_nullable
-              as Room,
-      emailUser: null == emailUser
-          ? _value.emailUser
-          : emailUser // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      phoneUser: null == phoneUser
-          ? _value.phoneUser
-          : phoneUser // ignore: cast_nullable_to_non_nullable
-              as UserModel,
       isAccepted: freezed == isAccepted
           ? _value.isAccepted
           : isAccepted // ignore: cast_nullable_to_non_nullable
@@ -278,10 +180,6 @@ class _$OrdersImpl implements _Orders {
       required final List<CartItem> products,
       required this.total,
       required this.orderId,
-      required this.fullName,
-      required this.nameRoomInOrder,
-      required this.emailUser,
-      required this.phoneUser,
       this.isAccepted,
       this.isCancelled,
       required this.date})
@@ -305,14 +203,6 @@ class _$OrdersImpl implements _Orders {
   @override
   final String orderId;
   @override
-  final UserModel fullName;
-  @override
-  final Room nameRoomInOrder;
-  @override
-  final UserModel emailUser;
-  @override
-  final UserModel phoneUser;
-  @override
   final bool? isAccepted;
   @override
   final bool? isCancelled;
@@ -321,7 +211,7 @@ class _$OrdersImpl implements _Orders {
 
   @override
   String toString() {
-    return 'Orders(uid: $uid, products: $products, total: $total, orderId: $orderId, fullName: $fullName, nameRoomInOrder: $nameRoomInOrder, emailUser: $emailUser, phoneUser: $phoneUser, isAccepted: $isAccepted, isCancelled: $isCancelled, date: $date)';
+    return 'Orders(uid: $uid, products: $products, total: $total, orderId: $orderId, isAccepted: $isAccepted, isCancelled: $isCancelled, date: $date)';
   }
 
   @override
@@ -333,14 +223,6 @@ class _$OrdersImpl implements _Orders {
             const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
-            (identical(other.fullName, fullName) ||
-                other.fullName == fullName) &&
-            (identical(other.nameRoomInOrder, nameRoomInOrder) ||
-                other.nameRoomInOrder == nameRoomInOrder) &&
-            (identical(other.emailUser, emailUser) ||
-                other.emailUser == emailUser) &&
-            (identical(other.phoneUser, phoneUser) ||
-                other.phoneUser == phoneUser) &&
             (identical(other.isAccepted, isAccepted) ||
                 other.isAccepted == isAccepted) &&
             (identical(other.isCancelled, isCancelled) ||
@@ -356,10 +238,6 @@ class _$OrdersImpl implements _Orders {
       const DeepCollectionEquality().hash(_products),
       total,
       orderId,
-      fullName,
-      nameRoomInOrder,
-      emailUser,
-      phoneUser,
       isAccepted,
       isCancelled,
       date);
@@ -384,10 +262,6 @@ abstract class _Orders implements Orders {
       required final List<CartItem> products,
       required final double total,
       required final String orderId,
-      required final UserModel fullName,
-      required final Room nameRoomInOrder,
-      required final UserModel emailUser,
-      required final UserModel phoneUser,
       final bool? isAccepted,
       final bool? isCancelled,
       required final DateTime date}) = _$OrdersImpl;
@@ -402,14 +276,6 @@ abstract class _Orders implements Orders {
   double get total;
   @override
   String get orderId;
-  @override
-  UserModel get fullName;
-  @override
-  Room get nameRoomInOrder;
-  @override
-  UserModel get emailUser;
-  @override
-  UserModel get phoneUser;
   @override
   bool? get isAccepted;
   @override

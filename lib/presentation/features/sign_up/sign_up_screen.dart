@@ -3,6 +3,7 @@ import 'package:chandoiqua/presentation/features/sign_up/sign_up_state.dart';
 import 'package:chandoiqua/presentation/features/sign_up/sign_up_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../sign_in/sign_in_screen.dart';
 import '../sign_in/widgets/custom_scaffold.dart';
 
@@ -217,8 +218,7 @@ class _SignUpScreenState
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignInScreen()),
+                                          builder: (context) => const LogIn()),
                                     );
                                   }
                                 } else {
@@ -325,7 +325,7 @@ class _SignUpScreenState
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (e) => const SignInScreen(),
+                                  builder: (e) => const LogIn(),
                                 ),
                               );
                             },
