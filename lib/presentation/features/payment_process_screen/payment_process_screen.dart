@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../discovery/discovery_screen.dart';
+import '../home/home_screen.dart';
 
 class PaymentProcessScreen extends StatefulWidget {
   const PaymentProcessScreen({super.key});
@@ -99,7 +99,7 @@ class _PaymentProcessScreenState extends State<PaymentProcessScreen>
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            const DiscoveryScreen(), // Chuyển đến màn hình xử lý thanh toán
+                            const HomeScreen(), // Chuyển đến màn hình xử lý thanh toán
                       ),
                     );
                   },

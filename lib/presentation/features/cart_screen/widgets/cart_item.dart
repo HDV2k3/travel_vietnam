@@ -16,7 +16,7 @@ class CartItemWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartControllerProvider.notifier);
     return SizedBox(
-      height: 800,
+      height: 400,
       width: double.maxFinite,
       child: Padding(
         padding: const EdgeInsets.only(right: 20, top: 20, left: 20),
@@ -79,8 +79,8 @@ class CartItemWidget extends ConsumerWidget {
                   children: [
                     IconButton(
                         onPressed: () {
-                          cart.clearCart();
-                          Navigator.pop(context);
+                          cart.removeCartItem(item, context);
+                          // Navigator.pop(context);
                         },
                         icon: const Icon(Icons.delete))
                   ],

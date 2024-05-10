@@ -1,11 +1,9 @@
 import 'package:chandoiqua/data/models/usser.dart';
-import 'package:chandoiqua/presentation/features/payment_process_screen/payment_process_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../controllers/authen_controller.dart';
-import '../../controllers/order_controller.dart';
 import '../cart_screen/widgets/cart_item.dart';
 import '../discovery/widgets/error_text.dart';
 import '../discovery/widgets/loader.dart';
@@ -39,9 +37,10 @@ class PaymentVip extends ConsumerWidget {
               child: ListView(
                 children: [
                   Column(
-                      children: data.cart!
-                          .map((cartItem) => CartItemWidget(item: cartItem))
-                          .toList()),
+                    children: data.cart!
+                        .map((cartItem) => CartItemWidget(item: cartItem))
+                        .toList(),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -64,41 +63,43 @@ class PaymentVip extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: 50,
-                        width: 400,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black),
-                            onPressed: () {
-                              ref
-                                  .read(getUserDataProvider(currentUser!.uid))
-                                  .whenData((value) {
-                                return ref
-                                    .read(orderControllerProvider.notifier)
-                                    .createOrder(context, currentUser.uid,
-                                        value, data.grandTotal)
-                                    .then((value) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const PaymentProcessScreen()));
-                                });
-                              });
-                            },
-                            child: const Text(
-                              "Place Order",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                      ),
-                    ),
-                  )
+                  // Center(
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(8.0),
+                  //     child: SizedBox(
+                  //       height: 50,
+                  //       width: 400,
+                  //       child: ElevatedButton(
+                  //         style: ElevatedButton.styleFrom(
+                  //             backgroundColor: Colors.black),
+                  //         onPressed: () {
+                  //           ref
+                  //               .read(getUserDataProvider(currentUser!.uid))
+                  //               .whenData((value) {
+                  //             return ref
+                  //                 .read(orderControllerProvider.notifier)
+                  //                 .createOrder(context, currentUser.uid, value,
+                  //                     data.grandTotal)
+                  //                 .then((value) {
+                  //               ref
+                  //                   .read(stripePaymentController.notifier)
+                  //                   .makePayment(context, data.grandTotal)
+                  //                   .then((value) => MaterialPageRoute(
+                  //                       builder: (context) =>
+                  //                           const PaymentProcessScreen()));
+                  //             });
+                  //           });
+                  //         },
+                  //         child: const Text(
+                  //           "Place Order",
+                  //           style: TextStyle(
+                  //               color: Colors.white,
+                  //               fontWeight: FontWeight.bold),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             );

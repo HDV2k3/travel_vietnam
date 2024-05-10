@@ -12,6 +12,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // await Hive.initFlutter();
+  //
+  // Stripe.publishableKey = APIKey.PUBLISHABLEkEY;
+  // Stripe.merchantIdentifier = "Isheunesu";
+  // await Stripe.instance.applySettings();
+
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(
     ProviderScope(
