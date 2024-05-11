@@ -226,19 +226,3 @@ class _DiscoveryState
   FavoriteViewModel get viewModel =>
       ref.read(favoriteViewModelProvider.notifier);
 }
-// onTap: () {
-//   Navigator.push(
-//     context,
-//     MaterialPageRoute(
-//       builder: (context) => DetailPage(
-//         image: favorite.image,
-//         title: favorite.title,
-//         description: favorite.description,
-//         price: location.price,
-//         location: location.location,
-//         vote: location.vote,
-//         nation: location.nation,
-//       ),
-//     ),
-//   );
-// },

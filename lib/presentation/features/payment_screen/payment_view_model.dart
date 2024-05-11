@@ -9,4 +9,12 @@ class PaymentViewModel extends _$PaymentViewModel {
   FutureOr<PaymentState> build() {
     return PaymentState();
   }
+
+  void onPaymentMethodChanged(int index) {
+    update(
+      (state) => state.copyWith(
+        selectedTabPaymentMethod: index,
+      ),
+    );
+  }
 }

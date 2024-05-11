@@ -54,7 +54,7 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
               right: 0,
               child: Container(
                 width: double.maxFinite,
-                height: 350,
+                height: 200,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: Image.network(hotel.image![0]).image,
@@ -82,11 +82,11 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
               ),
             ),
             Positioned(
-              top: 280,
+              top: 180,
               child: Container(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
                 width: MediaQuery.of(context).size.width,
-                height: 305,
+                height: 325,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -193,74 +193,79 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                             Text('Phòng và khách'),
                           ],
                         ),
-                        Row(
-                          children: [
-                            const SelectDateTimeHotel(),
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon:
-                                      const Icon(Icons.door_front_door_rounded),
-                                  // Trong hàm onPressed của IconButton
-                                  onPressed: () async {
-                                    final data = await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const RoomAndPerson(),
-                                      ),
-                                    );
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SelectDateTimeHotel(),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(
+                                        Icons.door_front_door_rounded),
+                                    // Trong hàm onPressed của IconButton
+                                    onPressed: () async {
+                                      final data = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const RoomAndPerson(),
+                                        ),
+                                      );
 
-                                    // Sau khi nhận dữ liệu trả về, bạn có thể thực hiện xử lý tại đây
-                                    if (data != null &&
-                                        data is RoomPersonChildData) {
-                                      updateCountRoom(data);
-                                    }
-                                  },
-                                ),
-                                Text(countRoom.toString()),
-                                IconButton(
-                                  icon: const Icon(Icons.person),
-                                  onPressed: () async {
-                                    final data = await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const RoomAndPerson(),
-                                      ),
-                                    );
+                                      // Sau khi nhận dữ liệu trả về, bạn có thể thực hiện xử lý tại đây
+                                      if (data != null &&
+                                          data is RoomPersonChildData) {
+                                        updateCountRoom(data);
+                                      }
+                                    },
+                                  ),
+                                  Text(countRoom.toString()),
+                                  IconButton(
+                                    icon: const Icon(Icons.person),
+                                    onPressed: () async {
+                                      final data = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const RoomAndPerson(),
+                                        ),
+                                      );
 
-                                    // Sau khi nhận dữ liệu trả về, bạn có thể thực hiện xử lý tại đây
-                                    if (data != null &&
-                                        data is RoomPersonChildData) {
-                                      updateCountRoom(data);
-                                    }
-                                  },
-                                ),
-                                Text(countPerson.toString()),
-                                IconButton(
-                                  icon: const Icon(Icons.child_care),
-                                  onPressed: () async {
-                                    final data = await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const RoomAndPerson(),
-                                      ),
-                                    );
+                                      // Sau khi nhận dữ liệu trả về, bạn có thể thực hiện xử lý tại đây
+                                      if (data != null &&
+                                          data is RoomPersonChildData) {
+                                        updateCountRoom(data);
+                                      }
+                                    },
+                                  ),
+                                  Text(countPerson.toString()),
+                                  IconButton(
+                                    icon: const Icon(Icons.child_care),
+                                    onPressed: () async {
+                                      final data = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const RoomAndPerson(),
+                                        ),
+                                      );
 
-                                    // Sau khi nhận dữ liệu trả về, bạn có thể thực hiện xử lý tại đây
-                                    if (data != null &&
-                                        data is RoomPersonChildData) {
-                                      updateCountRoom(data);
-                                    }
-                                  },
-                                ),
-                                Text(countChild.toString()),
-                              ],
-                            )
-                          ],
-                        ),
+                                      // Sau khi nhận dữ liệu trả về, bạn có thể thực hiện xử lý tại đây
+                                      if (data != null &&
+                                          data is RoomPersonChildData) {
+                                        updateCountRoom(data);
+                                      }
+                                    },
+                                  ),
+                                  Text(countChild.toString()),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ],
@@ -268,10 +273,10 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
               ),
             ),
             Positioned(
-              top: 580,
+              top: 490,
               child: Container(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 0),
-                width: MediaQuery.of(context).size.width,
+                width: 410,
                 height: 1000,
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -348,146 +353,150 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                       documents[index];
                   final Room room = Room.fromJson(document.data());
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              room.image![0],
-                              fit: BoxFit.cover,
-                              height: 180,
-                              width: 150,
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                room.image![0],
+                                fit: BoxFit.cover,
+                                height: 180,
+                                width: 150,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 0, bottom: 0, left: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  room.name!,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                TextButton(
-                                    onPressed: () {},
-                                    child: const Text('Chi tiết')),
-                                // const SizedBox(
-                                //   height: 20,
-                                // ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.bedroom_parent_outlined,
-                                      size: 20,
-                                    ),
-                                    Text('${room.numberOfBeds!} giường king')
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.area_chart_outlined,
-                                      size: 20,
-                                    ),
-                                    Text('${room.area!}m²'),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    const Icon(
-                                      Icons.living_outlined,
-                                      size: 20,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(room.view!),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.smoke_free_outlined),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(room.regulations!),
-                                  ],
-                                ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    room.name!,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  TextButton(
+                                      onPressed: () {},
+                                      child: const Text('Chi tiết')),
+                                  // const SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.bedroom_parent_outlined,
+                                        size: 20,
+                                      ),
+                                      Text('${room.numberOfBeds!} giường king')
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.area_chart_outlined,
+                                        size: 20,
+                                      ),
+                                      Text('${room.area!}m²'),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      const Icon(
+                                        Icons.living_outlined,
+                                        size: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(room.view!),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.smoke_free_outlined),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(room.regulations!),
+                                    ],
+                                  ),
 
-                                Row(
-                                  children: [
-                                    Text('${room.oldPrice! * numberOfDays}\$'),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        User? user =
-                                            FirebaseAuth.instance.currentUser;
-                                        if (user == null) {
-                                          // Người dùng chưa đăng nhập, chuyển hướng đến màn hình đăng nhập
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const LogIn()),
-                                          );
-                                        } else {
-                                          double totalPrice =
-                                              room.oldPrice! * numberOfDays;
-                                          // Tạo một đối tượng mới với giá trị mới cho trường oldPrice
-                                          Room updatedRoom = room.copyWith(
-                                              image: room.image,
-                                              area: room.area,
-                                              name: room.name,
-                                              numberOfBeds: room.numberOfBeds,
-                                              regulations: room.regulations,
-                                              view: room.view,
-                                              oldPrice: totalPrice);
-                                          ref
-                                              .watch(cartControllerProvider
-                                                  .notifier)
-                                              .addProductToCart(
-                                                  updatedRoom, context);
-                                          showSnackBar(
-                                              context, "Added to Cart");
-
-                                          Navigator.push(
+                                  Row(
+                                    children: [
+                                      Text(
+                                          '${room.oldPrice! * numberOfDays}\$'),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          User? user =
+                                              FirebaseAuth.instance.currentUser;
+                                          if (user == null) {
+                                            // Người dùng chưa đăng nhập, chuyển hướng đến màn hình đăng nhập
+                                            Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const PaymentVip()));
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: Colors.white,
-                                        backgroundColor:
-                                            Colors.blue, // Màu nền của nút
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              0), // Bo góc, bạn có thể đặt giá trị bất kỳ, 0 để không bo góc
+                                                      const LogIn()),
+                                            );
+                                          } else {
+                                            double totalPrice =
+                                                room.oldPrice! * numberOfDays;
+                                            // Tạo một đối tượng mới với giá trị mới cho trường oldPrice
+                                            Room updatedRoom = room.copyWith(
+                                                image: room.image,
+                                                area: room.area,
+                                                name: room.name,
+                                                numberOfBeds: room.numberOfBeds,
+                                                regulations: room.regulations,
+                                                view: room.view,
+                                                oldPrice: totalPrice);
+                                            ref
+                                                .watch(cartControllerProvider
+                                                    .notifier)
+                                                .addProductToCart(
+                                                    updatedRoom, context);
+                                            showSnackBar(
+                                                context, "Added to Cart");
+
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const PaymentVip()));
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          foregroundColor: Colors.white,
+                                          backgroundColor:
+                                              Colors.blue, // Màu nền của nút
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                0), // Bo góc, bạn có thể đặt giá trị bất kỳ, 0 để không bo góc
+                                          ),
+                                        ),
+                                        child: const SizedBox(
+                                          width: 80,
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text('Đặt'),
+                                          ),
                                         ),
                                       ),
-                                      child: const SizedBox(
-                                        width: 80,
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text('Đặt'),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   );
                 },
               );

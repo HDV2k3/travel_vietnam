@@ -16,7 +16,7 @@ class CartItemWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartControllerProvider.notifier);
     return SizedBox(
-      height: 400,
+      height: 350,
       width: double.maxFinite,
       child: Padding(
         padding: const EdgeInsets.only(right: 20, top: 20, left: 20),

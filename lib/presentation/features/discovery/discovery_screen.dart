@@ -8,6 +8,7 @@ import 'package:chandoiqua/presentation/features/discovery/widgets/search.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/slider.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/text_category.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/text_location.dart';
+import 'package:chandoiqua/presentation/features/sign_in/sign_in_screen.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -60,7 +61,13 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
                       Icons.notifications,
                       color: Colors.yellow,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LogIn()),
+                          (route) => true);
+                    },
                   ),
                 ],
               ),

@@ -73,6 +73,7 @@ dependencies:
   custom_navigation_bar: ^0.8.2
   dots_indicator: ^3.0.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -117,6 +118,10 @@ flutter:
     - assets/images/dn1.jpeg
     - assets/images/dn2.jpg
     - assets/images/dn3.jpg
+    - assets/images/amazon.png
+    - assets/images/creditcard.jpg
+    - assets/images/ggpay.png
+
 
   
   

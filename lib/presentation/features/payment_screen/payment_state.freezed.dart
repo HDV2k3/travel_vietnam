@@ -15,13 +15,21 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$PaymentState {}
+mixin _$PaymentState {
+  int get selectedTabPaymentMethod => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PaymentStateCopyWith<PaymentState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $PaymentStateCopyWith<$Res> {
   factory $PaymentStateCopyWith(
           PaymentState value, $Res Function(PaymentState) then) =
       _$PaymentStateCopyWithImpl<$Res, PaymentState>;
+  @useResult
+  $Res call({int selectedTabPaymentMethod});
 }
 
 /// @nodoc
@@ -33,13 +41,30 @@ class _$PaymentStateCopyWithImpl<$Res, $Val extends PaymentState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedTabPaymentMethod = null,
+  }) {
+    return _then(_value.copyWith(
+      selectedTabPaymentMethod: null == selectedTabPaymentMethod
+          ? _value.selectedTabPaymentMethod
+          : selectedTabPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$PaymentStateImplCopyWith<$Res> {
+abstract class _$$PaymentStateImplCopyWith<$Res>
+    implements $PaymentStateCopyWith<$Res> {
   factory _$$PaymentStateImplCopyWith(
           _$PaymentStateImpl value, $Res Function(_$PaymentStateImpl) then) =
       __$$PaymentStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int selectedTabPaymentMethod});
 }
 
 /// @nodoc
@@ -49,28 +74,63 @@ class __$$PaymentStateImplCopyWithImpl<$Res>
   __$$PaymentStateImplCopyWithImpl(
       _$PaymentStateImpl _value, $Res Function(_$PaymentStateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedTabPaymentMethod = null,
+  }) {
+    return _then(_$PaymentStateImpl(
+      selectedTabPaymentMethod: null == selectedTabPaymentMethod
+          ? _value.selectedTabPaymentMethod
+          : selectedTabPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$PaymentStateImpl implements _PaymentState {
-  _$PaymentStateImpl();
+  _$PaymentStateImpl({this.selectedTabPaymentMethod = 0});
+
+  @override
+  @JsonKey()
+  final int selectedTabPaymentMethod;
 
   @override
   String toString() {
-    return 'PaymentState()';
+    return 'PaymentState(selectedTabPaymentMethod: $selectedTabPaymentMethod)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PaymentStateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$PaymentStateImpl &&
+            (identical(
+                    other.selectedTabPaymentMethod, selectedTabPaymentMethod) ||
+                other.selectedTabPaymentMethod == selectedTabPaymentMethod));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, selectedTabPaymentMethod);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PaymentStateImplCopyWith<_$PaymentStateImpl> get copyWith =>
+      __$$PaymentStateImplCopyWithImpl<_$PaymentStateImpl>(this, _$identity);
 }
 
 abstract class _PaymentState implements PaymentState {
-  factory _PaymentState() = _$PaymentStateImpl;
+  factory _PaymentState({final int selectedTabPaymentMethod}) =
+      _$PaymentStateImpl;
+
+  @override
+  int get selectedTabPaymentMethod;
+  @override
+  @JsonKey(ignore: true)
+  _$$PaymentStateImplCopyWith<_$PaymentStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
