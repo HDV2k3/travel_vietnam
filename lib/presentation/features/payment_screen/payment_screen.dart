@@ -91,7 +91,7 @@ class PaymentVip extends ConsumerWidget {
                                   onPressed: () {
                                     ref
                                         .read(getUserDataProvider(
-                                            currentUser!.uid))
+                                            currentUser.uid))
                                         .whenData((value) {
                                       return ref
                                           .read(

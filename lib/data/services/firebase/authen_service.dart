@@ -15,7 +15,7 @@ final authServiceProvider = Provider((ref) => AuthService(
     firebaseStorage: ref.read(firebaseStorageProvider)));
 
 class AuthService {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore _fireStore;
   final FirebaseAuth _firebaseAuth;
   final FirebaseStorage _firebaseStorage;
 
@@ -23,11 +23,11 @@ class AuthService {
       {required FirebaseFirestore firestore,
       required FirebaseAuth firebaseAuth,
       required FirebaseStorage firebaseStorage})
-      : _firestore = firestore,
+      : _fireStore = firestore,
         _firebaseAuth = firebaseAuth,
         _firebaseStorage = firebaseStorage;
   CollectionReference get _users =>
-      _firestore.collection(FirebaseConstants.usersCollection);
+      _fireStore.collection(FirebaseConstants.usersCollection);
 
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
   User? user = FirebaseAuth.instance.currentUser;
@@ -75,15 +75,15 @@ class AuthService {
         (event) => UserModel.fromJson(event.data() as Map<String, dynamic>));
   }
 
-  Stream<UserModel> getUserDataFromFirestore() {
+  Stream<UserModel> getUserDataFromFireStore() {
     return _users.doc(_firebaseAuth.currentUser!.uid).snapshots().map(
         (event) => UserModel.fromJson(event.data() as Map<String, dynamic>));
   }
 
   Either<dynamic, Future<void>> updateUser(UserModel user) {
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    User? currentuser = _firebaseAuth.currentUser;
-    final userId = currentuser!.uid.toString();
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    User? currentUser = firebaseAuth.currentUser;
+    final userId = currentUser!.uid.toString();
     try {
       return right(_users.doc(userId).update(user.toJson()));
     } on FirebaseException catch (e) {

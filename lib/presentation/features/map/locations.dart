@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
-import 'package:json_annotation/json_annotation.dart';
 
 part 'locations.g.dart';
 
@@ -64,6 +64,7 @@ class Office {
   final String phone;
   final String region;
 }
+
 @JsonSerializable()
 class Locations {
   Locations({

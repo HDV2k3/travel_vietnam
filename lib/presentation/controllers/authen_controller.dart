@@ -27,7 +27,7 @@ final getUserDataProvider = StreamProvider.family((ref, String uid) {
 });
 final getUserDataFromFirestoreProvider = StreamProvider((ref) {
   final authController = ref.watch(authControllerProvider.notifier);
-  return authController.getUserDataFromFirestore();
+  return authController.getUserDataFromFireStore();
 });
 
 class AuthController extends StateNotifier<bool> {
@@ -77,8 +77,8 @@ class AuthController extends StateNotifier<bool> {
     return _authService.getUserData(uid);
   }
 
-  Stream<UserModel> getUserDataFromFirestore() {
-    return _authService.getUserDataFromFirestore();
+  Stream<UserModel> getUserDataFromFireStore() {
+    return _authService.getUserDataFromFireStore();
   }
 
   void updateUser(
@@ -86,8 +86,8 @@ class AuthController extends StateNotifier<bool> {
     File image,
     String fullName,
   ) async {
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    User? user = _firebaseAuth.currentUser;
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    User? user = firebaseAuth.currentUser;
     final userId = user!.uid.toString();
     final imageRes = await _storageService.storeFile(
         path: '/profileimages', id: userId, file: image);

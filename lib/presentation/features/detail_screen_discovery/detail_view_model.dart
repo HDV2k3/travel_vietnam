@@ -36,7 +36,9 @@ class DetailDiscoveryViewModel extends _$DetailDiscoveryViewModel {
 
       return fieldValueList;
     } catch (error) {
-      print('Error fetching nested collection data: $error');
+      if (kDebugMode) {
+        print('Error fetching nested collection data: $error');
+      }
       return [];
     }
   }

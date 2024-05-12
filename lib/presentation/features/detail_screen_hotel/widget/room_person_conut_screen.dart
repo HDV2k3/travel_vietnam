@@ -3,7 +3,7 @@ import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_stat
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_view_model.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/model/room_person_child.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod/src/common.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'icon_and_text_back.dart';
 

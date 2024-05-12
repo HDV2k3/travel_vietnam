@@ -11,7 +11,6 @@ class SliderImageActivity extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int _currentIndex = 0;
     return FutureBuilder<List<String>>(
       future:
           getImageUrlsFromFirebase(), // Call the function to get the image URLs from Firebase

@@ -22,7 +22,6 @@ class _SelectDateTimeState extends State<SelectDateTimeHotel> {
   String selectedEndDateText =
       DateFormat('dd/MM').format(DateTime.now().add(const Duration(days: 1)));
   bool isSelected = false;
-  final _selectDateTimeStateKey = GlobalKey<_SelectDateTimeState>();
 
   void handleOnCancelClick(WidgetRef ref) {
     setState(() {

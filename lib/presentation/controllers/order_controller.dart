@@ -38,7 +38,7 @@ class OrderController extends StateNotifier<bool> {
       isCancelled: false,
     );
 
-    final res = await _orderService.createOrder(order);
+    final res = _orderService.createOrder(order);
     state = false;
 
     res.fold(

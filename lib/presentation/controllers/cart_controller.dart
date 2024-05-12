@@ -38,9 +38,9 @@ class CartController extends StateNotifier<bool> {
     _cartService.decreaseQuantity(item);
   }
 
-  void increaseQuantity(CartItem item) {
-    _cartService.increaseQuantity(item);
-  }
+  // void increaseQuantity(CartItem item) {
+  //   _cartService.increaseQuantity(item);
+  // }
 
   Future<void> clearCart() async {
     return _cartService.clearCart();

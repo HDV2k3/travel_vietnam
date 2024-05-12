@@ -7,6 +7,7 @@ import 'package:chandoiqua/presentation/features/detail_screen_hotel/widget/sele
 import 'package:chandoiqua/presentation/features/payment_screen/payment_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -331,8 +332,6 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
   }
 
   Widget getRoomDataWidget1(BuildContext context, String hotelId) {
-    final hotel = ModalRoute.of(context)!.settings.arguments as Hotel;
-    final cart = ref.watch(cartControllerProvider.notifier);
     return Consumer(
       builder: (context, ref, child) {
         final numberOfDays = ref.watch(daysProvider);
@@ -531,9 +530,13 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
 
       // Cập nhật trường giá trị của tài liệu con
       await childRef.update({field: value});
-      print('Cập nhật thành công');
+      if (kDebugMode) {
+        print('Cập nhật thành công');
+      }
     } catch (e) {
-      print('Lỗi khi cập nhật: $e');
+      if (kDebugMode) {
+        print('Lỗi khi cập nhật: $e');
+      }
     }
   }
 

@@ -74,7 +74,7 @@ class HotelService {
         .map((querySnapshot) {
       return querySnapshot.docs.map((doc) {
         // Create a Room object from the document data
-        return Room.fromJson(doc.data() as Map<String, dynamic>);
+        return Room.fromJson(doc.data());
       }).toList();
     });
   }

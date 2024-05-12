@@ -109,15 +109,15 @@ class CartService {
     FirebaseConstants.cartRef.update({"cart": FieldValue.delete()});
   }
 
-  void increaseQuantity(CartItem item) {
-    // removeCartItem(item);
-    FirebaseConstants.cartRef.get().then((DocumentSnapshot doc) {
-      final dynamic data = doc.data() as Map<String, dynamic>;
-      _firestore.runTransaction((transaction) async {
-        final snapshot = await transaction.get(FirebaseConstants.cartRef);
-        final newQuantity = snapshot.get(data!["cart"]) + 1;
-      }).then((quantity) => print("error increasing quantity"),
-          onError: (e) => print("Error updating document $e"));
-    });
-  }
+  // void increaseQuantity(CartItem item) {
+  //   // removeCartItem(item);
+  //   FirebaseConstants.cartRef.get().then((DocumentSnapshot doc) {
+  //     final dynamic data = doc.data() as Map<String, dynamic>;
+  //     _firestore.runTransaction((transaction) async {
+  //       final snapshot = await transaction.get(FirebaseConstants.cartRef);
+  //       final newQuantity = snapshot.get(data!["cart"]) + 1;
+  //     }).then((quantity) => print("error increasing quantity"),
+  //         onError: (e) => print("Error updating document $e"));
+  //   });
+  // }
 }

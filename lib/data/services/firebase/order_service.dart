@@ -14,18 +14,18 @@ final ordersServiceProvider = Provider((ref) => OrderService(
     firebaseStorage: ref.watch(firebaseStorageProvider)));
 
 class OrderService {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore _fireStore;
   final FirebaseAuth _firebaseAuth;
   final FirebaseStorage _firebaseStorage;
   OrderService(
       {required FirebaseFirestore firestore,
       required FirebaseAuth firebaseAuth,
       required FirebaseStorage firebaseStorage})
-      : _firestore = firestore,
+      : _fireStore = firestore,
         _firebaseAuth = firebaseAuth,
         _firebaseStorage = firebaseStorage;
   CollectionReference get _orders =>
-      _firestore.collection(FirebaseConstants.orderCollection);
+      _fireStore.collection(FirebaseConstants.orderCollection);
   Either<dynamic, Future<void>> createOrder(Orders order) {
     return right(
       _orders.doc(order.orderId).set(order.toJson()),

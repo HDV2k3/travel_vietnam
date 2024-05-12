@@ -1,3 +1,4 @@
+import 'package:chandoiqua/constants/firebase_constants.dart';
 import 'package:chandoiqua/data/models/usser.dart';
 import 'package:chandoiqua/presentation/features/sign_in/sign_in_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,7 +12,7 @@ part 'sign_in_view_model.g.dart';
 @riverpod
 class SignInViewModel extends _$SignInViewModel {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   @override
   FutureOr<SignInState> build() {
     return SignInState(
@@ -39,7 +40,10 @@ class SignInViewModel extends _$SignInViewModel {
     User? user = userCredential.user;
     if (user != null) {
       if (userCredential.additionalUserInfo!.isNewUser) {
-        await _firestore.collection('users').doc(user.uid).set({
+        await _fireStore
+            .collection(FirebaseConstants.usersCollection)
+            .doc(user.uid)
+            .set({
           'name': user.displayName,
           'uid': user.uid,
           'avatar': user.photoURL,
@@ -80,7 +84,7 @@ class SignInViewModel extends _$SignInViewModel {
 
   // get collection of users
   final CollectionReference account =
-      FirebaseFirestore.instance.collection('users');
+      FirebaseFirestore.instance.collection(FirebaseConstants.usersCollection);
 
   //Create add new account
   Future<void> newAccount(
@@ -105,7 +109,7 @@ class SignInViewModel extends _$SignInViewModel {
       );
 
       await FirebaseFirestore.instance
-          .collection('users')
+          .collection(FirebaseConstants.usersCollection)
           .doc(userCredential.user!.uid)
           .set(
             user.toJson(),
@@ -119,7 +123,7 @@ class SignInViewModel extends _$SignInViewModel {
   Future<bool> userRegisteredSuccessfully() async {
     try {
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection('users')
+          .collection(FirebaseConstants.usersCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .get();
 
