@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../constants/firebase_constants.dart';
+import '../../../constants/constants.dart';
 import '../../../core/failure.dart';
 import '../../models/usser.dart';
 
@@ -27,7 +27,7 @@ class AuthService {
         _firebaseAuth = firebaseAuth,
         _firebaseStorage = firebaseStorage;
   CollectionReference get _users =>
-      _fireStore.collection(FirebaseConstants.usersCollection);
+      _fireStore.collection(Constants.usersCollection);
 
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
   User? user = FirebaseAuth.instance.currentUser;

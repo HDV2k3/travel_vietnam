@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../constants/firebase_constants.dart';
+import '../../../constants/constants.dart';
 import '../../../core/failure.dart';
 
 final locationsServiceProvider = Provider((ref) {
@@ -18,7 +18,7 @@ class LocationService {
       : _fireStore = fireStore;
 
   CollectionReference get _loactions =>
-      _fireStore.collection(FirebaseConstants.locationsCollection);
+      _fireStore.collection(Constants.locationsCollection);
 
   Either<dynamic, Future<void>> addLocation(Location location) {
     try {

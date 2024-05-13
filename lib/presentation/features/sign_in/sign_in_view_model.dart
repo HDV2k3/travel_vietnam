@@ -1,4 +1,4 @@
-import 'package:chandoiqua/constants/firebase_constants.dart';
+import 'package:chandoiqua/constants/constants.dart';
 import 'package:chandoiqua/data/models/usser.dart';
 import 'package:chandoiqua/presentation/features/sign_in/sign_in_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,7 +41,7 @@ class SignInViewModel extends _$SignInViewModel {
     if (user != null) {
       if (userCredential.additionalUserInfo!.isNewUser) {
         await _fireStore
-            .collection(FirebaseConstants.usersCollection)
+            .collection(Constants.usersCollection)
             .doc(user.uid)
             .set({
           'name': user.displayName,
@@ -84,7 +84,7 @@ class SignInViewModel extends _$SignInViewModel {
 
   // get collection of users
   final CollectionReference account =
-      FirebaseFirestore.instance.collection(FirebaseConstants.usersCollection);
+      FirebaseFirestore.instance.collection(Constants.usersCollection);
 
   //Create add new account
   Future<void> newAccount(
@@ -109,7 +109,7 @@ class SignInViewModel extends _$SignInViewModel {
       );
 
       await FirebaseFirestore.instance
-          .collection(FirebaseConstants.usersCollection)
+          .collection(Constants.usersCollection)
           .doc(userCredential.user!.uid)
           .set(
             user.toJson(),
@@ -123,7 +123,7 @@ class SignInViewModel extends _$SignInViewModel {
   Future<bool> userRegisteredSuccessfully() async {
     try {
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection(FirebaseConstants.usersCollection)
+          .collection(Constants.usersCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .get();
 

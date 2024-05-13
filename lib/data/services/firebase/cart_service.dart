@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../constants/firebase_constants.dart';
+import '../../../constants/constants.dart';
 import '../../../core/failure.dart';
 import '../../models/cart_item.dart';
 
@@ -32,35 +32,11 @@ class CartService {
         _firebaseAuth = firebaseAuth,
         _firebaseStorage = firebaseStorage,
         _ref = ref;
-
-  // Either<dynamic, Future<void>> addProductToCart(
-  //     Room hotel, BuildContext context) {
-  //   String cartId = const Uuid().v1();
-  //   try {
-  //     return right(FirebaseConstants.cartRef.set({
-  //       "cart": FieldValue.arrayUnion([
-  //         CartItem(
-  //           cartId: cartId,
-  //           image: hotel.image.toString(),
-  //           productId: hotel.hotelId.toString(),
-  //           quantity: 1,
-  //           cost: hotel.price!.toDouble(),
-  //           name: hotel.name!,
-  //           price: hotel.price!, numberOfBeds: '', area: '', view: '', regulations: '',
-  //         ).toJson()
-  //       ]),
-  //     }, SetOptions(merge: true)));
-  //   } on FirebaseException catch (e) {
-  //     throw e.message!;
-  //   } catch (e) {
-  //     return left(Failure(message: e.toString()));
-  //   }
-  // }
   Either<dynamic, Future<void>> addProductToCart(
       Room hotel, BuildContext context) {
     String cartId = const Uuid().v1();
     try {
-      return right(FirebaseConstants.cartRef.set({
+      return right(Constants.cartRef.set({
         "cart": FieldValue.arrayUnion([
           CartItem(
             cartId: cartId,
@@ -86,7 +62,7 @@ class CartService {
 
   Either<dynamic, Future<void>> removeCartItem(CartItem cartItem) {
     try {
-      return right(FirebaseConstants.cartRef.update({
+      return right(Constants.cartRef.update({
         "cart": FieldValue.arrayRemove([cartItem.toJson()])
       }));
     } catch (e) {
@@ -99,14 +75,14 @@ class CartService {
       removeCartItem(item);
     } else {
       item.quantity - 1;
-      FirebaseConstants.cartRef.update({
+      Constants.cartRef.update({
         "cart": FieldValue.arrayRemove([item.toJson()])
       });
     }
   }
 
   Future<void> clearCart() async {
-    FirebaseConstants.cartRef.update({"cart": FieldValue.delete()});
+    Constants.cartRef.update({"cart": FieldValue.delete()});
   }
 
   // void increaseQuantity(CartItem item) {

@@ -7,7 +7,7 @@ part of 'detail_view_model.dart';
 // **************************************************************************
 
 String _$detailDiscoveryViewModelHash() =>
-    r'ee37440bac3b3cde5c899149f1f93e02f102ee71';
+    r'12faea7313ca60f11a73864c85ae03996e3e1a20';
 
 /// See also [DetailDiscoveryViewModel].
 @ProviderFor(DetailDiscoveryViewModel)

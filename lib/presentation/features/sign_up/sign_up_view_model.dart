@@ -1,4 +1,4 @@
-import 'package:chandoiqua/constants/firebase_constants.dart';
+import 'package:chandoiqua/constants/constants.dart';
 import 'package:chandoiqua/data/models/usser.dart';
 import 'package:chandoiqua/presentation/features/sign_up/sign_up_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,7 +43,7 @@ class SignUpViewModel extends _$SignUpViewModel {
       );
 
       await FirebaseFirestore.instance
-          .collection(FirebaseConstants.usersCollection)
+          .collection(Constants.usersCollection)
           .doc(userCredential.user!.uid)
           .set(
             user.toJson(),
@@ -57,7 +57,7 @@ class SignUpViewModel extends _$SignUpViewModel {
   Future<bool> userRegisteredSuccessfully() async {
     try {
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection(FirebaseConstants.usersCollection)
+          .collection(Constants.usersCollection)
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .get();
 

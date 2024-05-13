@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../constants/firebase_constants.dart';
+import '../../../constants/constants.dart';
 
 final ordersServiceProvider = Provider((ref) => OrderService(
     firestore: ref.watch(firebaseFirestoreProvider),
@@ -25,7 +25,7 @@ class OrderService {
         _firebaseAuth = firebaseAuth,
         _firebaseStorage = firebaseStorage;
   CollectionReference get _orders =>
-      _fireStore.collection(FirebaseConstants.orderCollection);
+      _fireStore.collection(Constants.orderCollection);
   Either<dynamic, Future<void>> createOrder(Orders order) {
     return right(
       _orders.doc(order.orderId).set(order.toJson()),

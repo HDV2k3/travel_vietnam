@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseConstants {
+  FirebaseConstants._private();
   static const usersCollection = "users";
   static final user = FirebaseAuth.instance.currentUser!;
   static final currentUser = FirebaseAuth.instance.currentUser;

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../constants/firebase_constants.dart';
+import '../../../constants/constants.dart';
 import '../../../core/failure.dart';
 import '../../models/room_in_hotel.dart';
 
@@ -18,7 +18,7 @@ class HotelService {
   HotelService({required FirebaseFirestore fireStore}) : _fireStore = fireStore;
 
   CollectionReference get _hotels =>
-      _fireStore.collection(FirebaseConstants.hotelsCollection);
+      _fireStore.collection(Constants.hotelsCollection);
 
   Either<dynamic, Future<void>> addHotel(Hotel hotel) {
     try {
