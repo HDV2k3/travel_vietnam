@@ -22,6 +22,6 @@ Any questions contact: <a href="https://www.facebook.com/huynh.viet.7771">Facebo
     <img style="width: 200px; height: 400px;" alt="" src="assets/images/result8.png"/>
   </div>
 </div>
-
+Note: Not version final 
 
 
