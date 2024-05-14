@@ -1,6 +1,1 @@
-enum HomeTab {
-  home,
-  explore,
-  heart,
-  profile,
-}
+enum HomeTab { home, explore, heart, profile, settings }

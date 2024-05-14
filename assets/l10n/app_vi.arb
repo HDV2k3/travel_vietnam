@@ -14,6 +14,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "settings": "Cài Đặt",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
   "cart": "Cart",
   "@cart": {
     "type": "text",

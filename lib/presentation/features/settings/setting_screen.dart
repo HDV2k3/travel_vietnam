@@ -23,7 +23,7 @@ class _SettingScreenState
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return AppBar(
-      title: Text(ref.appLocalizations.profile),
+      title: Text(ref.appLocalizations.settings),
     );
   }
 
