@@ -1,4 +1,4 @@
-# Vietnam travel mobile using Flutter & Firebase 
+# VietNamTravel mobile using Flutter & Firebase 
 ## Project of Ho Chi Minh City University of Technology (Hutech) <br>
 ## Author : <a href="https://www.facebook.com/huynh.viet.7771">Huỳnh Đắc Việt</a>  <br>
 
