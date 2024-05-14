@@ -6,7 +6,7 @@
 step 1:git clone https://github.com/HDV2k3/travel_vietnam
 step 2:flutter pub get  <br>
 ## Result
-<img   src="assets/images/result.png" alt="#"/> 
+<img source='assets/images/result.png'/> <br>
 
 
 
