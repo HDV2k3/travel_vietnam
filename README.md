@@ -8,8 +8,7 @@ step 2:flutter pub get  <br>
 ## Result
 
 
-<img style="width:100px,height:200px" alt="" src="assets/images/result.png"/>
-
+<img style="width: 200px; height: 400px;" alt="" src="assets/images/result.png"/>
 
 
 
