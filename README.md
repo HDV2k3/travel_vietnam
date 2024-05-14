@@ -3,8 +3,8 @@
 ## Author : <a href="https://www.facebook.com/huynh.viet.7771">Huỳnh Đắc Việt</a>  <br>
 
 ## Getting Started
-step 1:git clone https://github.com/HDV2k3/travel_vietnam <br>
-step 2:flutter pub get  <br>
+Step 1:git clone https://github.com/HDV2k3/travel_vietnam <br>
+Step 2:Open enter command " flutter pub get "  <br>
 ## Result
 <div style="display: flex; flex-wrap: wrap;">
   <div style="width: 55%; display: flex; justify-content: center;">
