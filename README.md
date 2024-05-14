@@ -9,6 +9,9 @@ step 2:flutter pub get  <br>
 
 
 <img style="width: 200px; height: 400px;" alt="" src="assets/images/result.png"/>
+<img style="width: 200px; height: 400px;" alt="" src="assets/images/result1.png"/>
+<img style="width: 200px; height: 400px;" alt="" src="assets/images/result2.png"/>
+<img style="width: 200px; height: 400px;" alt="" src="assets/images/result3.png"/>
 
 
 
