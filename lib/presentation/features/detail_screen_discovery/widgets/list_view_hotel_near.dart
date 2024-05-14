@@ -1,10 +1,10 @@
-import 'package:chandoiqua/presentation/controllers/hotel_controller.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_screen_hotel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../data/models/hotel.dart';
 import '../../../../data/providers/favorite_provider.dart';
+import '../../../../data/providers/hotel_provider.dart';
 import '../../discovery/widgets/error_text.dart';
 import '../../discovery/widgets/favorite_icon.dart';
 import '../../discovery/widgets/loader.dart';

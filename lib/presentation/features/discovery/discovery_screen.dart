@@ -8,8 +8,10 @@ import 'package:chandoiqua/presentation/features/discovery/widgets/search.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/slider.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/text_category.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/text_location.dart';
+import 'package:chandoiqua/presentation/features/profile_user/profile_screen.dart';
 import 'package:chandoiqua/presentation/features/sign_in/sign_in_screen.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -58,15 +60,25 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
                   ),
                   IconButton(
                     icon: const Icon(
-                      Icons.notifications,
+                      Icons.person,
                       color: Colors.yellow,
                     ),
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
+                    onPressed: () async {
+                      User? user = FirebaseAuth.instance.currentUser;
+                      if (user == null) {
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const LogIn()),
-                          (route) => true);
+                          (route) => true,
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfileUser()),
+                        );
+                      }
                     },
                   ),
                 ],

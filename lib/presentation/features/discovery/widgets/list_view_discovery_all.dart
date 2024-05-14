@@ -1,11 +1,11 @@
 import 'package:chandoiqua/data/providers/favorite_provider.dart';
-import 'package:chandoiqua/presentation/controllers/location_controller.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/detail_screen_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/discovery_controller.dart';
+import '../../../../data/providers/location_provider.dart';
+import '../../../../data/repositories/discovery_repository.dart';
 import 'error_text.dart';
 import 'favorite_icon.dart';
 import 'loader.dart';

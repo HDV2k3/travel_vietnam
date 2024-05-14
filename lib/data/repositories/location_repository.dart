@@ -1,25 +1,20 @@
 import 'package:chandoiqua/data/models/location.dart';
-import 'package:chandoiqua/data/services/firebase/provider/firebase_provider.dart';
+import 'package:chandoiqua/data/repositories/abstract_location.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../constants/constants.dart';
-import '../../../core/failure.dart';
+import '../../constants/constants.dart';
+import '../../core/failure.dart';
 
-final locationsServiceProvider = Provider((ref) {
-  return LocationService(fireStore: ref.watch(firebaseFirestoreProvider));
-});
-
-class LocationService {
+class LocationRepository implements LocationInterface {
   final FirebaseFirestore _fireStore;
 
-  LocationService({required FirebaseFirestore fireStore})
+  LocationRepository({required FirebaseFirestore fireStore})
       : _fireStore = fireStore;
 
   CollectionReference get _loactions =>
       _fireStore.collection(Constants.locationsCollection);
-
+  @override
   Either<dynamic, Future<void>> addLocation(Location location) {
     try {
       return right(_loactions
@@ -32,6 +27,7 @@ class LocationService {
     }
   }
 
+  @override
   Stream<List<Location>> getLocations() {
     return _loactions.limit(10).snapshots().map((event) {
       List<Location> locations = [];
@@ -44,11 +40,13 @@ class LocationService {
     });
   }
 
+  @override
   Stream<Location> getLocationById(String productId) {
     return _loactions.doc(productId).snapshots().map(
         (event) => Location.fromJson((event.data() as Map<String, dynamic>)));
   }
 
+  @override
   Stream<List<Location>> searchLocations(String search) {
     return _loactions
         .orderBy("name")
@@ -66,6 +64,7 @@ class LocationService {
         });
   }
 
+  @override
   Either<dynamic, Future<void>> updateLocation(Location location) {
     try {
       return right(_loactions
@@ -78,6 +77,7 @@ class LocationService {
     }
   }
 
+  @override
   Stream<List<Location>> getLocationsByProvinceName(String provinceName) {
     return _loactions
         .where("provinceName", isEqualTo: provinceName)
@@ -91,6 +91,7 @@ class LocationService {
     });
   }
 
+  @override
   Stream<List<Location>> getRelatedLocations(String provinceName) {
     return _loactions
         .where("provinceName", isEqualTo: provinceName)

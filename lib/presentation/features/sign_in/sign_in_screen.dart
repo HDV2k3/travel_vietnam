@@ -31,9 +31,9 @@ class _SignInScreenState
     passwordController.text = ""; // Gán giá trị ban đầu
   }
   @override
-  void dispose() {
+  void onDispose() {
+    super.onDispose();
     // TODO: implement dispose
-    super.dispose();
     emailController.clear();
     passwordController.clear();
   }

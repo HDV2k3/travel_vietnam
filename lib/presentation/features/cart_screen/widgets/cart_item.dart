@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../data/models/cart_item.dart';
-import '../../../controllers/cart_controller.dart';
+import '../../../../data/providers/cart_provider.dart';
 
 class CartItemWidget extends ConsumerWidget {
   final CartItem item;

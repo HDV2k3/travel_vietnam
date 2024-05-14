@@ -1,42 +1,21 @@
 import 'dart:io';
 
+import 'package:chandoiqua/data/repositories/authen_repository.dart';
+import 'package:chandoiqua/data/repositories/storage_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/models/usser.dart';
-import '../../data/services/firebase/authen_service.dart';
-import '../../data/services/firebase/storage_service.dart';
+import '../../../data/models/usser.dart';
+import '../../../data/providers/authen_provider.dart';
 
-final authControllerProvider =
-    StateNotifierProvider<AuthController, bool>((ref) => AuthController(
-        authService: ref.watch(
-          authServiceProvider,
-        ),
-        storageService: ref.watch(storageServiceProvider),
-        ref: ref));
-final userProvider = StateProvider<UserModel?>((ref) => null);
-final authStateChangeProvider = StreamProvider((ref) {
-  final authController = ref.watch(authControllerProvider.notifier);
-  return authController.authStateChange;
-});
-
-final getUserDataProvider = StreamProvider.family((ref, String uid) {
-  final authController = ref.watch(authControllerProvider.notifier);
-  return authController.getUserData(uid);
-});
-final getUserDataFromFirestoreProvider = StreamProvider((ref) {
-  final authController = ref.watch(authControllerProvider.notifier);
-  return authController.getUserDataFromFireStore();
-});
-
-class AuthController extends StateNotifier<bool> {
-  final AuthService _authService;
-  final StorageService _storageService;
+class AuthViewModel extends StateNotifier<bool> {
+  final AuthRepository _authService;
+  final StorageRepository _storageService;
   final Ref _ref;
-  AuthController(
-      {required AuthService authService,
-      required StorageService storageService,
+  AuthViewModel(
+      {required AuthRepository authService,
+      required StorageRepository storageService,
       required Ref ref})
       : _authService = authService,
         _storageService = storageService,

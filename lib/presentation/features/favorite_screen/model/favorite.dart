@@ -10,14 +10,14 @@ class Favorites {
   // String nation;
   Favorites(
       {
-        // required this.nation,
-        // required this.vote,
-        // required this.id,
-        required this.image,
-        required this.title,
-        required this.price,
-        // required this.description,
-        required this.location});
+      // required this.nation,
+      // required this.vote,
+      // required this.id,
+      required this.image,
+      required this.title,
+      required this.price,
+      // required this.description,
+      required this.location});
 
   Map<String, dynamic> toMap() {
     return {
@@ -47,13 +47,13 @@ class Favorites {
 
   Favorites copyWith(
       {String? nation,
-        String? id,
-        String? image,
-        String? vote,
-        String? title,
-        String? description,
-        String? price,
-        String? location}) {
+      String? id,
+      String? image,
+      String? vote,
+      String? title,
+      String? description,
+      String? price,
+      String? location}) {
     return Favorites(
         // nation: nation ?? this.nation,
         // vote: vote ?? this.vote,

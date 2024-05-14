@@ -1,31 +1,23 @@
-import 'package:chandoiqua/data/services/firebase/provider/firebase_provider.dart';
+import 'package:chandoiqua/data/models/usser.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../constants/constants.dart';
-import '../../../core/failure.dart';
-import '../../models/usser.dart';
+import '../../constants/constants.dart';
+import '../../core/failure.dart';
+import 'abstract_authen.dart';
 
-final authServiceProvider = Provider((ref) => AuthService(
-    firestore: ref.read(firebaseFirestoreProvider),
-    firebaseAuth: ref.read(firebaseAuthProvider),
-    firebaseStorage: ref.read(firebaseStorageProvider)));
-
-class AuthService {
+class AuthRepository implements Authentication {
   final FirebaseFirestore _fireStore;
   final FirebaseAuth _firebaseAuth;
-  final FirebaseStorage _firebaseStorage;
 
-  AuthService(
-      {required FirebaseFirestore firestore,
+  AuthRepository(
+      {required FirebaseFirestore fireStore,
       required FirebaseAuth firebaseAuth,
       required FirebaseStorage firebaseStorage})
-      : _fireStore = firestore,
-        _firebaseAuth = firebaseAuth,
-        _firebaseStorage = firebaseStorage;
+      : _fireStore = fireStore,
+        _firebaseAuth = firebaseAuth;
   CollectionReference get _users =>
       _fireStore.collection(Constants.usersCollection);
 
@@ -33,7 +25,20 @@ class AuthService {
   User? user = FirebaseAuth.instance.currentUser;
   late UserModel _userModel;
 
-  Future<Either<dynamic, dynamic>> signInWithEmailAndPassword(
+  @override
+  Stream<UserModel> getUserData(uid) {
+    return _users.doc(uid).snapshots().map(
+        (event) => UserModel.fromJson(event.data() as Map<String, dynamic>));
+  }
+
+  @override
+  Stream<UserModel> getUserDataFromFireStore() {
+    return _users.doc(_firebaseAuth.currentUser!.uid).snapshots().map(
+        (event) => UserModel.fromJson(event.data() as Map<String, dynamic>));
+  }
+
+  @override
+  Future<Either> signInWithEmailAndPassword(
       String email, String password) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
@@ -44,6 +49,12 @@ class AuthService {
     }
   }
 
+  @override
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
+  @override
   Future<Either> signUpWithEmailAndPassword(
       String email, String password) async {
     try {
@@ -66,20 +77,7 @@ class AuthService {
     }
   }
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-  }
-
-  Stream<UserModel> getUserData(uid) {
-    return _users.doc(uid).snapshots().map(
-        (event) => UserModel.fromJson(event.data() as Map<String, dynamic>));
-  }
-
-  Stream<UserModel> getUserDataFromFireStore() {
-    return _users.doc(_firebaseAuth.currentUser!.uid).snapshots().map(
-        (event) => UserModel.fromJson(event.data() as Map<String, dynamic>));
-  }
-
+  @override
   Either<dynamic, Future<void>> updateUser(UserModel user) {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     User? currentUser = firebaseAuth.currentUser;

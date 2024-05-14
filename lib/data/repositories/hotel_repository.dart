@@ -1,25 +1,22 @@
+// repository
 import 'package:chandoiqua/data/models/hotel.dart';
-import 'package:chandoiqua/data/services/firebase/provider/firebase_provider.dart';
+import 'package:chandoiqua/data/repositories/abstract_hotel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../constants/constants.dart';
-import '../../../core/failure.dart';
-import '../../models/room_in_hotel.dart';
+import '../../constants/constants.dart';
+import '../../core/failure.dart';
+import '../models/room_in_hotel.dart';
 
-final hotelsServiceProvider = Provider((ref) {
-  return HotelService(fireStore: ref.watch(firebaseFirestoreProvider));
-});
-
-class HotelService {
+class HotelRepository implements HotelInterface {
   final FirebaseFirestore _fireStore;
 
-  HotelService({required FirebaseFirestore fireStore}) : _fireStore = fireStore;
+  HotelRepository({required FirebaseFirestore fireStore})
+      : _fireStore = fireStore;
 
   CollectionReference get _hotels =>
       _fireStore.collection(Constants.hotelsCollection);
-
+  @override
   Either<dynamic, Future<void>> addHotel(Hotel hotel) {
     try {
       return right(_hotels.doc(hotel.hotelId.toString()).set(hotel.toJson()));
@@ -30,6 +27,7 @@ class HotelService {
     }
   }
 
+  @override
   Stream<List<Hotel>> getHotels() {
     return _hotels.limit(10).snapshots().map((event) {
       List<Hotel> hotels = [];
@@ -42,6 +40,7 @@ class HotelService {
     });
   }
 
+  @override
   Stream<Hotel> getHotelById(String productId) {
     return _hotels
         .doc(productId)
@@ -49,6 +48,7 @@ class HotelService {
         .map((event) => Hotel.fromJson((event.data() as Map<String, dynamic>)));
   }
 
+  @override
   Stream<List<Hotel>> searchHotels(String search) {
     return _hotels
         .orderBy("name")
@@ -65,6 +65,7 @@ class HotelService {
         });
   }
 
+  @override
   Stream<List<Room>> getDataRoomInHotels(String hotelId) {
     return FirebaseFirestore.instance
         .collection('hotels')
@@ -79,6 +80,7 @@ class HotelService {
     });
   }
 
+  @override
   Either<dynamic, Future<void>> updateLocation(Hotel hotel) {
     try {
       return right(
@@ -90,6 +92,7 @@ class HotelService {
     }
   }
 
+  @override
   Stream<List<Hotel>> getHotelsByProvinceName(String provinceName) {
     return _hotels
         .where("provinceName", isEqualTo: provinceName)
@@ -103,6 +106,7 @@ class HotelService {
     });
   }
 
+  @override
   Stream<List<Hotel>> getRelatedHotels(String provinceName) {
     return _hotels
         .where("provinceName", isEqualTo: provinceName)

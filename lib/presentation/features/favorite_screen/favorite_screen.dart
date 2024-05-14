@@ -1,7 +1,4 @@
-import 'package:chandoiqua/data/services/firebase/func/fire_store_service.dart';
-import 'package:chandoiqua/data/services/firebase/models/favorite.dart';
 import 'package:chandoiqua/presentation/common_widgets/base/base_screen.dart';
-import 'package:chandoiqua/presentation/controllers/user_controller.dart';
 import 'package:chandoiqua/presentation/features/favorite_screen/favorite_state.dart';
 import 'package:chandoiqua/presentation/features/favorite_screen/favorite_view_model.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
@@ -11,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/discovery_controller.dart';
+import '../../../data/repositories/discovery_repository.dart';
+import '../../../data/repositories/user_repository.dart';
+import 'model/favorite.dart';
 
 class FavoriteScreen extends BaseScreen {
   const FavoriteScreen({super.key});
@@ -59,7 +58,7 @@ class _DiscoveryState
     }
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
-        stream: FireStoreService.getFavorite(
+        stream: DiscoveryController.getFavorite(
             user?.uid), // Truyền UID của người dùng vào stream
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {

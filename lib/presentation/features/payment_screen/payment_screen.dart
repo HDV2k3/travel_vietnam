@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../controllers/authen_controller.dart';
-import '../../controllers/order_controller.dart';
+import '../../../data/providers/authen_provider.dart';
+import '../../../data/providers/order_provider.dart';
 import '../cart_screen/widgets/cart_item.dart';
 import '../discovery/widgets/error_text.dart';
 import '../discovery/widgets/loader.dart';

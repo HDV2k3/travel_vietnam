@@ -12,9 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils.dart';
+import '../../../data/providers/cart_provider.dart';
 import '../../../utilities/widget/icon_button.dart';
 import '../../common_widgets/base/base_screen.dart';
-import '../../controllers/cart_controller.dart';
 import '../sign_in/sign_in_screen.dart';
 import 'detail_state.dart';
 import 'detail_view_model.dart';

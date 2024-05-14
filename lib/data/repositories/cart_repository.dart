@@ -1,5 +1,5 @@
 import 'package:chandoiqua/data/models/room_in_hotel.dart';
-import 'package:chandoiqua/data/services/firebase/provider/firebase_provider.dart';
+import 'package:chandoiqua/data/repositories/abstract_cart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -8,30 +8,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../constants/constants.dart';
-import '../../../core/failure.dart';
-import '../../models/cart_item.dart';
+import '../../constants/constants.dart';
+import '../../core/failure.dart';
+import '../models/cart_item.dart';
 
-final cartServiceProvider = Provider((ref) => CartService(
-    firebaseFirestore: ref.watch(firebaseFirestoreProvider),
-    firebaseAuth: ref.watch(firebaseAuthProvider),
-    firebaseStorage: ref.watch(firebaseStorageProvider),
-    ref: ref));
-
-class CartService {
-  final FirebaseFirestore _firestore;
-  final FirebaseAuth _firebaseAuth;
-  final FirebaseStorage _firebaseStorage;
-  final Ref _ref;
-  CartService(
-      {required FirebaseFirestore firebaseFirestore,
+class CartRepository implements CartInterface {
+  CartRepository(
+      {required FirebaseFirestore firebaseFireStore,
       required FirebaseAuth firebaseAuth,
       required FirebaseStorage firebaseStorage,
-      required Ref ref})
-      : _firestore = firebaseFirestore,
-        _firebaseAuth = firebaseAuth,
-        _firebaseStorage = firebaseStorage,
-        _ref = ref;
+      required Ref ref});
+  @override
   Either<dynamic, Future<void>> addProductToCart(
       Room hotel, BuildContext context) {
     String cartId = const Uuid().v1();
@@ -60,6 +47,7 @@ class CartService {
     }
   }
 
+  @override
   Either<dynamic, Future<void>> removeCartItem(CartItem cartItem) {
     try {
       return right(Constants.cartRef.update({
@@ -70,6 +58,12 @@ class CartService {
     }
   }
 
+  @override
+  Future<void> clearCart() async {
+    Constants.cartRef.update({"cart": FieldValue.delete()});
+  }
+
+  @override
   void decreaseQuantity(CartItem item) {
     if (item.quantity == 1) {
       removeCartItem(item);
@@ -80,20 +74,15 @@ class CartService {
       });
     }
   }
-
-  Future<void> clearCart() async {
-    Constants.cartRef.update({"cart": FieldValue.delete()});
-  }
-
-  // void increaseQuantity(CartItem item) {
-  //   // removeCartItem(item);
-  //   FirebaseConstants.cartRef.get().then((DocumentSnapshot doc) {
-  //     final dynamic data = doc.data() as Map<String, dynamic>;
-  //     _firestore.runTransaction((transaction) async {
-  //       final snapshot = await transaction.get(FirebaseConstants.cartRef);
-  //       final newQuantity = snapshot.get(data!["cart"]) + 1;
-  //     }).then((quantity) => print("error increasing quantity"),
-  //         onError: (e) => print("Error updating document $e"));
-  //   });
-  // }
+// void increaseQuantity(CartItem item) {
+//   // removeCartItem(item);
+//   FirebaseConstants.cartRef.get().then((DocumentSnapshot doc) {
+//     final dynamic data = doc.data() as Map<String, dynamic>;
+//     _firestore.runTransaction((transaction) async {
+//       final snapshot = await transaction.get(FirebaseConstants.cartRef);
+//       final newQuantity = snapshot.get(data!["cart"]) + 1;
+//     }).then((quantity) => print("error increasing quantity"),
+//         onError: (e) => print("Error updating document $e"));
+//   });
+// }
 }

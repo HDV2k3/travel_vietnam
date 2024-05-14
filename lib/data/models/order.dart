@@ -7,6 +7,7 @@ part 'order.g.dart';
 
 @freezed
 abstract class Orders with _$Orders {
+  // ignore: invalid_annotation_target
   @JsonSerializable(explicitToJson: true)
   factory Orders(
       {String? uid,

@@ -1,3 +1,4 @@
+import 'package:chandoiqua/presentation/features/discovery/widgets/search_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,7 +41,7 @@ class SearchWidget extends ConsumerWidget {
           ),
           style: const TextStyle(fontSize: 14),
           onTap: () {
-            // showSearch(context: context, delegate: SearchProducts(ref));
+            showSearch(context: context, delegate: SearchProducts(ref));
           },
         ),
         //     IconButton(

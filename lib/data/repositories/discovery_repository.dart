@@ -107,6 +107,13 @@ class DiscoveryController extends GetxController {
     }
   }
 
+  static getFavorite(uid) {
+    return FirebaseFirestore.instance
+        .collection('favorite')
+        .where('added_by', isEqualTo: uid)
+        .snapshots();
+  }
+
   Future<List<QueryDocumentSnapshot>> fetchFavoriteItems(String uid) async {
     try {
       final snapshot = await FirebaseFirestore.instance

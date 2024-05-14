@@ -1,9 +1,9 @@
-import 'package:chandoiqua/presentation/controllers/hotel_controller.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_screen_hotel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../data/providers/favorite_provider.dart';
+import '../../../../data/providers/hotel_provider.dart';
 import 'error_text.dart';
 import 'favorite_icon.dart';
 import 'loader.dart';
