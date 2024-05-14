@@ -5,7 +5,7 @@
 ## Getting Started
 Step 1:git clone https://github.com/HDV2k3/travel_vietnam <br>
 Step 2:Open terminal enter command " flutter pub get "  <br>
-Step 3: Run with device android or ios
+Step 3: Run with device android or ios <br>
 Any questions contact: <a href="https://www.facebook.com/huynh.viet.7771">Facebook</a>  <br>
 ## Result
 <div style="display: flex; flex-wrap: wrap;">
