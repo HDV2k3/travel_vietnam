@@ -57,13 +57,13 @@ class SearchProducts extends SearchDelegate {
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(10)),
                           elevation: 1,
                           child: Stack(
                             children: [
                               Container(
-                                height: 180,
-                                width: 180,
+                                height: 300,
+                                width: 300,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
@@ -77,7 +77,7 @@ class SearchProducts extends SearchDelegate {
                                       child: Image.network(
                                         data[index].image![0],
                                         fit: BoxFit.fitHeight,
-                                        height: 150,
+                                        height: 250,
                                         width: double.infinity,
                                       ),
                                     ),

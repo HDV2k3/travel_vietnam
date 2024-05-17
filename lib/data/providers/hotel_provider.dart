@@ -7,7 +7,6 @@ import '../models/room_in_hotel.dart';
 import '../repositories/hotel_repository.dart';
 import 'firebase_provider.dart';
 
-// provider
 final hotelsServiceProvider = Provider((ref) {
   return HotelRepository(fireStore: ref.watch(firebaseFirestoreProvider));
 });

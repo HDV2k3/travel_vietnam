@@ -10,10 +10,10 @@ class Favorite extends _$Favorite {
   bool build() {
     return ref.watch(sharedPreferencesRepositoryProvider).getIsFavorite();
   }
+
   void onToggle() {
     final newValue = !state;
     ref.read(sharedPreferencesRepositoryProvider).saveIsFavorite(newValue);
     state = newValue;
   }
-
 }

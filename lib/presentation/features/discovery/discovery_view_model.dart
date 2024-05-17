@@ -1,16 +1,11 @@
-import 'dart:io';
-
 import 'package:chandoiqua/data/models/hotel.dart';
 import 'package:chandoiqua/data/repositories/hotel_repository.dart';
 import 'package:chandoiqua/data/repositories/location_repository.dart';
 import 'package:chandoiqua/presentation/features/discovery/discovery_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../constants/constants.dart';
 import '../../../data/models/location.dart';
@@ -51,13 +46,11 @@ class HotelViewModel extends StateNotifier<bool> {
 
 class LocationViewModel extends StateNotifier<bool> {
   final LocationRepository _locationService;
-  final StorageRepository _storageService;
   LocationViewModel(
       {required LocationRepository locationService,
       required Ref ref,
       required StorageRepository storageService})
       : _locationService = locationService,
-        _storageService = storageService,
         super(false);
 
   Stream<List<Location>> getLocations() {
@@ -75,43 +68,6 @@ class LocationViewModel extends StateNotifier<bool> {
   Stream<List<Location>> getRelatedLocations(String provinceName) {
     return _locationService.getRelatedLocations(provinceName);
   }
-
-  void createLocation(
-      BuildContext context,
-      File? file,
-      String name,
-      String description,
-      double price,
-      double oldPrice,
-      String provinceName) async {
-    String locationId = const Uuid().v1();
-    final imageRes = await _storageService.storeFile(
-      path: "products/",
-      id: locationId,
-      file: file,
-    );
-
-    imageRes.fold(
-        (l) => ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(l.message))), (r) async {
-      final location = Location(
-          locationId: locationId,
-          image: r.toString(),
-          name: name,
-          description: description,
-          price: price,
-          oldPrice: oldPrice,
-          provinceName: provinceName);
-      final res = _locationService.addLocation(location);
-      state = false;
-      res.fold(
-          (l) => ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(l.message))), (r) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("location uploaded successfully")));
-      });
-    });
-  }
 }
 
 @riverpod
@@ -119,30 +75,6 @@ class DiscoveryViewModel extends _$DiscoveryViewModel {
   @override
   FutureOr<DiscoveryState> build() {
     return DiscoveryState();
-  }
-
-  Future<List<DocumentSnapshot>> searchLocations(String query) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        final querySnapshot = await FirebaseFirestore.instance
-            .collection('location')
-            .where('location', isGreaterThanOrEqualTo: query)
-            .where('location', isLessThan: '${query}z')
-            .get();
-
-        return querySnapshot.docs;
-      } else {
-        // Người dùng chưa đăng nhập
-        return [];
-      }
-    } catch (e) {
-      // Xử lý lỗi
-      if (kDebugMode) {
-        print('Error searching favorites: $e');
-      }
-      return [];
-    }
   }
 
   Future<bool> userRegisteredSuccessfully() async {

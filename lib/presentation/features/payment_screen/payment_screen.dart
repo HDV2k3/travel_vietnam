@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/providers/authen_provider.dart';
+import '../../../data/providers/cart_provider.dart';
 import '../../../data/providers/order_provider.dart';
 import '../cart_screen/widgets/cart_item.dart';
 import '../discovery/widgets/error_text.dart';
@@ -22,12 +23,19 @@ class PaymentVip extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = FirebaseAuth.instance.currentUser;
-
     final userProvider = ref.watch(getUserDataProvider(currentUser!.uid));
+    final cart = ref.watch(cartControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            cart.clearCart();
+          },
+        ),
         title: Padding(
-          padding: const EdgeInsets.only(right: 50),
+          padding: const EdgeInsets.only(right: 60),
           child: Center(
               child: Text(
             payment,
