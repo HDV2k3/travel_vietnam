@@ -40,7 +40,6 @@ class SearchProducts extends SearchDelegate {
                   physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    final product = data[index];
                     return Padding(
                       padding: const EdgeInsets.all(2),
                       child: GestureDetector(
