@@ -33,7 +33,7 @@ class _DetailPageState extends BaseScreenState<DetailPage,
       body: SingleChildScrollView(
         child: SizedBox(
           width: double.maxFinite,
-          height: 1050,
+          height: 940,
           child: Stack(
             children: [
               // ảnh
@@ -66,7 +66,7 @@ class _DetailPageState extends BaseScreenState<DetailPage,
                 ),
               ),
               Positioned(
-                top: 260,
+                top: 200,
                 child: Container(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                   width: MediaQuery.of(context).size.width,
@@ -163,7 +163,7 @@ class _DetailPageState extends BaseScreenState<DetailPage,
                 ),
               ),
               Positioned(
-                top: 430,
+                top: 370,
                 child: Container(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                   width: MediaQuery.of(context).size.width,
@@ -217,7 +217,7 @@ class _DetailPageState extends BaseScreenState<DetailPage,
                 ),
               ),
               Positioned(
-                top: 500,
+                top: 450,
                 child: Container(
                   padding:
                       const EdgeInsets.only(left: 20, right: 20, bottom: 5),
@@ -237,7 +237,7 @@ class _DetailPageState extends BaseScreenState<DetailPage,
                 ),
               ),
               Positioned(
-                top: 750,
+                top: 680,
                 child: Container(
                   padding:
                       const EdgeInsets.only(left: 20, right: 20, bottom: 5),

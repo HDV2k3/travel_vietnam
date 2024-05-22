@@ -34,9 +34,7 @@ class SearchProducts extends SearchDelegate {
     return products.when(
         data: (data) {
           return data.isNotEmpty
-              ? GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 2 / 3),
+              ? ListView.builder(
                   itemCount: data.length,
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
@@ -62,7 +60,7 @@ class SearchProducts extends SearchDelegate {
                           child: Stack(
                             children: [
                               Container(
-                                height: 300,
+                                height: 400,
                                 width: 300,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
@@ -123,28 +121,6 @@ class SearchProducts extends SearchDelegate {
                                   ],
                                 ),
                               ),
-                              Positioned(
-                                  top: 10,
-                                  right: 20,
-                                  child: Stack(
-                                    children: [
-                                      GestureDetector(
-                                          onTap: () {
-                                            ref
-                                                .watch(cartControllerProvider
-                                                    .notifier)
-                                                .addProductToCart(
-                                                    product as Room, context);
-                                            showSnackBar(
-                                                context, "Added to Cart");
-                                          },
-                                          child: const Icon(
-                                            Icons.shopping_cart,
-                                            color: Colors.blue,
-                                            size: 30,
-                                          )),
-                                    ],
-                                  )),
                               Positioned(
                                   top: 5,
                                   left: 0,
