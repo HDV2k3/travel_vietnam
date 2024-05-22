@@ -1,10 +1,7 @@
-import 'package:chandoiqua/data/models/room_in_hotel.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_screen_hotel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/utils.dart';
-import '../../../../data/providers/cart_provider.dart';
 import '../../../../data/providers/hotel_provider.dart';
 import 'error_text.dart';
 import 'loader.dart';
@@ -58,64 +55,107 @@ class SearchProducts extends SearchDelegate {
                           elevation: 1,
                           child: Stack(
                             children: [
-                              Container(
-                                height: 400,
-                                width: 300,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Column(
+                              Positioned(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Image.network(
+                                      scale: 8,
+                                      data[index].image![0],
+                                      fit: BoxFit.contain,
+                                    ),
                                     const SizedBox(
-                                      height: 32,
+                                      width: 20,
                                     ),
-                                    Flexible(
-                                      child: Image.network(
-                                        data[index].image![0],
-                                        fit: BoxFit.fitHeight,
-                                        height: 250,
-                                        width: double.infinity,
-                                      ),
-                                    ),
-                                    Center(
-                                        child: Text(
-                                      data[index].name!,
-                                      style: const TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600),
-                                    )),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "\$${data[index].price}",
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w600),
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              data[index].name!,
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            const Icon(
+                                              Icons.location_on,
+                                              size: 18,
+                                              color: Colors.deepPurple,
+                                            ),
+                                            Text(
+                                              data[index].provinceName!,
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.blue,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 50,
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.only(right: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                'Giá Mới',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.blue,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              SizedBox(
+                                                width: 60,
+                                              ),
+                                              Text(
+                                                'Giá Cũ',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.blue,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                            ],
                                           ),
-                                          const SizedBox(
-                                            height: 16,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                data[index].price.toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.blue,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              const SizedBox(
+                                                width: 60,
+                                              ),
+                                              Text(
+                                                data[index].oldPrice.toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.blue,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                            ],
                                           ),
-                                          Text(
-                                            "\$${data[index].oldPrice}",
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.blue,
-                                                fontWeight: FontWeight.w600,
-                                                decoration:
-                                                    TextDecoration.lineThrough),
-                                          )
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     )
                                   ],
                                 ),
@@ -163,15 +203,12 @@ class SearchProducts extends SearchDelegate {
     final products = ref.watch(searchHotels(query));
     return products.when(
         data: (data) {
-          return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: 2 / 3),
+          return ListView.builder(
               itemCount: data.length,
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                final product = data[index];
                 return Padding(
                   padding: const EdgeInsets.all(2),
                   child: GestureDetector(
@@ -184,93 +221,111 @@ class SearchProducts extends SearchDelegate {
                     },
                     child: Card(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                          borderRadius: BorderRadius.circular(10)),
                       elevation: 1,
                       child: Stack(
                         children: [
-                          Container(
-                            height: 180,
-                            width: 180,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
+                          Positioned(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Image.network(
+                                  data[index].image![0],
+                                  fit: BoxFit.cover,
+                                  height: 130,
+                                  width: 150,
+                                ),
                                 const SizedBox(
-                                  height: 32,
+                                  width: 20,
                                 ),
-                                Flexible(
-                                  child: Image.network(
-                                    data[index].image![0],
-                                    fit: BoxFit.fitHeight,
-                                    height: 150,
-                                    width: double.infinity,
-                                  ),
-                                ),
-                                Center(
-                                    child: Text(
-                                  data[index].name!,
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600),
-                                )),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "\$${data[index].price}",
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600),
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          data[index].name!,
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        const Icon(
+                                          Icons.location_on,
+                                          size: 18,
+                                          color: Colors.deepPurple,
+                                        ),
+                                        Text(
+                                          data[index].provinceName!,
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 50,
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 10),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Giá Mới',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          SizedBox(
+                                            width: 60,
+                                          ),
+                                          Text(
+                                            'Giá Cũ',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(
-                                        height: 16,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            data[index].price.toString(),
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          const SizedBox(
+                                            width: 60,
+                                          ),
+                                          Text(
+                                            data[index].oldPrice.toString(),
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        "\$${data[index].oldPrice}",
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.blue,
-                                            fontWeight: FontWeight.w600,
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 )
                               ],
                             ),
                           ),
-                          Positioned(
-                              top: 10,
-                              right: 20,
-                              child: Stack(
-                                children: [
-                                  GestureDetector(
-                                      onTap: () {
-                                        ref
-                                            .watch(
-                                                cartControllerProvider.notifier)
-                                            .addProductToCart(
-                                                product as Room, context);
-                                        showSnackBar(context, "Added to Cart");
-                                      },
-                                      child: const Icon(
-                                        Icons.shopping_cart,
-                                        color: Colors.blue,
-                                        size: 30,
-                                      )),
-                                ],
-                              )),
                           Positioned(
                               top: 5,
                               left: 0,

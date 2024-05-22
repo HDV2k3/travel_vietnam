@@ -132,14 +132,14 @@ class ListViewLocation extends ConsumerWidget {
                                             const SizedBox(
                                               width: 35,
                                             ),
-                                            Text(
-                                              'Từ ${data[index].price!.toStringAsFixed(0)}\$',
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16.0,
-                                              ),
-                                            ),
+                                            // Text(
+                                            //   'Từ ${data[index].price!.toStringAsFixed(0)}\$',
+                                            //   style: const TextStyle(
+                                            //     color: Colors.black,
+                                            //     fontWeight: FontWeight.bold,
+                                            //     fontSize: 16.0,
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ],
