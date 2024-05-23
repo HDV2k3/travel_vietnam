@@ -1,6 +1,7 @@
 import 'package:chandoiqua/data/models/location.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/list_view_hotel_near.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/widgets/slider_activi.dart';
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -149,7 +150,7 @@ class _DetailPageState extends BaseScreenState<DetailPage,
                         color: Colors.grey.withOpacity(0.5),
                       ),
                       Text(
-                        'Mở Cửa Hàng Ngày',
+                        ref.appLocalizations.moTa,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(0.8)),
@@ -177,16 +178,16 @@ class _DetailPageState extends BaseScreenState<DetailPage,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Hoạt Động',
-                              style: TextStyle(
+                              ref.appLocalizations.hoatDong,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                           ],
@@ -229,11 +230,12 @@ class _DetailPageState extends BaseScreenState<DetailPage,
                   child: const SliderImageActivity(),
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 720, left: 20),
                 child: Text(
-                  'Khách Sạn Gần Đó',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ref.appLocalizations.khachSanGanDo,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               Positioned(

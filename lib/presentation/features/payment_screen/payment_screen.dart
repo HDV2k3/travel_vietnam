@@ -1,5 +1,6 @@
 import 'package:chandoiqua/data/models/usser.dart';
 import 'package:chandoiqua/presentation/features/payment_screen/widgets/selected_payment_method.dart';
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +39,7 @@ class PaymentVip extends ConsumerWidget {
           padding: const EdgeInsets.only(right: 60),
           child: Center(
               child: Text(
-            payment,
+            ref.appLocalizations.thanhToan,
             style: const TextStyle(
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
           )),
@@ -67,9 +68,9 @@ class PaymentVip extends ConsumerWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
-                                  "Total",
-                                  style: TextStyle(
+                                Text(
+                                  ref.appLocalizations.tongTien,
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -111,9 +112,9 @@ class PaymentVip extends ConsumerWidget {
                                                   const PaymentProcessScreen()));
                                     });
                                   },
-                                  child: const Text(
-                                    "Place Order",
-                                    style: TextStyle(
+                                  child: Text(
+                                    ref.appLocalizations.thanhToan,
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   ),

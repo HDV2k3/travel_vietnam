@@ -1,14 +1,15 @@
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class IconTextBack extends StatelessWidget {
+class IconTextBack extends ConsumerWidget {
   final VoidCallback onBackPressed;
   const IconTextBack({
     super.key,
     required this.onBackPressed,
   });
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -17,9 +18,9 @@ class IconTextBack extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           color: Colors.blue,
         ),
-        const Text(
-          'Số lượng phòng và khách',
-          style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+        Text(
+          ref.appLocalizations.soLuongPhongVaKhach,
+          style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
         ),
         Opacity(
           opacity: 0,

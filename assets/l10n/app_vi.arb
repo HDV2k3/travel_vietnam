@@ -80,5 +80,145 @@
   "@language": {
     "type": "text",
     "placeholders": {}
+  },
+  "quyDinh": "Quy định",
+  "@quyDinh": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "khungCanh": "Khung cảnh",
+  "@khungCanh": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thanhToanTrucTuyen": "Thanh toán trực tuyến",
+  "@thanhToanTrucTuyen": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dem": "Đêm",
+  "@dem": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "moCuaHangNgay": "Mở cửa hàng ngày",
+  "@moCuaHangNgay": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hoatDong": "Hoạt động",
+  "@hoatDong": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "khachSanGanDo": "Khách sạn gần đó",
+  "@khachSanGanDo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tu": "Từ",
+  "@tu": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dat": "Đặt",
+  "@dat": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "soLuongPhongVaKhach": "Số lượng phòng và khách",
+  "@soLuongPhongVaKhach": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "phong": "Phòng",
+  "@phong": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nguoiLon": "Người lớn",
+  "@nguoiLon": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "trEm": "Trẻ em",
+  "@trEm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hoanThanh": "Hoàn thành",
+  "@hoanThanh": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nhanPhongVaTraPhong": "Nhận phòng và trả phòng",
+  "@nhanPhongVaTraPhong": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "phongVaKhach": "Phòng và khách",
+  "@phongVaKhach": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "chiTiet": "Chi tiết",
+  "@chiTiet": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "giuong": "Giường",
+  "@giuong": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "timKiem": "Tìm kiếm",
+  "@timKiem": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mucYeuThich": "Mục yêu thích",
+  "@mucYeuThich": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thanhToanThanhCong": "Thanh toán thành công",
+  "@thanhToanThanhCong": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tiepTucDatKhachSan": "Tiếp tục đặt khách sạn",
+  "@tiepTucDatKhachSan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thanhToan": "Thanh toán",
+  "@thanhToan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tongTien": "Tổng tiền",
+  "@tongTien": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "moTa": "Mô tả",
+  "@moTa": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tienIch": "Tiện ich",
+  "@tienIch": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "giaCu": "Giá cũ",
+  "@giaCu": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "giaMoi": "Giá mới",
+  "@giaMoi": {
+    "type": "text",
+    "placeholders": {}
   }
 }

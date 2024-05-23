@@ -1,4 +1,5 @@
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_screen_hotel.dart';
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -99,24 +100,25 @@ class SearchProducts extends SearchDelegate {
                                         const SizedBox(
                                           height: 50,
                                         ),
-                                        const Padding(
-                                          padding: EdgeInsets.only(right: 10),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 10),
                                           child: Row(
                                             children: [
                                               Text(
-                                                'Giá Mới',
-                                                style: TextStyle(
+                                                ref.appLocalizations.giaMoi,
+                                                style: const TextStyle(
                                                     fontSize: 15,
                                                     color: Colors.blue,
                                                     fontWeight:
                                                         FontWeight.w600),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 60,
                                               ),
                                               Text(
-                                                'Giá Cũ',
-                                                style: TextStyle(
+                                                ref.appLocalizations.giaCu,
+                                                style: const TextStyle(
                                                     fontSize: 15,
                                                     color: Colors.blue,
                                                     fontWeight:
@@ -270,23 +272,23 @@ class SearchProducts extends SearchDelegate {
                                     const SizedBox(
                                       height: 50,
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.only(right: 10),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
                                       child: Row(
                                         children: [
                                           Text(
-                                            'Giá Mới',
-                                            style: TextStyle(
+                                            ref.appLocalizations.giaMoi,
+                                            style: const TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.blue,
                                                 fontWeight: FontWeight.w600),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 60,
                                           ),
                                           Text(
-                                            'Giá Cũ',
-                                            style: TextStyle(
+                                            ref.appLocalizations.giaCu,
+                                            style: const TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.blue,
                                                 fontWeight: FontWeight.w600),

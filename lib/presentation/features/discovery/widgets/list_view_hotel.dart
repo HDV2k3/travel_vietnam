@@ -1,4 +1,5 @@
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_screen_hotel.dart';
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -115,7 +116,7 @@ class ListViewHotel extends ConsumerWidget {
                                               width: 20,
                                             ),
                                             Text(
-                                              'Từ ${data[index].price!.toStringAsFixed(0)}\$',
+                                              '${ref.appLocalizations.tu} ${data[index].price!.toStringAsFixed(0)}\$',
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold,

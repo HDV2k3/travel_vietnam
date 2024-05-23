@@ -2,6 +2,7 @@ import 'package:chandoiqua/presentation/common_widgets/base/base_screen.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_state.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_view_model.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/model/room_person_child.dart';
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -54,11 +55,11 @@ class _RoomAndPersonState extends BaseScreenState<RoomAndPerson,
                 ),
                 Row(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 20, top: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, top: 10),
                       child: Text(
-                        'Phòng',
-                        style: TextStyle(
+                        ref.appLocalizations.phong,
+                        style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -97,11 +98,11 @@ class _RoomAndPersonState extends BaseScreenState<RoomAndPerson,
                 ),
                 Row(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 20, top: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, top: 10),
                       child: Text(
-                        'Người Lớn',
-                        style: TextStyle(
+                        ref.appLocalizations.nguoiLon,
+                        style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -140,11 +141,11 @@ class _RoomAndPersonState extends BaseScreenState<RoomAndPerson,
                 ),
                 Row(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 20, top: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, top: 10),
                       child: Text(
-                        'Trẻ em',
-                        style: TextStyle(
+                        ref.appLocalizations.trEm,
+                        style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -194,12 +195,12 @@ class _RoomAndPersonState extends BaseScreenState<RoomAndPerson,
                         );
                         Navigator.pop(context, data); // Trả về đối tượng
                       },
-                      child: const SizedBox(
+                      child: SizedBox(
                         width: 100,
                         height: 20,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text('Hoàn Thành'),
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(ref.appLocalizations.hoanThanh),
                         ),
                       ),
                     ),

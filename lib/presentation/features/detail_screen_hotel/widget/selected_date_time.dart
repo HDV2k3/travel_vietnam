@@ -1,3 +1,4 @@
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:custom_date_range_picker/custom_date_range_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +32,7 @@ class _SelectDateTimeState extends State<SelectDateTimeHotel> {
       selectedStartDateText = DateFormat('dd/MM').format(DateTime.now());
       selectedEndDateText = DateFormat('dd/MM')
           .format(DateTime.now().add(const Duration(days: 1)));
-      applyClickText = '1 Đêm';
+      applyClickText = '1${ref.appLocalizations.dem}';
       ref.read(daysProvider.notifier).state = 1;
     });
   }
@@ -63,8 +64,9 @@ class _SelectDateTimeState extends State<SelectDateTimeHotel> {
                     selectedEndDateText = DateFormat('dd/MM').format(end);
                     final numberOfDays = end.difference(start).inDays;
                     ref.read(daysProvider.notifier).state = numberOfDays;
-                    applyClickText =
-                        numberOfDays == 1 ? '1 Đêm' : '$numberOfDays Đêm';
+                    applyClickText = numberOfDays == 1
+                        ? '1${ref.appLocalizations.dem}'
+                        : '$numberOfDays${ref.appLocalizations.dem}';
                   });
                 },
                 onCancelClick: () {
@@ -76,7 +78,7 @@ class _SelectDateTimeState extends State<SelectDateTimeHotel> {
                         DateFormat('dd/MM').format(DateTime.now());
                     selectedEndDateText = DateFormat('dd/MM')
                         .format(DateTime.now().add(const Duration(days: 1)));
-                    applyClickText = '1 Đêm';
+                    applyClickText = '1${ref.appLocalizations.dem}';
                     ref.read(daysProvider.notifier).state = 1;
                   });
                 },

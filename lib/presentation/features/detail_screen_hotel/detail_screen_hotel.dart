@@ -5,6 +5,7 @@ import 'package:chandoiqua/presentation/features/detail_screen_hotel/provider/da
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/widget/room_person_conut_screen.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/widget/selected_date_time.dart';
 import 'package:chandoiqua/presentation/features/payment_screen/payment_screen.dart';
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -155,9 +156,9 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                       height: 1,
                       color: Colors.grey.withOpacity(0.5),
                     ),
-                    const Text(
-                      'Tiện Ích',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      ref.appLocalizations.tienIch,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Wrap(
                       children: hotel.utilities!.map((utility) {
@@ -185,13 +186,13 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                     ),
                     Column(
                       children: [
-                        const Row(
+                        Row(
                           children: [
-                            Text('Nhận phòng và trả phòng'),
-                            SizedBox(
+                            Text(ref.appLocalizations.nhanPhongVaTraPhong),
+                            const SizedBox(
                               width: 55,
                             ),
-                            Text('Phòng và khách'),
+                            Text(ref.appLocalizations.phongVaKhach),
                           ],
                         ),
                         SingleChildScrollView(
@@ -362,7 +363,8 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                                   ),
                                   TextButton(
                                       onPressed: () {},
-                                      child: const Text('Chi tiết')),
+                                      child:
+                                          Text(ref.appLocalizations.chiTiet)),
                                   // const SizedBox(
                                   //   height: 20,
                                   // ),
@@ -372,7 +374,8 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                                         Icons.bedroom_parent_outlined,
                                         size: 20,
                                       ),
-                                      Text('${room.numberOfBeds!} giường king')
+                                      Text(
+                                          '${room.numberOfBeds!}${ref.appLocalizations.giuong}King')
                                     ],
                                   ),
                                   Row(
@@ -460,11 +463,12 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                                                 0), // Bo góc, bạn có thể đặt giá trị bất kỳ, 0 để không bo góc
                                           ),
                                         ),
-                                        child: const SizedBox(
+                                        child: SizedBox(
                                           width: 60,
                                           child: Align(
                                             alignment: Alignment.center,
-                                            child: Text('Đặt'),
+                                            child:
+                                                Text(ref.appLocalizations.dat),
                                           ),
                                         ),
                                       ),
