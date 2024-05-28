@@ -11,37 +11,33 @@ class SliderImageActivity extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return FutureBuilder<List<String>>(
-      future:
-          getImageUrlsFromFirebase(), // Call the function to get the image URLs from Firebase
+    return FutureBuilder<Map<String, List<String>>>(
+      future: getImageUrlsFromFirebase(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child:
-                CircularProgressIndicator(), // Show a loading indicator while fetching data
+            child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
           return Center(
-            child: Text(
-                'Error: ${snapshot.error}'), // Show an error message if there's an error
+            child: Text('Error: ${snapshot.error}'),
           );
         } else if (snapshot.hasData && snapshot.data != null) {
-          List<String> imageUrls =
-              snapshot.data!; // Get the image URLs from the snapshot
+          Map<String, List<String>> roomImageUrls = snapshot.data!;
+          List<String> allImageUrls =
+              roomImageUrls.values.expand((urls) => urls).toList();
 
           return CarouselSlider(
             options: CarouselOptions(
-              height: 200, // Set the height of the slider
-              enableInfiniteScroll: true, // Enable infinite scrolling
-              autoPlay: true, // Enable auto play
-              autoPlayInterval:
-                  const Duration(seconds: 3), // Set the auto play interval
-              enlargeCenterPage: true, // Enlarge the center page
-              viewportFraction:
-                  1, // Set the visible portion of each item on the screen
+              height: 200,
+              enableInfiniteScroll: true,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 3),
+              enlargeCenterPage: true,
+              viewportFraction: 1,
               onPageChanged: (index, reason) {},
             ),
-            items: imageUrls.map((imageUrl) {
+            items: allImageUrls.map((imageUrl) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
@@ -50,8 +46,7 @@ class SliderImageActivity extends ConsumerWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: NetworkImage(
-                            imageUrl), // Use NetworkImage to load the image from the URL
+                        image: NetworkImage(imageUrl),
                         fit: BoxFit.fitWidth,
                       ),
                     ),
@@ -62,31 +57,33 @@ class SliderImageActivity extends ConsumerWidget {
           );
         } else {
           return const Center(
-            child:
-                Text('No data available'), // Show a message if there's no data
+            child: Text('No data available'),
           );
         }
       },
     );
   }
 
-// Function to get the image URLs from the 'location' collection in Firestore
-  Future<List<String>> getImageUrlsFromFirebase() async {
-    List<String> imageUrls = [];
-    QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection('location')
-        .get(); // Get the documents from the 'location' collection
-    for (var doc in snapshot.docs) {
-      // Convert the 'imageUrl' array to a list of strings
+  Future<Map<String, List<String>>> getImageUrlsFromFirebase() async {
+    Map<String, List<String>> roomImageUrls = {};
+
+    QuerySnapshot locationsSnapshot =
+        await FirebaseFirestore.instance.collection('location').get();
+
+    for (var locationDoc in locationsSnapshot.docs) {
+      String locationId = locationDoc.id;
       List<dynamic> imageUrlArray =
-          doc['imageActivity'] as List<dynamic>; // Cast to List<dynamic>
+          locationDoc['imageActivity'] as List<dynamic>;
       List<String> imageUrlList =
           imageUrlArray.map((imageUrl) => imageUrl as String).toList();
-      imageUrls.addAll(imageUrlList);
+
+      roomImageUrls[locationId] = imageUrlList;
     }
+
     if (kDebugMode) {
-      print(imageUrls);
+      print(roomImageUrls);
     }
-    return imageUrls;
+
+    return roomImageUrls;
   }
 }

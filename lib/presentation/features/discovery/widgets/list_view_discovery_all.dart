@@ -1,11 +1,14 @@
 import 'package:chandoiqua/data/providers/favorite_provider.dart';
 import 'package:chandoiqua/presentation/features/detail_screen_discovery/detail_screen_discovery.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/providers/location_provider.dart';
 import '../../../../data/repositories/discovery_repository.dart';
+import '../../favorite_screen/favorite_screen.dart';
+import '../../sign_in/sign_in_screen.dart';
 import 'error_text.dart';
 import 'favorite_icon.dart';
 import 'loader.dart';
@@ -74,6 +77,25 @@ class ListViewLocation extends ConsumerWidget {
                                               child: FavoriteIcon(
                                                 isFavorite: isFavorite,
                                                 onPressed: () {
+                                                  User? user = FirebaseAuth
+                                                      .instance.currentUser;
+                                                  if (user == null) {
+                                                    Navigator
+                                                        .pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const LogIn()),
+                                                      (route) => true,
+                                                    );
+                                                  } else {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const FavoriteScreen()),
+                                                    );
+                                                  }
                                                   discoveryController
                                                       .addToFavorite(
                                                     title:

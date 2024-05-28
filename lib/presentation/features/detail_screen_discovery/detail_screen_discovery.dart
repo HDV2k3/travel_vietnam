@@ -231,7 +231,7 @@ class _DetailPageState extends BaseScreenState<DetailPage,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 720, left: 20),
+                padding: const EdgeInsets.only(top: 720, left: 20),
                 child: Text(
                   ref.appLocalizations.khachSanGanDo,
                   style: const TextStyle(

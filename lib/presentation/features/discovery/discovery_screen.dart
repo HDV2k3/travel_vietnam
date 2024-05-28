@@ -8,10 +8,10 @@ import 'package:chandoiqua/presentation/features/discovery/widgets/search.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/slider.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/text_category.dart';
 import 'package:chandoiqua/presentation/features/discovery/widgets/text_location.dart';
-import 'package:chandoiqua/presentation/features/profile_user/profile_screen.dart';
 import 'package:chandoiqua/presentation/features/sign_in/sign_in_screen.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -76,7 +76,7 @@ class _DiscoveryState extends BaseScreenState<DiscoveryScreen,
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ProfileUser()),
+                              builder: (context) => const ProfileScreen()),
                         );
                       }
                     },

@@ -225,5 +225,10 @@
   "@giaMoi": {
     "type": "text",
     "placeholders": {}
+  },
+  "tatCa": "ALL",
+  "@tatCa": {
+    "type": "text",
+    "placeholders": {}
   }
 }

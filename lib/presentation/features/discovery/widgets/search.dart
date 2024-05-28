@@ -1,4 +1,5 @@
 import 'package:chandoiqua/presentation/features/discovery/widgets/search_delegate.dart';
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,7 +14,7 @@ class SearchWidget extends ConsumerWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: TextField(
           decoration: InputDecoration(
-            hintText: "Search",
+            hintText: ref.appLocalizations.timKiem,
             hintStyle: const TextStyle(color: Colors.black),
             border: InputBorder.none,
             enabledBorder: OutlineInputBorder(

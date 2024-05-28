@@ -51,6 +51,7 @@ class _DiscoveryState
   @override
   Widget buildBody(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+
     if (user != null) {
       loadFavoriteItems(); // Gọi hàm loadFavoriteItems để tải danh sách yêu thích
     } else {

@@ -38,7 +38,7 @@ class ButtonTabbar extends ConsumerWidget {
             ),
             height: 40,
             tabs: [
-              Tab(text: ref.appLocalizations.all),
+              Tab(text: ref.appLocalizations.tatCa),
               Tab(text: ref.appLocalizations.sai_gon),
               Tab(text: ref.appLocalizations.da_nang),
               Tab(text: ref.appLocalizations.ha_noi),

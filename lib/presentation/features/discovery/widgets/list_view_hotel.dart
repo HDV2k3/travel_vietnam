@@ -1,10 +1,13 @@
 import 'package:chandoiqua/presentation/features/detail_screen_hotel/detail_screen_hotel.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../data/providers/favorite_provider.dart';
 import '../../../../data/providers/hotel_provider.dart';
+import '../../favorite_screen/favorite_screen.dart';
+import '../../sign_in/sign_in_screen.dart';
 import 'error_text.dart';
 import 'favorite_icon.dart';
 import 'loader.dart';
@@ -70,7 +73,27 @@ class ListViewHotel extends ConsumerWidget {
                                               top: 10,
                                               child: FavoriteIcon(
                                                 isFavorite: isFavorite,
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  User? user = FirebaseAuth
+                                                      .instance.currentUser;
+                                                  if (user == null) {
+                                                    Navigator
+                                                        .pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const LogIn()),
+                                                      (route) => true,
+                                                    );
+                                                  } else {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const FavoriteScreen()),
+                                                    );
+                                                  }
+                                                },
                                               ),
                                             ),
                                           ],

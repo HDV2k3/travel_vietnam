@@ -289,9 +289,10 @@ class SearchProducts extends SearchDelegate {
                                           Text(
                                             ref.appLocalizations.giaCu,
                                             style: const TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.blue,
-                                                fontWeight: FontWeight.w600),
+                                              fontSize: 15,
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -304,7 +305,7 @@ class SearchProducts extends SearchDelegate {
                                       child: Row(
                                         children: [
                                           Text(
-                                            data[index].price.toString(),
+                                            '${data[index].price}\$',
                                             style: const TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.blue,
@@ -314,11 +315,13 @@ class SearchProducts extends SearchDelegate {
                                             width: 60,
                                           ),
                                           Text(
-                                            data[index].oldPrice.toString(),
+                                            '${data[index].oldPrice}\$',
                                             style: const TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.blue,
-                                                fontWeight: FontWeight.w600),
+                                                fontWeight: FontWeight.w600,
+                                                decoration:
+                                                    TextDecoration.lineThrough),
                                           ),
                                         ],
                                       ),
