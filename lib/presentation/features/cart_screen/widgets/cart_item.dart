@@ -1,3 +1,4 @@
+import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -49,13 +50,14 @@ class CartItemWidget extends ConsumerWidget {
                     children: [
                       Text('${item.area}m²'),
                       const SizedBox(
-                        width: 20,
+                        width: 5,
                       ),
-                      Text('view: ${item.view}'),
+                      Text('${ref.appLocalizations.khungCanh}: ${item.view}'),
                       const SizedBox(
-                        width: 20,
+                        width: 5,
                       ),
-                      Text('quy định: ${item.regulations}'),
+                      Text(
+                          '${ref.appLocalizations.quyDinh}: ${item.regulations}'),
                     ],
                   )
                 ],

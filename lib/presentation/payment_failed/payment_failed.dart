@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../home/home_screen.dart';
+import '../features/home/home_screen.dart';
 
-class PaymentProcessScreen extends StatefulWidget {
-  const PaymentProcessScreen({super.key});
+class PaymentFailed extends StatefulWidget {
+  const PaymentFailed({super.key});
 
   @override
-  State<PaymentProcessScreen> createState() => _PaymentProcessScreenState();
+  State<PaymentFailed> createState() => _PaymentProcessScreenState();
 }
 
-class _PaymentProcessScreenState extends State<PaymentProcessScreen>
+class _PaymentProcessScreenState extends State<PaymentFailed>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _iconAnimation;
@@ -82,15 +82,15 @@ class _PaymentProcessScreenState extends State<PaymentProcessScreen>
                 Opacity(
                   opacity: _iconAnimation.value,
                   child: const Icon(
-                    Icons.check_circle_outline,
+                    Icons.dangerous_outlined,
                     size: 100,
-                    color: Colors.green,
+                    color: Colors.red,
                   ),
                 ),
                 Opacity(
                   opacity: _textAnimation.value,
                   child: const Text(
-                    'Thanh toán thành công!',
+                    'Thanh toán thất bại!',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -105,15 +105,17 @@ class _PaymentProcessScreenState extends State<PaymentProcessScreen>
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) =>
+                            const HomeScreen(), // Chuyển đến màn hình xử lý thanh toán
                       ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.teal,
+                    backgroundColor:
+                        Colors.teal, // Thiết lập màu nền là màu xanh nước biển
                   ),
                   child: const Text(
-                    'Tiếp tục đặt khách sạn nào!',
+                    'Vui lòng đặt lại!',
                     style: TextStyle(
                       color: Colors.white,
                     ),
