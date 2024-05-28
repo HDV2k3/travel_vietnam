@@ -1,4 +1,5 @@
 import 'package:chandoiqua/data/models/usser.dart';
+import 'package:chandoiqua/presentation/features/payment_process_screen/payment_process_screen.dart';
 import 'package:chandoiqua/presentation/features/payment_screen/widgets/selected_payment_method.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +12,6 @@ import '../../../data/providers/order_provider.dart';
 import '../cart_screen/widgets/cart_item.dart';
 import '../discovery/widgets/error_text.dart';
 import '../discovery/widgets/loader.dart';
-import '../payment_process_screen/payment_process_screen.dart';
 
 class PaymentVip extends ConsumerWidget {
   final String payment;
@@ -109,9 +109,12 @@ class PaymentVip extends ConsumerWidget {
                                               value, data.grandTotal)
                                           .then((value) => MaterialPageRoute(
                                               builder: (context) =>
-                                                  const PaymentProcessScreen()));
+                                                  PaymentProcessScreen()));
                                     });
                                   },
+                                  // => MaterialPageRoute(
+                                  // builder: (context) =>
+                                  // const PaymentProcessScreen())
                                   child: Text(
                                     ref.appLocalizations.thanhToan,
                                     style: const TextStyle(

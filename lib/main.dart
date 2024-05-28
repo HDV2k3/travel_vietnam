@@ -15,7 +15,7 @@ Future<void> main() async {
   // await Hive.initFlutter();
   //
   // Stripe.publishableKey = APIKey.PUBLISHABLEkEY;
-  // Stripe.merchantIdentifier = "Isheunesu";
+  // Stripe.merchantIdentifier = "HDV";
   // await Stripe.instance.applySettings();
 
   final sharedPreferences = await SharedPreferences.getInstance();
