@@ -22,4 +22,14 @@ class OrderRepository implements OrderInterface {
       _orders.doc(order.orderId).set(order.toJson()),
     );
   }
+
+  Stream<List<Orders>> getUserOrders(String userId) {
+    return _orders.where('uid', isEqualTo: userId).snapshots().map((event) {
+      List<Orders> orders = [];
+      for (var doc in event.docs) {
+        orders.add(Orders.fromJson(doc.data() as Map<String, dynamic>));
+      }
+      return orders;
+    });
+  }
 }

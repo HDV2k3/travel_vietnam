@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../features/home/home_screen.dart';
+import '../home/home_screen.dart';
 
 class PaymentFailed extends StatefulWidget {
   const PaymentFailed({super.key});

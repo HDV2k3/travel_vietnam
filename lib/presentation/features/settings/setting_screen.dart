@@ -1,3 +1,4 @@
+import 'package:chandoiqua/presentation/features/settings/widgets/fea.dart';
 import 'package:chandoiqua/presentation/features/settings/widgets/setting_language_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,6 +43,7 @@ class _SettingScreenState
         SizedBox(
           height: 16,
         ),
+        OrderStatusItem(),
       ],
     );
   }

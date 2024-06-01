@@ -13,10 +13,10 @@ import 'package:riverpod/riverpod.dart';
 import '../../../data/providers/authen_provider.dart';
 import '../../../data/providers/cart_provider.dart';
 import '../../../data/providers/order_provider.dart';
-import '../../payment_failed/payment_failed.dart';
 import '../cart_screen/widgets/cart_item.dart';
 import '../discovery/widgets/error_text.dart';
 import '../discovery/widgets/loader.dart';
+import '../payment_failed/payment_failed.dart';
 import '../payment_process_screen/payment_process_screen.dart';
 
 class PaymentVip extends BaseScreen {
