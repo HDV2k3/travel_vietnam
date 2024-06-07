@@ -9,6 +9,17 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsAppIconGen {
+  const $AssetsAppIconGen();
+
+  /// File path: assets/app_icon/iconapp.jpg
+  AssetGenImage get iconapp =>
+      const AssetGenImage('assets/app_icon/iconapp.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [iconapp];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -64,6 +75,10 @@ class $AssetsImagesGen {
   AssetGenImage get paypalll =>
       const AssetGenImage('assets/images/paypalll.jpg');
 
+  /// File path: assets/images/vlh-1581501483279773323335.jpg
+  AssetGenImage get vlh1581501483279773323335 =>
+      const AssetGenImage('assets/images/vlh-1581501483279773323335.jpg');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         img7985,
@@ -80,7 +95,8 @@ class $AssetsImagesGen {
         ggpay,
         googleLogo,
         paypal,
-        paypalll
+        paypalll,
+        vlh1581501483279773323335
       ];
 }
 
@@ -98,6 +114,7 @@ class $AssetsLogosGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAppIconGen appIcon = $AssetsAppIconGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const String locations = 'assets/locations.json';
   static const $AssetsLogosGen logos = $AssetsLogosGen();

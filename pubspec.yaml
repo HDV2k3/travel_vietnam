@@ -75,7 +75,7 @@ dependencies:
   crypto: ^3.0.3
   sprintf: ^7.0.0
   flutter_dash: ^1.0.0
-  flutter_stripe: ^10.1.1
+  flutter_stripe: ^10.0.0
 
 dev_dependencies:
   flutter_test:

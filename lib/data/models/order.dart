@@ -16,6 +16,7 @@ abstract class Orders with _$Orders {
       required String orderId,
       bool? isAccepted,
       bool? isCancelled,
+      bool? isActivity,
       required DateTime date}) = _Orders;
   factory Orders.fromJson(Map<String, dynamic> json) => _$OrdersFromJson(json);
 }

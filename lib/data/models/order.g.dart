@@ -15,6 +15,7 @@ _$OrdersImpl _$$OrdersImplFromJson(Map<String, dynamic> json) => _$OrdersImpl(
       orderId: json['orderId'] as String,
       isAccepted: json['isAccepted'] as bool?,
       isCancelled: json['isCancelled'] as bool?,
+      isActivity: json['isActivity'] as bool?,
       date: DateTime.parse(json['date'] as String),
     );
 
@@ -26,5 +27,6 @@ Map<String, dynamic> _$$OrdersImplToJson(_$OrdersImpl instance) =>
       'orderId': instance.orderId,
       'isAccepted': instance.isAccepted,
       'isCancelled': instance.isCancelled,
+      'isActivity': instance.isActivity,
       'date': instance.date.toIso8601String(),
     };

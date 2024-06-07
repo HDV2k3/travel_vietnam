@@ -26,6 +26,7 @@ mixin _$Orders {
   String get orderId => throw _privateConstructorUsedError;
   bool? get isAccepted => throw _privateConstructorUsedError;
   bool? get isCancelled => throw _privateConstructorUsedError;
+  bool? get isActivity => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $OrdersCopyWith<$Res> {
       String orderId,
       bool? isAccepted,
       bool? isCancelled,
+      bool? isActivity,
       DateTime date});
 }
 
@@ -67,6 +69,7 @@ class _$OrdersCopyWithImpl<$Res, $Val extends Orders>
     Object? orderId = null,
     Object? isAccepted = freezed,
     Object? isCancelled = freezed,
+    Object? isActivity = freezed,
     Object? date = null,
   }) {
     return _then(_value.copyWith(
@@ -94,6 +97,10 @@ class _$OrdersCopyWithImpl<$Res, $Val extends Orders>
           ? _value.isCancelled
           : isCancelled // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isActivity: freezed == isActivity
+          ? _value.isActivity
+          : isActivity // ignore: cast_nullable_to_non_nullable
+              as bool?,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -116,6 +123,7 @@ abstract class _$$OrdersImplCopyWith<$Res> implements $OrdersCopyWith<$Res> {
       String orderId,
       bool? isAccepted,
       bool? isCancelled,
+      bool? isActivity,
       DateTime date});
 }
 
@@ -136,6 +144,7 @@ class __$$OrdersImplCopyWithImpl<$Res>
     Object? orderId = null,
     Object? isAccepted = freezed,
     Object? isCancelled = freezed,
+    Object? isActivity = freezed,
     Object? date = null,
   }) {
     return _then(_$OrdersImpl(
@@ -163,6 +172,10 @@ class __$$OrdersImplCopyWithImpl<$Res>
           ? _value.isCancelled
           : isCancelled // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isActivity: freezed == isActivity
+          ? _value.isActivity
+          : isActivity // ignore: cast_nullable_to_non_nullable
+              as bool?,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -182,6 +195,7 @@ class _$OrdersImpl implements _Orders {
       required this.orderId,
       this.isAccepted,
       this.isCancelled,
+      this.isActivity,
       required this.date})
       : _products = products;
 
@@ -207,11 +221,13 @@ class _$OrdersImpl implements _Orders {
   @override
   final bool? isCancelled;
   @override
+  final bool? isActivity;
+  @override
   final DateTime date;
 
   @override
   String toString() {
-    return 'Orders(uid: $uid, products: $products, total: $total, orderId: $orderId, isAccepted: $isAccepted, isCancelled: $isCancelled, date: $date)';
+    return 'Orders(uid: $uid, products: $products, total: $total, orderId: $orderId, isAccepted: $isAccepted, isCancelled: $isCancelled, isActivity: $isActivity, date: $date)';
   }
 
   @override
@@ -227,6 +243,8 @@ class _$OrdersImpl implements _Orders {
                 other.isAccepted == isAccepted) &&
             (identical(other.isCancelled, isCancelled) ||
                 other.isCancelled == isCancelled) &&
+            (identical(other.isActivity, isActivity) ||
+                other.isActivity == isActivity) &&
             (identical(other.date, date) || other.date == date));
   }
 
@@ -240,6 +258,7 @@ class _$OrdersImpl implements _Orders {
       orderId,
       isAccepted,
       isCancelled,
+      isActivity,
       date);
 
   @JsonKey(ignore: true)
@@ -264,6 +283,7 @@ abstract class _Orders implements Orders {
       required final String orderId,
       final bool? isAccepted,
       final bool? isCancelled,
+      final bool? isActivity,
       required final DateTime date}) = _$OrdersImpl;
 
   factory _Orders.fromJson(Map<String, dynamic> json) = _$OrdersImpl.fromJson;
@@ -280,6 +300,8 @@ abstract class _Orders implements Orders {
   bool? get isAccepted;
   @override
   bool? get isCancelled;
+  @override
+  bool? get isActivity;
   @override
   DateTime get date;
   @override

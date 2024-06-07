@@ -141,7 +141,8 @@ class OrderStatusPage extends ConsumerWidget {
                             ),
                           ),
                           if (data[index].isAccepted == true &&
-                              data[index].isCancelled == true) ...{
+                              data[index].isCancelled == false &&
+                              data[index].isActivity == false) ...{
                             Positioned(
                                 top: 2,
                                 right: 0,
@@ -158,7 +159,8 @@ class OrderStatusPage extends ConsumerWidget {
                                     ),
                                   ),
                                 ))
-                          } else if (data[index].isAccepted == true) ...{
+                          } else if (data[index].isAccepted == true &&
+                              data[index].isActivity == true) ...{
                             Positioned(
                                 top: 2,
                                 right: 0,
@@ -169,7 +171,7 @@ class OrderStatusPage extends ConsumerWidget {
                                         color: Colors.green,
                                         borderRadius: BorderRadius.circular(5)),
                                     child: const Text(
-                                      "Delivered",
+                                      "Activity",
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 15),
                                     ),
@@ -193,7 +195,8 @@ class OrderStatusPage extends ConsumerWidget {
                                   ),
                                 ))
                           } else if (data[index].isCancelled == false &&
-                              data[index].isAccepted == false) ...{
+                              data[index].isAccepted == false &&
+                              data[index].isActivity == false) ...{
                             Positioned(
                                 top: 2,
                                 right: 0,
