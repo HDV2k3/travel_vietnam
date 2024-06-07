@@ -72,7 +72,10 @@ dependencies:
   convex_bottom_bar: ^3.2.0
   custom_navigation_bar: ^0.8.2
   dots_indicator: ^3.0.0
-
+  crypto: ^3.0.3
+  sprintf: ^7.0.0
+  flutter_dash: ^1.0.0
+  flutter_stripe: ^10.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

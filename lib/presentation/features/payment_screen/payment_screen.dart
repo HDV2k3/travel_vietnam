@@ -5,6 +5,7 @@ import 'package:chandoiqua/presentation/common_widgets/base/base_screen.dart';
 import 'package:chandoiqua/presentation/features/payment_screen/payment_state.dart';
 import 'package:chandoiqua/presentation/features/payment_screen/payment_view_model.dart';
 import 'package:chandoiqua/presentation/features/payment_screen/widgets/selected_payment_method.dart';
+import 'package:chandoiqua/presentation/features/stripe/stripcontroller.dart';
 import 'package:chandoiqua/utilities/extensions/widget_ref_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -186,14 +187,21 @@ class _PaymentVipScreenState
                                           value,
                                           data.grandTotal,
                                         )
-                                        .then((value) => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const PaymentProcessScreen(),
-                                              ),
-                                            ));
+                                        .then((value) {
+                                      ref
+                                          .read(
+                                              stripePaymentController.notifier)
+                                          .makePayment(context, data.grandTotal)
+                                          .then((value) => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PaymentProcessScreen(),
+                                                ),
+                                              ));
+                                    });
                                   });
+
                                   cart.clearCart();
                                 },
                                 child: Text(

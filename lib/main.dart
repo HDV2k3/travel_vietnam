@@ -2,8 +2,10 @@ import 'package:chandoiqua/presentation/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'constants/api_key.dart';
 import 'data/providers/shared_preferences_provider.dart';
 import 'firebase_options.dart';
 
@@ -12,11 +14,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await Hive.initFlutter();
-  //
-  // Stripe.publishableKey = APIKey.PUBLISHABLEkEY;
-  // Stripe.merchantIdentifier = "Isheunesu";
-  // await Stripe.instance.applySettings();
+
+  Stripe.publishableKey = APIKey.PUBLISHABLEkEY;
+  await Stripe.instance.applySettings();
 
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(
