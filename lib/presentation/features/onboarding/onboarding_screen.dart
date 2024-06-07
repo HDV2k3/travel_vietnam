@@ -25,7 +25,7 @@ class _OnBoardingScreenState extends BaseScreenState<OnBoardingScreen,
     return Stack(
       children: [
         Image.asset(
-          'assets/images/IMG_7985.png',
+          'assets/images/vlh-1581501483279773323335.jpg',
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,

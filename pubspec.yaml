@@ -76,15 +76,10 @@ dependencies:
   sprintf: ^7.0.0
   flutter_dash: ^1.0.0
   flutter_stripe: ^10.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  
-  
-  
-  
-  
   flutter_lints: ^3.0.0
   riverpod_generator: ^2.4.0
   build_runner: ^2.4.9
@@ -100,10 +95,7 @@ dev_dependencies:
 
 
 flutter:
-
   generate: true
-  
-  
   uses-material-design: true
   assets:
     - assets/images/bg1.png
@@ -123,10 +115,8 @@ flutter:
     - assets/images/amazon.png
     - assets/images/creditcard.jpg
     - assets/images/ggpay.png
-
-
-  
-  
+    - assets/images/vlh-1581501483279773323335.jpg
+    - assets/app_icon/iconapp.jpg
 
 flutter_gen:
   output: lib/constants/resources/gen/
@@ -135,7 +125,13 @@ flutter_gen:
   colors:
     inputs:
       - assets/colors/colors.xml
-  
+flutter_launcher_icons:
+  android: "launcher_icon"
+  adaptive_icon_foreground: "assets/app_icon/iconapp.jpg"
+  adaptive_icon_background: "#233BA4"
+  ios: true
+  image_path: "assets/app_icon/iconapp.jpg"
+
 
   
   

@@ -3,7 +3,7 @@
 
         android:label="chandoiqua"
         android:name="androidx.multidex.MultiDexApplication"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBi-AkP2fxxaHzC9D_6z0-t4c1BSbHn35s"/>
         <activity
