@@ -13,9 +13,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Stripe.publishableKey = APIKey.PUBLISHABLEkEY;
-  // await Stripe.instance.applySettings();
-
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(
     ProviderScope(

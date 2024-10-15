@@ -59,7 +59,10 @@ class _DetailHotelState extends BaseScreenState<DetailScreenHotel,
                 height: 200,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: Image.network(hotel.image![0]).image,
+                    image: hotel.image != null && hotel.image!.isNotEmpty
+                        ? Image.network(hotel.image![0]).image
+                        : const AssetImage(
+                            'assets/images/default_hotel.png'), // Provide a default image
                     fit: BoxFit.cover,
                   ),
                 ),
